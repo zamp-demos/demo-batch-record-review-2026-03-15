@@ -1,0 +1,17 @@
+{
+    "id": "BRR_002",
+    "name": "Metformin HCl 500mg Tablets",
+    "category": "Batch Record Review",
+    "stockId": "MF-2026-0089",
+    "year": "2026-03-15",
+    "status": "In Progress",
+    "currentStatus": "Queued for review",
+    "site": "Lilly Kinsale",
+    "batchSize": "1,200,000 units",
+    "mbr": "MBR-MFH-500-001 v3.0",
+    "confidence": null,
+    "disposition": null,
+    "steps": [],
+    "artifacts": [],
+    "findings": []
+}

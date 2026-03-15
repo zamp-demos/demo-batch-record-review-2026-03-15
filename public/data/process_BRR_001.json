@@ -1,0 +1,17 @@
+{
+    "id": "BRR_001",
+    "name": "Atorvastatin Calcium 40mg Film-Coated Tablets",
+    "category": "Batch Record Review",
+    "stockId": "AT-2026-0142",
+    "year": "2026-03-15",
+    "status": "In Progress",
+    "currentStatus": "Queued for review",
+    "site": "Lilly Indianapolis",
+    "batchSize": "500,000 units",
+    "mbr": "MBR-ATV-040-003 v2.1",
+    "confidence": null,
+    "disposition": null,
+    "steps": [],
+    "artifacts": [],
+    "findings": []
+}

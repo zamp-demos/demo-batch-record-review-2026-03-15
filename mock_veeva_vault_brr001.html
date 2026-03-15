@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Veeva Vault — Lilly QualityDocs</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Lato', sans-serif; background: #f4f5f7; color: #2c2c2c; }
+.topbar { background: #2c3e6b; color: white; height: 52px; display: flex; align-items: center; padding: 0 20px; gap: 16px; }
+.topbar .logo { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+.topbar .product { font-size: 13px; color: #a0b4d8; }
+.topbar .user { margin-left: auto; font-size: 13px; color: #d0ddf0; }
+.sidebar { position: fixed; top: 52px; left: 0; width: 220px; height: calc(100vh - 52px); background: #1e2d54; color: #c8d6ee; overflow-y: auto; }
+.sidebar .section { padding: 18px 16px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #6a80a8; }
+.sidebar a { display: block; padding: 9px 16px; font-size: 13px; color: #c8d6ee; text-decoration: none; cursor: pointer; }
+.sidebar a:hover, .sidebar a.active { background: #2c3e6b; color: white; }
+.main { margin-left: 220px; padding: 24px; }
+.toolbar { background: white; border: 1px solid #dde; border-radius: 6px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.toolbar input { flex: 1; border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; font-size: 14px; }
+.toolbar button { background: #e8432c; color: white; border: none; border-radius: 4px; padding: 8px 18px; font-size: 14px; cursor: pointer; font-weight: 600; }
+.breadcrumb { font-size: 13px; color: #666; margin-bottom: 16px; }
+.breadcrumb span { color: #2c3e6b; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 6px; overflow: hidden; border: 1px solid #dde; }
+thead { background: #2c3e6b; color: white; }
+th { padding: 12px 16px; text-align: left; font-size: 13px; font-weight: 600; }
+td { padding: 11px 16px; font-size: 13px; border-bottom: 1px solid #eef; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f0f4ff; cursor: pointer; }
+tr.highlight td { background: #fff3f0; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+.badge.approved { background: #e0f4ec; color: #1a7a4a; }
+.badge.superseded { background: #f0f0f0; color: #888; }
+.detail-panel { position: fixed; right: 0; top: 52px; width: 360px; height: calc(100vh - 52px); background: white; border-left: 2px solid #2c3e6b; padding: 24px; overflow-y: auto; display: none; }
+.detail-panel.show { display: block; }
+.detail-panel h3 { font-size: 15px; color: #2c3e6b; margin-bottom: 16px; font-weight: 700; }
+.detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+.detail-row .label { color: #666; }
+.detail-row .value { font-weight: 600; color: #1a1a1a; }
+.dl-btn { display: block; margin-top: 20px; background: #e8432c; color: white; border: none; border-radius: 4px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer; text-align: center; width: 100%; }
+#login-screen { position: fixed; inset: 0; background: #2c3e6b; display: flex; align-items: center; justify-content: center; z-index: 999; }
+.login-box { background: white; border-radius: 8px; padding: 40px; width: 380px; }
+.login-box h2 { color: #2c3e6b; font-size: 22px; margin-bottom: 6px; }
+.login-box p { color: #888; font-size: 13px; margin-bottom: 24px; }
+.login-box input { width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; font-size: 14px; margin-bottom: 14px; display: block; }
+.login-box button { width: 100%; background: #e8432c; color: white; border: none; border-radius: 4px; padding: 12px; font-size: 15px; font-weight: 700; cursor: pointer; }
+.login-logo { font-size: 28px; font-weight: 900; color: #2c3e6b; margin-bottom: 8px; letter-spacing: -1px; }
+</style>
+</head>
+<body>
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">veeva</div>
+    <h2>Vault QualityDocs</h2>
+    <p>Lilly — Quality Management System</p>
+    <input id="u" type="text" value="pace.agent@lilly.com" />
+    <input id="p" type="password" value="••••••••••" />
+    <button onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+<div class="topbar">
+  <div class="logo">veeva</div>
+  <div class="product">Vault QualityDocs — Lilly</div>
+  <div class="user">pace.agent@lilly.com</div>
+</div>
+<div class="sidebar">
+  <div class="section">Navigate</div>
+  <a href="#" class="active">Library</a>
+  <a href="#">My Documents</a>
+  <a href="#">Workflows</a>
+  <div class="section">Categories</div>
+  <a href="#">SOPs</a>
+  <a href="#" id="mbr-link" onclick="showMBR()">Master Batch Records</a>
+  <a href="#">Batch Records</a>
+  <a href="#">Quality Events</a>
+  <a href="#">Validation</a>
+</div>
+<div class="main" id="main-content">
+  <div id="view-library">
+    <div class="toolbar">
+      <input id="search-input" placeholder="Search documents..." />
+      <button onclick="doSearch()">Search</button>
+    </div>
+    <div class="breadcrumb">Library &gt; <span>All Documents</span></div>
+    <table><thead><tr><th>Document Name</th><th>Type</th><th>Version</th><th>Status</th><th>Modified</th></tr></thead>
+    <tbody>
+      <tr><td>MBR-ATV-040-003</td><td>Master Batch Record</td><td>2.1</td><td><span class="badge approved">Approved</span></td><td>15-Nov-2025</td></tr>
+      <tr><td>MBR-MFH-500-001</td><td>Master Batch Record</td><td>3.0</td><td><span class="badge approved">Approved</span></td><td>01-Sep-2025</td></tr>
+      <tr><td>MBR-LIS-010-002</td><td>Master Batch Record</td><td>1.4</td><td><span class="badge approved">Approved</span></td><td>03-Jan-2026</td></tr>
+      <tr><td>MBR-OME-020-004</td><td>Master Batch Record</td><td>2.0</td><td><span class="badge approved">Approved</span></td><td>20-Jan-2026</td></tr>
+      <tr><td>SOP-ENV-007</td><td>SOP</td><td>4.0</td><td><span class="badge approved">Approved</span></td><td>10-Oct-2025</td></tr>
+      <tr><td>SOP-QC-015</td><td>SOP</td><td>2.3</td><td><span class="badge approved">Approved</span></td><td>05-Aug-2025</td></tr>
+    </tbody></table>
+  </div>
+  <div id="view-mbr" style="display:none;">
+    <div class="toolbar">
+      <input id="mbr-search" placeholder="Search Master Batch Records..." value="ATV-040-003" />
+      <button onclick="doMBRSearch()">Search</button>
+    </div>
+    <div class="breadcrumb">Library &gt; <span onclick="showLibrary()">All Documents</span> &gt; <span>Master Batch Records</span></div>
+    <table id="mbr-table"><thead><tr><th>Document ID</th><th>Product</th><th>Version</th><th>Status</th><th>Effective Date</th></tr></thead>
+    <tbody id="mbr-rows">
+      <tr><td>MBR-ATV-040-003</td><td>Atorvastatin 40mg Tablets</td><td>2.1</td><td><span class="badge approved">Current Approved</span></td><td>15-Nov-2025</td></tr>
+      <tr><td>MBR-MFH-500-001</td><td>Metformin HCl 500mg Tablets</td><td>3.0</td><td><span class="badge approved">Current Approved</span></td><td>01-Sep-2025</td></tr>
+      <tr><td>MBR-LIS-010-002</td><td>Lisinopril 10mg Tablets</td><td>1.4</td><td><span class="badge approved">Current Approved</span></td><td>03-Jan-2026</td></tr>
+      <tr><td>MBR-OME-020-004</td><td>Omeprazole 20mg DR Capsules</td><td>2.0</td><td><span class="badge approved">Current Approved</span></td><td>20-Jan-2026</td></tr>
+    </tbody></table>
+  </div>
+</div>
+<div class="detail-panel" id="detail-panel">
+  <h3>MBR-ATV-040-003 v2.1</h3>
+  <div class="detail-row"><span class="label">Document ID</span><span class="value">MBR-ATV-040-003</span></div>
+  <div class="detail-row"><span class="label">Version</span><span class="value">2.1</span></div>
+  <div class="detail-row"><span class="label">Status</span><span class="value" style="color:#1a7a4a">✓ Current Approved</span></div>
+  <div class="detail-row"><span class="label">Product</span><span class="value">Atorvastatin 40mg Tablets</span></div>
+  <div class="detail-row"><span class="label">Effective Date</span><span class="value">15-Nov-2025</span></div>
+  <div class="detail-row"><span class="label">Owner</span><span class="value">Dr. R. Chen (QA Director)</span></div>
+  <div class="detail-row"><span class="label">Site</span><span class="value">Lilly Indianapolis IN</span></div>
+  <div class="detail-row"><span class="label">Pages</span><span class="value">52</span></div>
+  <div class="detail-row"><span class="label">Change Controls Pending</span><span class="value">None</span></div>
+  <button class="dl-btn">⬇ Download PDF</button>
+</div>
+<script>
+function doLogin() {
+  document.getElementById('login-screen').style.display = 'none';
+}
+function showMBR() {
+  document.getElementById('view-library').style.display = 'none';
+  document.getElementById('view-mbr').style.display = 'block';
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+  document.getElementById('mbr-link').classList.add('active');
+}
+function showLibrary() {
+  document.getElementById('view-library').style.display = 'block';
+  document.getElementById('view-mbr').style.display = 'none';
+}
+function doSearch() {
+  showMBR();
+}
+function doMBRSearch() {
+  var val = document.getElementById('mbr-search').value.toLowerCase();
+  var rows = document.querySelectorAll('#mbr-rows tr');
+  rows.forEach(function(r) {
+    r.style.display = r.textContent.toLowerCase().includes(val) ? '' : 'none';
+  });
+  if (val === 'atv-040-003') {
+    setTimeout(function() {
+      rows.forEach(function(r) { if (r.textContent.includes('ATV-040-003')) { r.classList.add('highlight'); } });
+    }, 300);
+  }
+}
+document.querySelectorAll('#mbr-rows tr').forEach(function(r) {
+  r.addEventListener('click', function() {
+    if (r.textContent.includes('ATV-040-003')) {
+      document.getElementById('detail-panel').classList.add('show');
+      if (document.getElementById('main-content')) {
+        document.getElementById('main-content').style.marginRight = '360px';
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

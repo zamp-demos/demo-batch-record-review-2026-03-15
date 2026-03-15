@@ -1,0 +1,17 @@
+{
+    "id": "BRR_003",
+    "name": "Lisinopril 10mg Tablets",
+    "category": "Batch Record Review",
+    "stockId": "LS-2026-0031",
+    "year": "2026-03-15",
+    "status": "In Progress",
+    "currentStatus": "Queued for review",
+    "site": "Eurofins Mfg GmbH Mannheim",
+    "batchSize": "800,000 units",
+    "mbr": "MBR-LIS-010-002 v1.4",
+    "confidence": null,
+    "disposition": null,
+    "steps": [],
+    "artifacts": [],
+    "findings": []
+}

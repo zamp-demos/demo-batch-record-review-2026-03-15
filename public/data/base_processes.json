@@ -1,0 +1,58 @@
+[
+    {
+        "id": "BRR_001",
+        "name": "Atorvastatin Calcium 40mg Film-Coated Tablets",
+        "category": "Batch Record Review",
+        "stockId": "AT-2026-0142",
+        "year": "2026-03-15",
+        "status": "In Progress",
+        "currentStatus": "Queued for review",
+        "site": "Lilly Indianapolis",
+        "batchSize": "500,000 units",
+        "mbr": "MBR-ATV-040-003 v2.1",
+        "confidence": null,
+        "disposition": null
+    },
+    {
+        "id": "BRR_002",
+        "name": "Metformin HCl 500mg Tablets",
+        "category": "Batch Record Review",
+        "stockId": "MF-2026-0089",
+        "year": "2026-03-15",
+        "status": "In Progress",
+        "currentStatus": "Queued for review",
+        "site": "Lilly Kinsale",
+        "batchSize": "1,200,000 units",
+        "mbr": "MBR-MFH-500-001 v3.0",
+        "confidence": null,
+        "disposition": null
+    },
+    {
+        "id": "BRR_003",
+        "name": "Lisinopril 10mg Tablets",
+        "category": "Batch Record Review",
+        "stockId": "LS-2026-0031",
+        "year": "2026-03-15",
+        "status": "In Progress",
+        "currentStatus": "Queued for review",
+        "site": "Eurofins Mfg GmbH Mannheim",
+        "batchSize": "800,000 units",
+        "mbr": "MBR-LIS-010-002 v1.4",
+        "confidence": null,
+        "disposition": null
+    },
+    {
+        "id": "BRR_004",
+        "name": "Omeprazole 20mg Delayed-Release Capsules",
+        "category": "Batch Record Review",
+        "stockId": "OM-2026-0217",
+        "year": "2026-03-15",
+        "status": "In Progress",
+        "currentStatus": "Queued for review",
+        "site": "Lilly Branchburg NJ",
+        "batchSize": "900,000 units",
+        "mbr": "MBR-OME-020-004 v2.0",
+        "confidence": null,
+        "disposition": null
+    }
+]

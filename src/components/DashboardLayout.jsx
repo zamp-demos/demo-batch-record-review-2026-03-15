@@ -339,6 +339,7 @@ const DashboardLayout = () => {
                             onClick={async () => {
                                 try {
                                     await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/reset`);
+                                    await new Promise(r => setTimeout(r, 3000));
                                 } catch (err) {
                                     console.error('Failed to reset backend:', err);
                                 }

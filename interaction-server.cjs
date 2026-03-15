@@ -8,7 +8,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const PORT = process.env.PORT || 3001;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const MODEL_NAME = process.env.VITE_MODEL || 'gemini-2.5-flash';
+const MODEL_NAME = process.env.VITE_MODEL || 'gemini-1.5-flash';
 
 const DATA_DIR = path.join(__dirname, 'public/data');
 const SRC_DATA_DIR = path.join(__dirname, 'src/data');

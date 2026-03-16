@@ -124,7 +124,7 @@ const waitForSignal = async (signalId) => {
             id: 'step-3',
             title: 'Bill of Materials — 9/9 Materials Verified',
             status: 'running',
-            reasoning: 'Verifying all 9 raw materials against approved BOM. Omeprazole USP: 20.0 kg (required 20.0 kg) ✓ CoA current. Mannitol SD200: 95.1 kg (required 95.0 kg, within ±0.5%) ✓. HPMC E5: 12.0 kg ✓. Sodium Lauryl Sulfate: 1.5 kg ✓. Eudragit L30 D-55: 45.0 kg ✓ CoA current. Triethyl Citrate: 4.5 kg ✓. Purified Water (process): 48.0 L ✓. Gelatin Capsules Size 4: 905,000 units (overage 0.6%) ✓. Talc USP: 1.8 kg ✓. All 9 materials verified. Overall dispensing yield: 99.7%. No BOM discrepancies detected.',
+            reasoning: 'Verifying all 9 raw materials against approved BOM. Omeprazole USP: 20.0 kg (required 20.0 kg)  [PASS] CoA current. Mannitol SD200: 95.1 kg (required 95.0 kg, within ±0.5%)  [PASS]. HPMC E5: 12.0 kg  [PASS]. Sodium Lauryl Sulfate: 1.5 kg  [PASS]. Eudragit L30 D-55: 45.0 kg  [PASS] CoA current. Triethyl Citrate: 4.5 kg  [PASS]. Purified Water (process): 48.0 L  [PASS]. Gelatin Capsules Size 4: 905,000 units (overage 0.6%)  [PASS]. Talc USP: 1.8 kg  [PASS]. All 9 materials verified. Overall dispensing yield: 99.7%. No BOM discrepancies detected.',
             artifacts: []
         },
         {

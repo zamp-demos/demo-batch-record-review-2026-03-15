@@ -105,7 +105,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     // --- RESET ---
-    if (req.method === 'GET' && cleanPath === '/reset') {
+    if (req.method === 'GET' && cleanPath === '/api/reset') {
         state = { sent: false, confirmed: false, signals: {} };
         console.log('Demo Reset Triggered');
 
@@ -225,6 +225,35 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && cleanPath === '/email-status') {
         const body = await readBody(req);
         state.sent = body.sent !== undefined ? body.sent : state.sent;
+
+        if (state.sent) {
+            // Case BRR_003: Advance flow when escalation email is sent
+            const brr003Path = path.join(DATA_DIR, 'process_BRR_003.json');
+            if (fs.existsSync(brr003Path)) {
+                try {
+                    const data = JSON.parse(fs.readFileSync(brr003Path, 'utf8'));
+                    if (!data.logs.some(l => l.id === 'step-10')) {
+                        data.logs.push({
+                            "id": "step-10",
+                            "time": "10:15 AM",
+                            "title": "Escalation sent to Eurofins QA Director — batch LS-2026-0031 on HOLD pending investigation",
+                            "status": "completed",
+                            "reasoning": [
+                                "Email sent to: dr.k.weber@eurofins-mfg.com | CC: regulatory-affairs@lilly.com, dr.p.mwangi@lilly.com",
+                                "OOS investigation reference assigned: OOS-2026-0031",
+                                "Batch status: HOLD — quarantine documentation filed",
+                                "Response expected: within 5 business days per CMO Quality Agreement",
+                                "Lilly QA notified: Dr. P. Mwangi and site quality director copied"
+                            ]
+                        });
+                        fs.writeFileSync(brr003Path, JSON.stringify(data, null, 4));
+                    }
+                } catch (e) {
+                    console.error("Error updating BRR_003 data:", e);
+                }
+            }
+        }
+
         res.writeHead(200, { 'Content-Type': 'application/json', ...corsHeaders });
         res.end(JSON.stringify({ status: 'ok' }));
         return;

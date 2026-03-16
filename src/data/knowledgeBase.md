@@ -165,13 +165,13 @@ Final analytical testing of the finished batch. Typical tests: assay (HPLC), dis
 - **Batch**: LS-2026-0031 | **Size**: 500,000 tablets
 - **MBR**: MBR-LIS-010-002 v1.4 (current, verified vs. v1.2 Superseded and v1.3 Superseded in Veeva)
 - **Confidence**: 71% | **Outcome**: Needs Review
-- **Summary**: MAJOR finding — MBR v1.4 effective 03-Jan-2026 introduced revised blend time (12 min → 18 min). EBR shows 12-minute blend time (old spec). Blend was executed per superseded procedure. Blend uniformity RSD 1.8% is within ≤2.0% but borderline. OOS investigation required. Email HITL: QA team notified via email for manual review.
+- **Summary**: MAJOR finding — MBR v1.4 effective 03-Jan-2026 introduced revised blend time (12 min -> 18 min). EBR shows 12-minute blend time (old spec). Blend was executed per superseded procedure. Blend uniformity RSD 1.8% is within ≤2.0% but borderline. OOS investigation required. Email HITL: QA team notified via email for manual review.
 
 ### BRR_004 — Omeprazole 20mg DR Capsules (Released after HITL)
 - **Batch**: OM-2026-0217 | **Size**: 900,000 capsules
 - **MBR**: MBR-OME-020-004 v2.0 (current)
 - **Confidence**: 89% | **Outcome**: Done (released after QA countersig)
-- **Summary**: Expedited review threshold (80–94%). Two MINOR findings: impeller CPP 275 RPM vs 240–260 RPM (DEV-2026-0412 documented same-day, IPC within spec); ENV excursion form ENV-OM-2026-0217 missing QA countersignature per SOP-ENV-007 Section 4.2. One OBSERVATION: coating temp at upper boundary. QA Dr. P. Mwangi countersigned ENV form → batch released. 900,000 units cleared.
+- **Summary**: Expedited review threshold (80–94%). Two MINOR findings: impeller CPP 275 RPM vs 240–260 RPM (DEV-2026-0412 documented same-day, IPC within spec); ENV excursion form ENV-OM-2026-0217 missing QA countersignature per SOP-ENV-007 Section 4.2. One OBSERVATION: coating temp at upper boundary. QA Dr. P. Mwangi countersigned ENV form -> batch released. 900,000 units cleared.
 
 ---
 

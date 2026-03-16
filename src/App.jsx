@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/done" element={<DashboardLayout />}>
-          <Route path={CATEGORY_SLUG} element={<ProcessList categorySlug={CATEGORY_SLUG} categoryLabel={CATEGORY_LABEL} />} />
+          <Route path={CATEGORY_SLUG} element={<ProcessList category={CATEGORY_LABEL} />} />
           <Route path={`${CATEGORY_SLUG}/process/:id`} element={<ProcessDetails />} />
           <Route path="knowledge-base" element={<KnowledgeBase />} />
           <Route path="people" element={<People />} />

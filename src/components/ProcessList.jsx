@@ -68,11 +68,29 @@ const ProcessList = ({ category = 'Data Integrity Review' }) => {
     };
 
     const columns = [
-        { label: 'Study ID', key: 'stockId' },
-        { label: 'Document Type', key: 'documentType' },
-        { label: 'Data Points', key: 'dataPoints' },
-        { label: 'Risk Level', key: 'riskLevel' }
+        { label: 'Batch #', key: 'stockId' },
+        { label: 'Product', key: 'name' },
+        { label: 'Site', key: 'site' },
+        { label: 'Confidence', key: 'confidence' }
     ];
+
+    const handleApprove = (e, processId) => {
+        e.stopPropagation();
+        const currentStatus = sessionStorage.getItem(`case_status_${processId}`);
+        if (currentStatus === 'Done') {
+            sessionStorage.removeItem(`case_status_${processId}`);
+        } else {
+            sessionStorage.setItem(`case_status_${processId}`, 'Done');
+        }
+        // Force a refresh of the processes state to reflect the change immediately
+        setProcesses(prev => prev.map(p => {
+            if (p.id === processId) {
+                const newStatus = sessionStorage.getItem(`case_status_${processId}`) || p.status;
+                return { ...p, status: newStatus };
+            }
+            return p;
+        }));
+    };
 
     return (
         <div className="bg-white flex flex-col h-full overflow-hidden">
@@ -131,7 +149,7 @@ const ProcessList = ({ category = 'Data Integrity Review' }) => {
                                 <tr
                                     key={process.id}
                                     className="hover:bg-[#f9f9f9] cursor-pointer transition-colors border-b border-[#f2f2f2] last:border-0"
-                                    onClick={() => navigate(`/done/process/${process.id}`)}
+                                    onClick={() => navigate(`/done/batch-record-review/process/${process.id}`)}
                                 >
                                     <td className="px-6 py-2.5 whitespace-nowrap">
                                         <div className="flex items-center gap-3">
@@ -156,7 +174,7 @@ const ProcessList = ({ category = 'Data Integrity Review' }) => {
                                     </td>
 
                                     <td className="px-4 py-2.5 text-[13px] font-[450] text-[#171717] text-left max-w-[350px] truncate">
-                                        {process.currentStatus || "An email response has been drafted"}
+                                         {typeof process.currentStatus === 'string' ? process.currentStatus : (process.currentStatus?.['Review Status'] || "An email response has been drafted")}
                                     </td>
 
                                     {columns.map(col => (

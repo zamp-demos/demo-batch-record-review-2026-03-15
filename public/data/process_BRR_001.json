@@ -1,17 +1,297 @@
 {
-    "id": "BRR_001",
-    "name": "Atorvastatin Calcium 40mg Film-Coated Tablets",
-    "category": "Batch Record Review",
-    "stockId": "AT-2026-0142",
-    "year": "2026-03-15",
-    "status": "In Progress",
-    "currentStatus": "Queued for review",
-    "site": "Lilly Indianapolis",
-    "batchSize": "500,000 units",
-    "mbr": "MBR-ATV-040-003 v2.1",
-    "confidence": null,
-    "disposition": null,
-    "steps": [],
-    "artifacts": [],
-    "findings": []
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:49 AM",
+            "title": "EBR AT-2026-0142 received from S. Chen, Lilly Indianapolis — document loaded",
+            "status": "success",
+            "reasoning": [
+                "Source: sarah.chen@lilly.com → quality-inbox@lilly.com",
+                "Subject: EBR Submission for Review — AT-2026-0142 Atorvastatin Calcium 40mg Tablets",
+                "Attachment: ebr_AT-2026-0142.pdf (67 pages)",
+                "Batch: AT-2026-0142 | 500,000 units | Manufactured: 08–11-Mar-2026",
+                "Site: Lilly Indianapolis, IN"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-email-001",
+                    "type": "email_draft",
+                    "label": "Incoming EBR Submission",
+                    "subject": "EBR Submission for Review — AT-2026-0142 Atorvastatin Calcium 40mg Tablets",
+                    "from": "sarah.chen@lilly.com",
+                    "to": "quality-inbox@lilly.com",
+                    "body": "Hi Quality team,\n\nPlease find attached the executed batch record for AT-2026-0142 (Atorvastatin Calcium 40mg Film-Coated Tablets, 500,000 units, Lilly Indianapolis).\n\nManufacture dates: 08–11-Mar-2026. All in-process checks completed. One observation noted in Step 7 (blend time) — within acceptable range per SOP-BLN-004 discretion.\n\nPlease confirm receipt.\n\nBest,\nSarah Chen\nSenior QA Associate, Lilly Indianapolis",
+                    "isIncoming": true,
+                    "timestamp": "2026-03-11T16:42:00Z"
+                },
+                {
+                    "id": "ebr-pdf-001",
+                    "type": "pdf",
+                    "label": "EBR AT-2026-0142",
+                    "filename": "ebr_AT-2026-0142.pdf",
+                    "url": "/pdfs/ebr_AT-2026-0142.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:49 AM",
+            "title": "MBR-ATV-040-003 v2.1 retrieved — current approved version confirmed",
+            "status": "success",
+            "reasoning": [
+                "Browser agent: vault.lilly.com → Library → Master Batch Records",
+                "Search: \"ATV-040-003\" — 1 result found",
+                "Document: MBR-ATV-040-003 v2.1 | Status: Current Approved | Effective: 15-Jan-2026",
+                "Previous version v2.0 superseded — v2.1 is the applicable version for this batch",
+                "Download successful — PDF 94 pages"
+            ],
+            "artifacts": [
+                {
+                    "id": "mbr-video-001",
+                    "type": "video",
+                    "label": "Veeva Vault MBR Retrieval",
+                    "title": "Veeva Vault — MBR-ATV-040-003 Retrieval",
+                    "url": "/videos/brr_001_veeva_vault_mbr_retrieval.webm"
+                },
+                {
+                    "id": "mbr-pdf-001",
+                    "type": "pdf",
+                    "label": "MBR-ATV-040-003 v2.1",
+                    "filename": "mbr_ATV-040-003_v2.1.pdf",
+                    "url": "/pdfs/mbr_ATV-040-003_v2.1.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-3",
+            "time": "09:49 AM",
+            "title": "BOM complete — all 8 materials dispensed within specification",
+            "status": "success",
+            "reasoning": [
+                "Atorvastatin Calcium USP (RM-4021) — MBR: 42.6 kg | EBR: 42.6 kg  [PASS]",
+                "Lactose Monohydrate NF (RM-2001) — MBR: 120.0 kg | EBR: 120.0 kg  [PASS]",
+                "Microcrystalline Cellulose PH-102 (RM-2018) — MBR: 55.0 kg | EBR: 55.0 kg  [PASS]",
+                "Croscarmellose Sodium NF (RM-2031) — MBR: 8.0 kg | EBR: 8.0 kg  [PASS]",
+                "Hydroxypropyl Cellulose EF (RM-3011) — MBR: 4.0 kg | EBR: 4.0 kg  [PASS]",
+                "Magnesium Stearate NF (RM-2041) — MBR: 2.0 kg | EBR: 2.0 kg  [PASS]",
+                "Opadry II White (RM-6021) — MBR: 12.5 kg | EBR: 12.5 kg  [PASS]",
+                "Purified Water USP (RM-1001) — Used in granulation, evaporated  [PASS]",
+                "All CoAs current  [PASS] | All suppliers on approved list  [PASS] | Dispensing yield: 100.0%  [PASS]"
+            ],
+            "artifacts": [
+                {
+                    "id": "bom-json-001",
+                    "type": "json",
+                    "label": "BOM Verification Results",
+                    "data": {
+                        "batch": "AT-2026-0142",
+                        "materials_checked": 8,
+                        "all_within_spec": true,
+                        "dispensing_yield_pct": 100,
+                        "coa_status": "All current",
+                        "supplier_status": "All approved"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "step-4",
+            "time": "09:49 AM",
+            "title": "Steps 1–5 reviewed — all within specification",
+            "status": "success",
+            "reasoning": [
+                "Step 1 Dispensing: Env 21°C/38% RH  [PASS] | All weights verified  [PASS]",
+                "Step 2 Sieving: 60 mesh  [PASS] | Yield 99.8%  [PASS]",
+                "Step 3 Pre-Blend: VBL-002 cal current exp 30-Jun-2026  [PASS] | 18 RPM × 10 min  [PASS]",
+                "Step 4 Wet Granulation: RMG-001 | Impeller 250 RPM  [PASS] | Granulation endpoint met  [PASS]",
+                "Step 5 Fluid Bed Drying: FBD-001 | Inlet 65°C | LOD 1.8% (spec ≤2.0%)  [PASS] | Cal current  [PASS]"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-5",
+            "time": "09:49 AM",
+            "title": "Steps 6–7 reviewed — 1 OBSERVATION noted (blend time)",
+            "status": "success",
+            "reasoning": [
+                "Step 6 Milling: MIL-001 | 20 mesh  [PASS] | Yield 99.2%  [PASS]",
+                "Step 7 Final Blending: VBL-002 | Target: 15–17 min | EBR recorded: 18 min",
+                "[WARN] OBSERVATION: Blend time 18 min vs MBR maximum 17 min",
+                "SOP-BLN-004 Section 3.2: “Single time point exceedances ≤1.5 min require documentation only”",
+                "IPC blend uniformity result: RSD 0.8% (spec ≤1.5%)  [PASS] — product quality not affected",
+                "Operator note on EBR: “Blend time extended due to equipment stop for safety check at T+16 min”",
+                "Classification: OBSERVATION — documented, within SOP discretion, no product impact"
+            ],
+            "artifacts": [
+                {
+                    "id": "blend-obs-json",
+                    "type": "json",
+                    "label": "Blending Step Findings",
+                    "data": {
+                        "step": 7,
+                        "parameter": "Blend Time",
+                        "mbr_spec": "15-17 min",
+                        "ebr_value": "18 min",
+                        "delta": "+1 min",
+                        "classification": "OBSERVATION",
+                        "ipc_rsd_pct": 0.8,
+                        "ipc_spec": "<=1.5%",
+                        "product_impact": "None",
+                        "sop_reference": "SOP-BLN-004 Section 3.2"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "step-6",
+            "time": "09:49 AM",
+            "title": "Steps 8–10 reviewed — all within specification",
+            "status": "success",
+            "reasoning": [
+                "Step 8 Compression: TBP-003 | Target hardness 8–12 kP | EBR avg 10.1 kP  [PASS]",
+                "IPC friability: 0.18% (spec ≤0.5%)  [PASS] | Disintegration: 4.2 min (spec ≤6 min)  [PASS]",
+                "Step 9 Film Coating: CTR-002 | Opadry II White | Target weight gain 3.0–3.5%",
+                "Achieved weight gain: 3.2%  [PASS] | Inlet temperature 65–70°C throughout  [PASS]",
+                "Step 10 Packaging: 90cc HDPE bottles | 30-count | Reconciliation 99.6%  [PASS]",
+                "All equipment calibrations current  [PASS] | All operator signatures complete  [PASS]"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-7",
+            "time": "09:49 AM",
+            "title": "QC complete — 12/12 specifications met",
+            "status": "success",
+            "reasoning": [
+                "Appearance: White, oval, film-coated tablets, no defects  [PASS]",
+                "Identification: Positive for Atorvastatin by HPLC  [PASS]",
+                "Assay: 100.2% of label claim (spec 95.0–105.0%)  [PASS]",
+                "Dissolution: 88% at 30 min (NLT 80%)  [PASS]",
+                "Related Substances: Max individual 0.08% (NMT 0.2%)  [PASS] | Total 0.14% (NMT 1.0%)  [PASS]",
+                "Uniformity of Dosage Units: AV 4.2 (spec ≤15.0)  [PASS]",
+                "Disintegration: 3.8 min (spec ≤6 min)  [PASS]",
+                "Hardness: 10.3 kP (spec 8–12 kP)  [PASS]",
+                "Friability: 0.18% (NMT 0.5%)  [PASS]",
+                "Water Content: 1.9% (NMT 3.0%)  [PASS]",
+                "Microbial Limits: Pass USP <61>/<62>  [PASS]",
+                "Particle Size D90: 82 μm (spec ≤90 μm)  [PASS]"
+            ],
+            "artifacts": [
+                {
+                    "id": "qc-json-001",
+                    "type": "json",
+                    "label": "QC Results Summary",
+                    "data": {
+                        "batch": "AT-2026-0142",
+                        "tests_performed": 12,
+                        "tests_passed": 12,
+                        "assay_pct": 100.2,
+                        "dissolution_30min_pct": 88,
+                        "av_value": 4.2,
+                        "friability_pct": 0.18,
+                        "water_content_pct": 1.9,
+                        "microbial_limits": "Pass",
+                        "overall_qc_status": "PASS"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "step-8",
+            "time": "09:49 AM",
+            "title": "68-point checklist complete — 67/68 items pass",
+            "status": "success",
+            "reasoning": [
+                "Manufacturing procedure compliance: 25/25  [PASS]",
+                "In-process controls: 15/15  [PASS]",
+                "Equipment qualification and calibration: 12/12  [PASS]",
+                "Operator training and signatures: 10/10  [PASS]",
+                "Environmental monitoring: 4/4  [PASS]",
+                "Yield reconciliation: 1/1  [PASS]",
+                "OBSERVATION item: Blend time Step 7 (18 min vs 17 min max) — noted, SOP-BLN-004 discretion applied",
+                "Overall checklist score: 67/68 (98.5%) — single observation does not affect releasability"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-9",
+            "time": "09:49 AM",
+            "title": "Confidence: 97% — Batch AT-2026-0142 meets all release criteria",
+            "status": "success",
+            "reasoning": [
+                "OBSERVATION penalty: 1 × (−1 pt) = −1 pt",
+                "Base score: 100% → After penalties: 97%",
+                "Threshold: ≥95% = Eligible for release recommendation",
+                "All 12 QC specifications met – no Out-of-Specification results",
+                "All 8 BOM materials verified – no discrepancies",
+                "OBSERVATION fully documented per SOP-BLN-004 – product quality unaffected",
+                "Recommended disposition: RELEASE"
+            ],
+            "artifacts": [
+                {
+                    "id": "findings-json-001",
+                    "type": "json",
+                    "label": "Findings Summary",
+                    "data": {
+                        "batch": "AT-2026-0142",
+                        "confidence_pct": 97,
+                        "critical_findings": 0,
+                        "major_findings": 0,
+                        "minor_findings": 0,
+                        "observations": 1,
+                        "disposition": "RELEASE",
+                        "observation_detail": "Blend time 18 min vs 17 min max — SOP-BLN-004 discretion applied"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "step-10",
+            "time": "09:50 AM",
+            "title": "Review complete — batch AT-2026-0142 recommended for RELEASE",
+            "status": "completed",
+            "reasoning": [
+                "Review report CR-AT-2026-0142 generated",
+                "500,000 units Atorvastatin Calcium 40mg Film-Coated Tablets cleared for release",
+                "Certificate of Analysis attached — all specifications met",
+                "Single OBSERVATION documented and closed per SOP-BLN-004 Section 3.2",
+                "Review time: 4 min 12 sec (manual equivalent: ∼3.5 hours)",
+                "Batch disposition: APPROVED FOR RELEASE"
+            ],
+            "artifacts": [
+                {
+                    "id": "report-pdf-001",
+                    "type": "pdf",
+                    "label": "Batch Review Report",
+                    "filename": "review_report_AT-2026-0142.pdf",
+                    "url": "/pdfs/review_report_AT-2026-0142.pdf"
+                },
+                {
+                    "id": "results-json-001",
+                    "type": "json",
+                    "label": "Review Results",
+                    "data": {
+                        "batch": "AT-2026-0142",
+                        "product": "Atorvastatin Calcium 40mg Film-Coated Tablets",
+                        "site": "Lilly Indianapolis",
+                        "units": 500000,
+                        "disposition": "RELEASE",
+                        "confidence_pct": 97,
+                        "review_time_sec": 252,
+                        "final_status": "Done"
+                    }
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "AT-2026-0142",
+        "Product": "Atorvastatin Calcium 40mg Film-Coated Tablets",
+        "Batch Size": "500,000 units",
+        "Site": "Lilly Indianapolis",
+        "MBR Reference": "MBR-ATV-040-003 v2.1",
+        "Review Status": "Done",
+        "Confidence": "97%",
+        "Disposition": "RELEASE"
+    }
 }

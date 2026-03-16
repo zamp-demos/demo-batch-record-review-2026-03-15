@@ -154,7 +154,7 @@ const DiffViewModal = ({ diffData, onClose, isLoading }) => {
                         <div className="flex items-center gap-2 mb-1">
                             <span className="px-2 py-0.5 bg-[#f5f5f5] text-[#8f8f8f] text-[10px] font-bold rounded uppercase tracking-wider">Comparison</span>
                             <h2 className="text-[18px] font-bold text-[#171717]">
-                                Version {previousVersion?.version} <span className="text-[#c0c0c0] font-normal mx-1">→</span> Version {currentVersion?.version}
+                                Version {previousVersion?.version} <span className="text-[#c0c0c0] font-normal mx-1">{"->"}</span> Version {currentVersion?.version}
                             </h2>
                         </div>
                         <p className="text-[13px] text-[#555] font-medium">
@@ -190,7 +190,7 @@ const DiffViewModal = ({ diffData, onClose, isLoading }) => {
                                     if (line.type === 'ellipsis') {
                                         return (
                                             <div key={`ellipsis-${index}`} className="flex items-center justify-center py-4 bg-[#fcfcfc] border-y border-[#f0f0f0] text-[#c0c0c0] text-[11px] font-bold tracking-[4px] select-none">
-                                                <span>••••••••••••••••••••••••••••</span>
+                                                <span>----------------------------</span>
                                             </div>
                                         );
                                     }

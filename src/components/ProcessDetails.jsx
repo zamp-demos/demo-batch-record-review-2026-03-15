@@ -156,9 +156,9 @@ const DocumentViewer = ({ artifact, onClose }) => {
                             height: `${baseHeight}px`,
                         }}
                     >
-                        {artifact.pdfPath ? (
+                        {(artifact.pdfPath || artifact.url) ? (
                             <iframe
-                                src={`${import.meta.env.VITE_API_URL || ''}${artifact.pdfPath}#toolbar=0&view=FitH&page=${activePage}`}
+                                src={`${import.meta.env.VITE_API_URL || ''}${artifact.pdfPath || artifact.url}#toolbar=0&view=FitH&page=${activePage}`}
                                 className="w-full h-full border-none"
                                 title={artifact.label}
                                 key={`${artifact.id}-${activePage}`}
@@ -364,10 +364,20 @@ const DatasetViewer = ({ artifact, onClose }) => {
 
 
 const EmailDraftViewer = ({ artifact, onClose }) => {
-    const { to, from, cc, bcc, subject, body, isIncoming, isSent } = artifact.data || {};
+    // Check both artifact.data and the artifact itself for properties
+    const to = artifact.to || (artifact.data && artifact.data.to);
+    const from = artifact.from || (artifact.data && artifact.data.from);
+    const cc = artifact.cc || (artifact.data && artifact.data.cc);
+    const bcc = artifact.bcc || (artifact.data && artifact.data.bcc);
+    const subject = artifact.subject || (artifact.data && artifact.data.subject);
+    const body = artifact.body || (artifact.data && artifact.data.body);
+    const isIncoming = artifact.isIncoming || (artifact.data && artifact.data.isIncoming);
+    const isSent = artifact.isSent || (artifact.data && artifact.data.isSent);
+
     const isReadOnly = isIncoming || isSent;
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+    const [readyToSend, setReadyToSend] = useState(false);
 
     const handleSend = async () => {
         setSending(true);
@@ -504,13 +514,34 @@ const EmailDraftViewer = ({ artifact, onClose }) => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                        <button
-                            onClick={handleSend}
-                            disabled={sending}
-                            className="px-6 py-2 bg-gray-900 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors disabled:opacity-50 flex items-center gap-2"
-                        >
-                            {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Send"}
-                        </button>
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2 mr-2">
+                                <label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">Ready to Send</label>
+                                <button
+                                    onClick={() => setReadyToSend(!readyToSend)}
+                                    className={`w-10 h-5 rounded-full relative transition-colors duration-200 focus:outline-none ${readyToSend ? 'bg-green-500' : 'bg-gray-200'}`}
+                                >
+                                    <div className={`absolute top-1 left-1 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${readyToSend ? 'translate-x-5' : ''}`}></div>
+                                </button>
+                            </div>
+                            <button
+                                onClick={handleSend}
+                                disabled={sending || !readyToSend}
+                                className={`px-6 py-2 rounded font-medium text-sm flex items-center gap-2 transition-all ${sending || !readyToSend ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-900 text-white hover:bg-black active:scale-95'}`}
+                            >
+                                {sending ? (
+                                    <>
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        Sending...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Send className="w-4 h-4" />
+                                        Send Review
+                                    </>
+                                )}
+                            </button>
+                        </div>
                         <button className="p-2 hover:bg-gray-100 rounded text-gray-400 hover:text-red-500 transition-colors">
                             <Trash2 className="w-5 h-5" />
                         </button>
@@ -1043,16 +1074,17 @@ const ProcessDetails = () => {
     const canGoDown = currentIndex < allProcesses.length - 1;
 
     const handleNavigateUp = () => {
-        if (canGoUp) navigate(`/done/process/${allProcesses[currentIndex - 1].id}`);
+        if (canGoUp) navigate(`/done/batch-record-review/process/${allProcesses[currentIndex - 1].id}`);
     };
 
     const handleNavigateDown = () => {
-        if (canGoDown) navigate(`/done/process/${allProcesses[currentIndex + 1].id}`);
+        if (canGoDown) navigate(`/done/batch-record-review/process/${allProcesses[currentIndex + 1].id}`);
     };
 
     const getIconComponent = (iconType) => {
         switch (iconType) {
             case 'file': return FileText;
+            case 'pdf': return FileText;
             case 'video': return ExternalLink;
             case 'dashboard': return FileText;
             case 'image': return ImageIcon;
@@ -1198,16 +1230,28 @@ const ProcessDetails = () => {
 
                     <div className="px-8 pb-8">
                         <div className="max-w-3xl">
-                            {logs && logs.map((log, index) => {
-                                const isLastItem = index === logs.length - 1;
-                                const isComplete = log.status === 'success' || log.status === 'completed';
-                                const isError = log.status === 'error' || log.status === 'failed';
-                                const isWarning = log.status === 'warning';
+                                            {logs && logs.map((log, index) => {
+                                                const isLastItem = index === logs.length - 1;
+                                                const isComplete = log.status === 'success' || log.status === 'completed';
+                                                const isError = log.status === 'error' || log.status === 'failed';
+                                                const isWarning = log.status === 'warning';
 
-                                return (
-                                    <div key={log.id} className="relative flex gap-4">
-                                        {/* Time */}
-                                        <div className="w-20 flex-shrink-0 text-right pt-[8.5px]">
+                                                // Processing reasoning to remove symbols if any were left in data via dynamic paths
+                                                const processedReasoning = (log.reasoning || []).map(r => {
+                                                    if (typeof r !== 'string') return r;
+                                                    let content = r;
+                                                    if (content.startsWith('(G)') || content.includes('[PASS]')) {
+                                                        content = content.replace('(G)', '').replace('[PASS]', '').trim();
+                                                    } else if (content.startsWith('(R)') || content.includes('[FAIL]') || content.includes('[WARN]')) {
+                                                        content = content.replace('(R)', '').replace('[FAIL]', '').replace('[WARN]', '').trim();
+                                                    }
+                                                    return content;
+                                                });
+
+                                                return (
+                                                    <div key={log.id} className="relative flex gap-4">
+                                                        {/* Time */}
+                                                        <div className="w-20 flex-shrink-0 text-right pt-[8.5px]">
                                             <span className="text-[11px] text-[#9CA3AF] font-medium tabular-nums leading-[13px] block">{log.time}</span>
                                         </div>
 
@@ -1236,7 +1280,7 @@ const ProcessDetails = () => {
                                             <h3 className="text-[13px] font-medium text-gray-900 mb-2 leading-[13px]">{log.title}</h3>
 
                                             {/* Reasoning Section */}
-                                            <CollapsibleReasoning reasons={log.reasoning} />
+                                            <CollapsibleReasoning reasons={processedReasoning} />
 
                                             {/* Artifacts - Inline */}
                                             {log.artifacts && log.artifacts.length > 0 && (
@@ -1338,6 +1382,32 @@ const ProcessDetails = () => {
                                     </div>
                                 );
                             })}
+                            
+                            {/* Final Approval Step for Needs Review cases */}
+                            {processStatus === 'Needs Review' && (
+                                <div className="relative flex gap-4 mt-8 pt-6 border-t border-gray-100">
+                                    <div className="w-20 flex-shrink-0" />
+                                    <div className="relative flex flex-col items-center w-5">
+                                        <div className="w-[11px] h-[11px] bg-white border border-gray-300 rounded-[2px]" />
+                                    </div>
+                                    <div className="flex-1 bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm">
+                                        <h3 className="text-sm font-semibold text-gray-900 mb-2">Final Case Approval</h3>
+                                        <p className="text-xs text-gray-500 mb-6">Once all findings have been addressed or escalated, you can finalize the review for this case.</p>
+                                        <div className="flex justify-start">
+                                            <button 
+                                                onClick={() => {
+                                                    sessionStorage.setItem(`case_status_${id}`, 'Done');
+                                                    setProcessMetadata(prev => ({ ...prev, status: 'Done' }));
+                                                }}
+                                                className="px-8 py-2.5 bg-[#1a1a1b] text-white text-sm font-bold rounded hover:bg-black active:scale-95 transition-all shadow-md flex items-center gap-2"
+                                            >
+                                                <Check className="w-4 h-4" />
+                                                Approve Case
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -1366,7 +1436,7 @@ const ProcessDetails = () => {
                             <VideoViewer artifact={selectedArtifact} onClose={closeArtifactPanel} />
                         )}
 
-                        {selectedArtifact.type === 'file' && (
+                        {(selectedArtifact.type === 'file' || selectedArtifact.type === 'pdf') && (
                             <DocumentViewer artifact={selectedArtifact} onClose={closeArtifactPanel} />
                         )}
 

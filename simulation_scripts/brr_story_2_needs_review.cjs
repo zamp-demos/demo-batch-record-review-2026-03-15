@@ -342,8 +342,8 @@ const waitForSignal = async (signalId) => {
     updateProcessLog(PROCESS_ID, { id: postSignalStep.id, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), title: postSignalStep.title_p, status: 'processing' });
     await updateProcessListStatus(PROCESS_ID, 'In Progress', postSignalStep.title_p);
     await delay(2000);
-    updateProcessLog(PROCESS_ID, { id: postSignalStep.id, title: postSignalStep.title_s, status: 'completed', reasoning: postSignalStep.reasoning, artifacts: [] }, { 'Review Status': 'Needs Review' });
-    await updateProcessListStatus(PROCESS_ID, 'Needs Review', postSignalStep.title_s);
+    updateProcessLog(PROCESS_ID, { id: postSignalStep.id, title: postSignalStep.title_s, status: 'completed', reasoning: postSignalStep.reasoning, artifacts: [] }, { 'Review Status': 'Done' });
+    await updateProcessListStatus(PROCESS_ID, 'Done', postSignalStep.title_s);
 
-    console.log(`${PROCESS_ID} Complete: ${CASE_NAME} \u2014 Final status: Needs Review`);
+    console.log(`${PROCESS_ID} Complete: ${CASE_NAME} \u2014 Final status: Done`);
 })();

@@ -308,7 +308,7 @@ const KnowledgeBase = () => {
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                                    placeholder="Ask away or give feedback to ✦ Pace"
+                                    placeholder="Ask away or give feedback to  Pace"
                                     className="flex-1 px-5 py-3.5 text-[17px] text-[#171717] placeholder-[#8f8f8f] focus:outline-none bg-transparent"
                                 />
                                 <button

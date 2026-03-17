@@ -392,12 +392,20 @@ const EmailDraftViewer = ({ artifact, onClose }) => {
                 return;
             }
 
-            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/email-status`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sent: true })
-            });
-            // Simulate delay for "visual" confirmation
+            const sig = artifact.signal || (artifact.data && artifact.data.signal);
+            if (sig) {
+                await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/signal`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ signal: sig })
+                });
+            } else {
+                await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/email-status`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sent: true })
+                });
+            }
             await new Promise(r => setTimeout(r, 1000));
             setSent(true);
             setTimeout(() => {
@@ -516,19 +524,10 @@ const EmailDraftViewer = ({ artifact, onClose }) => {
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 mr-2">
-                                <label className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">Ready to Send</label>
-                                <button
-                                    onClick={() => setReadyToSend(!readyToSend)}
-                                    className={`w-10 h-5 rounded-full relative transition-colors duration-200 focus:outline-none ${readyToSend ? 'bg-green-500' : 'bg-gray-200'}`}
-                                >
-                                    <div className={`absolute top-1 left-1 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${readyToSend ? 'translate-x-5' : ''}`}></div>
-                                </button>
-                            </div>
                             <button
                                 onClick={handleSend}
-                                disabled={sending || !readyToSend}
-                                className={`px-6 py-2 rounded font-medium text-sm flex items-center gap-2 transition-all ${sending || !readyToSend ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-900 text-white hover:bg-black active:scale-95'}`}
+                                disabled={sending}
+                                className={`px-6 py-2 rounded font-medium text-sm flex items-center gap-2 transition-all ${sending ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-black text-white hover:bg-gray-900 active:scale-95'}`}
                             >
                                 {sending ? (
                                     <>
@@ -538,7 +537,7 @@ const EmailDraftViewer = ({ artifact, onClose }) => {
                                 ) : (
                                     <>
                                         <Send className="w-4 h-4" />
-                                        Send Review
+                                        Send
                                     </>
                                 )}
                             </button>
@@ -671,12 +670,12 @@ const CollapsibleReasoning = ({ reasons }) => {
                             let content = r;
                             let marker = <span className="text-gray-300 select-none">•</span>;
 
-                            if (r.startsWith('(G)') || r.includes('✓')) {
-                                marker = <span className="text-green-500 select-none text-base leading-none">●</span>;
-                                content = r.replace('(G)', '').replace('✓', '').trim();
-                            } else if (r.startsWith('(R)') || r.includes('❌') || r.includes('⚠️')) {
-                                marker = <span className="text-red-500 select-none text-base leading-none">●</span>;
-                                content = r.replace('(R)', '').replace('❌', '').replace('⚠️', '').trim();
+                            if (r.startsWith('(G)') || r.includes('')) {
+                                marker = <span className="text-green-500 select-none text-base leading-none"></span>;
+                                content = r.replace('(G)', '').replace('', '').trim();
+                            } else if (r.startsWith('(R)') || r.includes('') || r.includes('')) {
+                                marker = <span className="text-red-500 select-none text-base leading-none"></span>;
+                                content = r.replace('(R)', '').replace('', '').replace('', '').trim();
                             }
 
                             return (

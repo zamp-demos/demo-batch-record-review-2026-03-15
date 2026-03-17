@@ -286,17 +286,7 @@ const waitForSignal = async (signalId) => {
         ],
         artifacts: [
             {
-                id: 'decision-003', type: 'decision',
-                data: {
-                    question: 'QA Disposition — Batch LS-2026-0031',
-                    options: [
-                        { label: 'Approve HOLD — send escalation to CMO, initiate OOS investigation', signal: 'APPROVE_HOLD_LS0031' },
-                        { label: 'Reject — do not escalate, release batch', signal: 'REJECT_HOLD_LS0031' }
-                    ]
-                }
-            },
-            {
-                id: 'escalation-email-003', type: 'email_draft', label: 'Escalation Email to CMO QA Director',
+                id: 'escalation-email-003', type: 'email_draft', label: 'Escalation Email to CMO QA Director', signal: 'APPROVE_HOLD_LS0031',
                 subject: 'URGENT: Critical Findings \u2014 Batch LS-2026-0031 Lisinopril 10mg \u2014 OOS Investigation Required',
                 from: 'pace-review@lilly.com', to: 'dr.k.weber@eurofins-mfg.com',
                 body: 'Dear Dr. Weber,\n\nOur batch record review system has identified 2 Critical findings in batch LS-2026-0031 (Lisinopril 10mg Tablets, 800,000 units) that require immediate action before any disposition can be considered.\n\nCRITICAL FINDING #1 \u2014 OOS Assay Result:\nAssay result: 93.1% (Specification: 95.0\u2013105.0%). This is an Out-of-Specification result. Per 21 CFR 211.192 and FDA OOS Guidance (2006), a Phase I laboratory investigation must be initiated immediately. No OOS investigation was found in the batch record.\n\nCRITICAL FINDING #2 \u2014 CPP Coating Temperature Excursion:\nInlet temperature 58\u00b0C recorded for 40 minutes during enteric coating (Specification: 65\u201370\u00b0C). This is a Critical Process Parameter excursion with no deviation report or impact assessment on file.\n\nAdditionally, we note that CMO QA countersigned the release record despite the documented OOS result, which represents a Major procedural deviation.\n\nRequired actions within 5 business days:\n1. Initiate formal OOS Phase I investigation per SOP and FDA guidance\n2. Open deviation report for CPP coating temperature excursion\n3. Provide raw data and investigation plan to Lilly QA\n\nBatch LS-2026-0031 is placed on HOLD pending resolution of these findings.\n\nReference: OOS-2026-0031 (assigned)\n\nRegards,\nPace \u2014 Batch Record Review System\nLilly Quality Operations\ncc: regulatory-affairs@lilly.com | dr.p.mwangi@lilly.com',
@@ -324,8 +314,8 @@ const waitForSignal = async (signalId) => {
             'Response expected: within 5 business days per CMO Quality Agreement',
             'Lilly QA notified: Dr. P. Mwangi and site quality director copied'
         ]
-    }, { 'Review Status': 'Needs Review' });
-    await updateProcessListStatus(PROCESS_ID, 'Needs Review', 'Escalation sent \u2014 batch LS-2026-0031 on HOLD pending OOS investigation');
+    }, { 'Review Status': 'Done' });
+    await updateProcessListStatus(PROCESS_ID, 'Done', 'Escalation sent \u2014 batch LS-2026-0031 on HOLD pending OOS investigation');
 
-    console.log(`${PROCESS_ID} Complete: ${CASE_NAME} \u2014 Final status: Needs Review`);
+    console.log(`${PROCESS_ID} Complete: ${CASE_NAME} \u2014 Final status: Done`);
 })();

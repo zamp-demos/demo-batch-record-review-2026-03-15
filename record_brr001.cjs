@@ -3,9 +3,10 @@ const fs = require('fs');
 const path = require('path');
 
 (async () => {
-    const videosDir = '/tmp/brr_demo/public/videos/';
+    const videosDir = path.join(__dirname, 'public/videos/');
+    if (!fs.existsSync(videosDir)) fs.mkdirSync(videosDir, { recursive: true });
     const browser = await chromium.launch({
-        headless: true,
+        headless: false,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const context = await browser.newContext({
@@ -13,7 +14,7 @@ const path = require('path');
     });
     const page = await context.newPage();
 
-    await page.goto('file:///tmp/brr_demo/mock_veeva_vault_brr001.html');
+    await page.goto(`file://${path.join(__dirname, 'mock_veeva_vault_brr001.html')}`);
     await page.waitForTimeout(800);
 
     // Login
@@ -27,7 +28,7 @@ const path = require('path');
     // Search for ATV-040-003
     await page.fill('#mbr-search', 'ATV-040-003');
     await page.waitForTimeout(500);
-    await page.click('.toolbar button');
+    await page.click('#view-mbr .toolbar button');
     await page.waitForTimeout(1200);
 
     // Click first result row

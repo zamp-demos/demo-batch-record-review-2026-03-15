@@ -132,56 +132,40 @@ const updateProcessListStatus = async (processId, status, currentStatus) => {
         },
         {
             id: 'step-4',
-            title_p: 'Reviewing Steps 1\u20135: Dispensing through Fluid Bed Drying...',
-            title_s: 'Steps 1\u20135 reviewed \u2014 all within specification',
+            title_p: 'Reviewing Steps 1\u201310: Manufacturing procedure through packaging...',
+            title_s: 'Manufacturing steps reviewed \u2014 1 OBSERVATION: blend time +1 min, within SOP discretion',
             reasoning: [
-                'Step 1 Dispensing: Env 21\u00b0C/38% RH \u2713 | All weights verified \u2713',
-                'Step 2 Sieving: 60 mesh \u2713 | Yield 99.8% \u2713',
-                'Step 3 Pre-Blend: VBL-002 cal current exp 30-Jun-2026 \u2713 | 18 RPM \u00d7 10 min \u2713',
-                'Step 4 Wet Granulation: RMG-001 | Impeller 250 RPM \u2713 | Granulation endpoint met \u2713',
-                'Step 5 Fluid Bed Drying: FBD-001 | Inlet 65\u00b0C | LOD 1.8% (spec \u22642.0%) \u2713 | Cal current \u2713'
-            ]
-        },
-        {
-            id: 'step-5',
-            title_p: 'Reviewing Steps 6\u20137: Milling and Blending...',
-            title_s: 'Steps 6\u20137 reviewed \u2014 1 OBSERVATION noted (blend time)',
-            reasoning: [
-                'Step 6 Milling: MIL-001 | 20 mesh \u2713 | Yield 99.2% \u2713',
-                'Step 7 Final Blending: VBL-002 | Target: 15\u201317 min | EBR recorded: 18 min',
-                '\u26a0 OBSERVATION: Blend time 18 min vs MBR maximum 17 min',
-                'SOP-BLN-004 Section 3.2: \u201cSingle time point exceedances \u22641.5 min require documentation only\u201d',
-                'IPC blend uniformity result: RSD 0.8% (spec \u22641.5%) \u2713 \u2014 product quality not affected',
-                'Operator note on EBR: \u201cBlend time extended due to equipment stop for safety check at T+16 min\u201d',
-                'Classification: OBSERVATION \u2014 documented, within SOP discretion, no product impact'
+                'Steps 1-2 Dispensing/Sieving: All 8 materials at exact MBR quantities \u2713 | Env 21\u00b0C/38% RH \u2713 | Yield 99.8% \u2713',
+                'Steps 3-5 Pre-Blend, Granulation, Drying: RMG-001 impeller 250 RPM \u2713 | Endpoint 17.2 kW (spec 15-20 kW) \u2713 | FBD-001 cal exp Jun-2026 \u2713 | LOD avg 1.8% (spec NMT 2.0%) \u2713',
+                'Steps 6-7 Milling/Blending: 20 mesh \u2713 | Yield 99.2% \u2713 | OBSERVATION: Blend time 18 min vs MBR max 17 min',
+                '  -> SOP-BLN-004 Sec 3.2: single exceedance NMT 1.5 min, documentation only | IPC blend uniformity RSD 0.8% (spec NMT 1.5%) \u2713 \u2014 no product impact',
+                'Steps 8-9 Compression/Coating: TBP-003 avg weight 467.8 mg \u2713 | Hardness 10.1 kP \u2713 | Friability 0.18% \u2713 | Weight gain 3.2% (spec 3.0-3.5%) \u2713',
+                'Step 10 Packaging: Reconciliation 99.6% \u2713 | All equipment calibrations current \u2713 | All operator signatures complete \u2713'
             ],
             artifacts: [
                 {
-                    id: 'blend-obs-json', type: 'json', label: 'Blending Step Findings',
+                    id: 'mfg-steps-data', type: 'json', label: 'Manufacturing Steps \u2014 Batch Actuals vs Specification',
                     data: {
-                        step: 7, parameter: 'Blend Time', mbr_spec: '15-17 min',
-                        ebr_value: '18 min', delta: '+1 min', classification: 'OBSERVATION',
-                        ipc_rsd_pct: 0.8, ipc_spec: '<=1.5%', product_impact: 'None',
-                        sop_reference: 'SOP-BLN-004 Section 3.2'
+                        batch: 'AT-2026-0142',
+                        parameters: [
+                            { step: 'Dispensing', parameter: 'Yield', spec: '100%', actual: '100.0%', status: 'PASS' },
+                            { step: 'Granulation', parameter: 'Endpoint Power', spec: '15-20 kW', actual: '17.2 kW', status: 'PASS' },
+                            { step: 'Drying', parameter: 'LOD (avg)', spec: 'NMT 2.0%', actual: '1.8%', status: 'PASS' },
+                            { step: 'Final Blend', parameter: 'Blend Time', spec: '15-17 min', actual: '18 min', status: 'OBSERVATION' },
+                            { step: 'Final Blend', parameter: 'IPC Blend Uniformity RSD', spec: 'NMT 1.5%', actual: '0.8%', status: 'PASS' },
+                            { step: 'Compression', parameter: 'Avg Tablet Weight', spec: '467 mg +/-3%', actual: '467.8 mg', status: 'PASS' },
+                            { step: 'Compression', parameter: 'Hardness', spec: '8-12 kP', actual: '10.1 kP', status: 'PASS' },
+                            { step: 'Film Coating', parameter: 'Weight Gain', spec: '3.0-3.5%', actual: '3.2%', status: 'PASS' },
+                            { step: 'Film Coating', parameter: 'Inlet Temp Range', spec: '65-70 deg C', actual: '65-68 deg C', status: 'PASS' }
+                        ],
+                        observations: 1, major_findings: 0, critical_findings: 0
                     }
                 }
             ]
-        }
+        },
     ];
     const steps2 = [
         {
-            id: 'step-6',
-            title_p: 'Reviewing Steps 8\u201310: Compression, Coating, and Packaging...',
-            title_s: 'Steps 8\u201310 reviewed \u2014 all within specification',
-            reasoning: [
-                'Step 8 Compression: TBP-003 | Target hardness 8\u201312 kP | EBR avg 10.1 kP \u2713',
-                'IPC friability: 0.18% (spec \u22640.5%) \u2713 | Disintegration: 4.2 min (spec \u22646 min) \u2713',
-                'Step 9 Film Coating: CTR-002 | Opadry II White | Target weight gain 3.0\u20133.5%',
-                'Achieved weight gain: 3.2% \u2713 | Inlet temperature 65\u201370\u00b0C throughout \u2713',
-                'Step 10 Packaging: 90cc HDPE bottles | 30-count | Reconciliation 99.6% \u2713',
-                'All equipment calibrations current \u2713 | All operator signatures complete \u2713'
-            ]
-        },
         {
             id: 'step-7',
             title_p: 'Running QC verification \u2014 12 tests for film-coated tablets...',

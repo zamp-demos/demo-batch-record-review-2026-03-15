@@ -165,53 +165,42 @@ const waitForSignal = async (signalId) => {
         },
         {
             id: 'step-4',
-            title_p: 'Reviewing Steps 1\u20134: Dispensing through Wet Granulation...',
-            title_s: 'Steps 1\u20134 reviewed \u2014 MAJOR finding: granulation yield below specification',
+            title_p: 'Reviewing Steps 1\u201310: Manufacturing procedure through packaging...',
+            title_s: 'Manufacturing steps reviewed \u2014 3 MAJOR findings identified',
             reasoning: [
-                'Step 1 Dispensing: Env 20\u00b0C/42% RH \u2713 | All materials verified \u2713',
-                'Step 2 Pre-Blend: BLN-003 | 15 RPM \u00d7 8 min \u2713',
-                'Step 3 Wet Granulation: RMG-002 | Impeller 230 RPM (spec 220\u2013250 RPM) \u2713',
-                'Step 4 Granulation Yield: MBR specification \u226598.0%',
-                '\u274c MAJOR FINDING #1: Granulation yield recorded as 95.8% \u2014 2.2 percentage points below minimum',
-                'No deviation report opened at time of manufacture',
-                'SOP-GRN-002 Section 5.1: Yield <98% requires immediate deviation report and hold',
-                'Operator signed off without flagging the yield discrepancy \u2014 procedural non-compliance'
+                'Steps 1-4 Dispensing through Wet Granulation: All 7 materials at exact MBR quantities \u2713',
+                'MAJOR FINDING 1 \u2014 Granulation Yield: 94.2% vs MBR minimum 97.0% (delta: -2.8%) | No deviation report filed | Operator note: wiped bowl walls \u2014 not an acceptable corrective action under SOP-QA-007',
+                'Steps 5-7 Fluid Bed Drying through Final Blending:',
+                'MAJOR FINDING 2 \u2014 FBD-003 Calibration EXPIRED: Used 20-Feb-2026, expired 15-Jan-2026 (36 days past expiry) | No Equipment Release Authorization on file | Violation of SOP-EQP-004 Sec 2.1',
+                'FBD-003 LOD results: 1.2-1.3% (spec NMT 1.5%) numerically pass, but data validity is compromised by expired equipment calibration',
+                'Steps 8-10 Compression, Coating, Packaging:',
+                'MAJOR FINDING 3 \u2014 IPC Blend Uniformity test NOT performed before compression | Mandatory per SOP-IPC-003 | Cannot be waived | No entry or authorization in batch record',
+                'Compression passes: avg weight 750.2 mg \u2713 | Hardness 12.4 kP \u2713 | Friability 0.22-0.28% \u2713',
+                'Metformin 500mg is uncoated \u2014 no coating step per MBR-MFH-500-001 \u2713 | Packaging reconciliation complete \u2713'
+            ],
+            artifacts: [
+                {
+                    id: 'mfg-steps-data', type: 'json', label: 'Manufacturing Steps \u2014 Batch Actuals vs Specification',
+                    data: {
+                        batch: 'MF-2026-0089',
+                        parameters: [
+                            { step: 'Dispensing', parameter: 'Yield', spec: '100%', actual: '100.0%', status: 'PASS' },
+                            { step: 'Granulation', parameter: 'Granulation Yield', spec: 'NLT 97.0%', actual: '94.2%', status: 'MAJOR DEVIATION' },
+                            { step: 'Granulation', parameter: 'Deviation Report Filed', spec: 'Required', actual: 'NOT FILED', status: 'MAJOR DEVIATION' },
+                            { step: 'FBD-003', parameter: 'Calibration Status', spec: 'Current', actual: 'EXPIRED 15-Jan-2026', status: 'MAJOR DEVIATION' },
+                            { step: 'FBD-003', parameter: 'Equipment Release Auth', spec: 'Required', actual: 'NOT ON FILE', status: 'MAJOR DEVIATION' },
+                            { step: 'Drying', parameter: 'LOD (avg)', spec: 'NMT 1.5%', actual: '1.2%', status: 'PASS (validity compromised)' },
+                            { step: 'Pre-Compression IPC', parameter: 'Blend Uniformity RSD', spec: 'NMT 2.0% MANDATORY', actual: 'NOT PERFORMED', status: 'MAJOR DEVIATION' },
+                            { step: 'Compression', parameter: 'Avg Tablet Weight', spec: '750 mg +/-3%', actual: '750.2 mg', status: 'PASS' },
+                            { step: 'Compression', parameter: 'Hardness', spec: '10-16 kP', actual: '12.4 kP', status: 'PASS' }
+                        ],
+                        observations: 0, major_findings: 3, critical_findings: 0
+                    }
+                }
             ]
         },
         {
-            id: 'step-5',
-            title_p: 'Reviewing Steps 5\u20137: Fluid Bed Drying through Final Blending...',
-            title_s: 'Steps 5\u20137 reviewed \u2014 MAJOR finding: expired calibration certificate on FBD-003',
-            reasoning: [
-                'Step 5 Fluid Bed Drying: FBD-003 | Inlet 60\u00b0C | LOD 1.9% (spec \u22642.5%) \u2713',
-                '\u274c MAJOR FINDING #2: FBD-003 calibration certificate expired 35 days before use',
-                'FBD-003 cal expiry: 28-Jan-2026 | Batch dried: 05-Mar-2026 | Overdue by 35 days',
-                'USP <1058> and 21 CFR 211.68: Equipment used in manufacturing must have current calibration',
-                'GMP violation \u2014 data integrity risk: temperature readings from uncalibrated equipment cannot be trusted',
-                'Step 6 Milling: MIL-002 | 16 mesh | Yield 99.1% \u2713',
-                'Step 7 Final Blend: RSD 1.1% (spec \u22641.5%) \u2713 | Cal current \u2713'
-            ]
-        }
-    ];
-
-    const steps2 = [
-        {
-            id: 'step-6',
-            title_p: 'Reviewing Steps 8\u201310: Compression, Coating, and Packaging...',
-            title_s: 'Steps 8\u201310 reviewed \u2014 MAJOR missing IPC, MINOR coating speed deviation',
-            reasoning: [
-                'Step 8 Compression: TBP-005 | Target hardness 12\u201316 kP | EBR avg 13.8 kP \u2713',
-                '\u274c MAJOR FINDING #3: IPC check at 14:30 missing from compression record',
-                'SOP-IPC-001: Compression IPC required every 30 minutes during run',
-                'Previous IPC: 14:00 \u2713 | Next IPC: 15:00 \u2713 | 14:30 entry: blank \u2014 no operator note',
-                'Step 9 Film Coating: CTR-004 | Opadry Clear',
-                '\u26a0 MINOR FINDING #1: Coating pan speed 8 RPM vs MBR specification 9\u201311 RPM',
-                'Duration at 8 RPM: 22 minutes (T+40 to T+62 min) | No operator note',
-                'Step 10 Packaging: 1000-count drums | Reconciliation 99.8% \u2713'
-            ]
-        },
-        {
-            id: 'step-7',
+id: 'step-7',
             title_p: 'Running QC verification \u2014 results within spec despite process deviations...',
             title_s: 'QC results within specification \u2014 process record integrity compromised',
             reasoning: [

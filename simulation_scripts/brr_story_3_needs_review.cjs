@@ -156,37 +156,42 @@ const waitForSignal = async (signalId) => {
         },
         {
             id: 'step-4',
-            title_p: 'Reviewing Steps 1\u20138: Dispensing through Compression...',
-            title_s: 'Steps 1\u20138 reviewed \u2014 MINOR finding: drying timestamp discrepancy',
+            title_p: 'Reviewing Steps 1\u20139: Manufacturing procedure through enteric coating...',
+            title_s: 'Manufacturing steps reviewed \u2014 CRITICAL: coating CPP inlet temperature 58\u00b0C for 40 min, undocumented',
             reasoning: [
-                'Steps 1\u20133 Dispensing/Sieving/Blending: All within specification \u2713',
-                'Step 4 Direct Compression setup: TBP-002 | Hardness 8\u201312 kP \u2713',
-                'Step 5 Fluid Bed Drying: FBD-002 | LOD 1.6% (spec \u22642.0%) \u2713',
-                '\u26a0 MINOR FINDING: Step 5 drying end timestamp ambiguity \u2014 10-minute gap in record',
-                'ALCOA+ principle: Attributable, Legible, Contemporaneous, Original, Accurate + Complete',
-                'EBR shows FBD start: 08:00 | FBD end: 10:35 | Next entry: 10:45 \u2014 10-min unaccounted period',
-                'No operator note explaining gap | SOP-ALCOA-001 requires contemporaneous documentation',
-                'Steps 6\u20138 Milling/Compression/IPC: All within specification \u2713'
+                'Steps 1-2 Dispensing/Dry Blend: All 8 materials at MBR quantities \u2713 | Blend IPC RSD 1.8% (spec NMT 3.0%) \u2713',
+                'Steps 3-6 Lubrication through Compression: EUR-TBP-009 cal exp Aug-2026 \u2713 | Avg weight 196.2 mg \u2713 | Hardness 6.4 kP \u2713 | Yield 98.8% \u2713',
+                'MINOR: Drying timestamp discrepancy \u2014 30 min unaccounted between Steps 2-3, low risk, clarification required',
+                'Step 9 Enteric Coating \u2014 CRITICAL FINDING:',
+                '  CPP Inlet Temp 10:00-10:40: recorded 58\u00b0C vs spec 65-70\u00b0C | Delta: -7\u00b0C for 40 continuous minutes',
+                '  MBR-LIS-010-002 Sec 5: below 65\u00b0C risks poor coating adhesion, incomplete film formation, enteric integrity failure',
+                '  No deviation report filed | CMO QA (K. Weber) countersigned EBR without flagging excursion',
+                '  Acid resistance IPC at 50% weight gain: 8% (spec NMT 10%) \u2014 borderline, not escalated',
+                '  Temp recovered to 62\u00b0C at 10:40, back in spec by 11:00 | Final weight gain 6.0% (spec 5.5-7.0%) \u2713'
+            ],
+            artifacts: [
+                {
+                    id: 'mfg-steps-data', type: 'json', label: 'Manufacturing Steps \u2014 Batch Actuals vs Specification',
+                    data: {
+                        batch: 'LS-2026-0031',
+                        parameters: [
+                            { step: 'Dispensing', parameter: 'Yield', spec: '100%', actual: '100.0%', status: 'PASS' },
+                            { step: 'Dry Blend', parameter: 'IPC Blend Uniformity RSD', spec: 'NMT 3.0%', actual: '1.8%', status: 'PASS' },
+                            { step: 'Compression', parameter: 'Avg Tablet Weight', spec: '196 mg +/-3%', actual: '196.2 mg', status: 'PASS' },
+                            { step: 'Compression', parameter: 'Hardness', spec: '5-8 kP', actual: '6.4 kP', status: 'PASS' },
+                            { step: 'Compression', parameter: 'Yield', spec: '96.0-100.5%', actual: '98.8%', status: 'PASS' },
+                            { step: 'Enteric Coating CPP', parameter: 'Inlet Temp (10:00-10:40)', spec: '65-70 deg C', actual: '58 deg C (40 min)', status: 'CRITICAL DEVIATION' },
+                            { step: 'Enteric Coating', parameter: 'Deviation Report', spec: 'Required for CPP excursion', actual: 'NOT FILED', status: 'CRITICAL DEVIATION' },
+                            { step: 'Enteric Coating IPC', parameter: 'Acid Resistance at 50% gain', spec: 'NMT 10%', actual: '8%', status: 'PASS (marginal)' },
+                            { step: 'Enteric Coating', parameter: 'Final Weight Gain', spec: '5.5-7.0%', actual: '6.0%', status: 'PASS' }
+                        ],
+                        observations: 0, major_findings: 0, critical_findings: 1
+                    }
+                }
             ]
         },
         {
-            id: 'step-5',
-            title_p: 'Reviewing Step 9: Enteric Coating and CPP parameters...',
-            title_s: 'Step 9 reviewed \u2014 CRITICAL: coating CPP temperature excursion undocumented',
-            reasoning: [
-                'Step 9 Enteric Coating: CTP-001 | Eudragit L100-55 coating',
-                'MBR CPP: Inlet temperature 65\u201370\u00b0C throughout coating operation',
-                '\u274c CRITICAL FINDING #1: Inlet temperature 58\u00b0C recorded for 40 minutes (T+20 to T+60 min)',
-                'Excursion duration: 40 minutes at 58\u00b0C \u2014 7\u00b0C below minimum specification',
-                'No deviation report opened at time of manufacture',
-                'No CMO QA note or impact assessment for the excursion',
-                'Impact on product: enteric coating polymer requires minimum 65\u00b0C for proper film formation',
-                'Risk: sub-spec coating temp may result in incomplete enteric coating \u2014 acid protection failure',
-                'This is a Critical Process Parameter (CPP) excursion \u2014 21 CFR 211.100 violation'
-            ]
-        },
-        {
-            id: 'step-6',
+id: 'step-6',
             title_p: 'Reviewing QC results \u2014 assay and dissolution...',
             title_s: 'QC OOS detected \u2014 CRITICAL: assay 93.1% out-of-specification, no investigation initiated',
             reasoning: [

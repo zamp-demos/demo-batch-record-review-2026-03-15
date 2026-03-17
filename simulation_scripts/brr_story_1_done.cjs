@@ -166,7 +166,6 @@ const updateProcessListStatus = async (processId, status, currentStatus) => {
     ];
     const steps2 = [
         {
-        {
             id: 'step-7',
             title_p: 'Running QC verification \u2014 12 tests for film-coated tablets...',
             title_s: 'QC complete \u2014 12/12 specifications met',

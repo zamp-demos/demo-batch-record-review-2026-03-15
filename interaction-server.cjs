@@ -111,7 +111,9 @@ const server = http.createServer(async (req, res) => {
 
         fs.writeFileSync(SIGNALS_FILE, JSON.stringify({
             APPROVE_HOLD_MF0089: false,
-            APPROVE_RELEASE_OM0217: false
+            APPROVE_HOLD_LS0031: false,
+            REJECT_HOLD_MF0089: false,
+            REJECT_HOLD_LS0031: false
         }, null, 4));
 
         runningProcesses.forEach((proc) => {

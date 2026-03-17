@@ -1384,31 +1384,7 @@ const ProcessDetails = () => {
                                 );
                             })}
                             
-                            {/* Final Approval Step for Needs Review cases */}
-                            {processStatus === 'Needs Review' && (
-                                <div className="relative flex gap-4 mt-8 pt-6 border-t border-gray-100">
-                                    <div className="w-20 flex-shrink-0" />
-                                    <div className="relative flex flex-col items-center w-5">
-                                        <div className="w-[11px] h-[11px] bg-white border border-gray-300 rounded-[2px]" />
-                                    </div>
-                                    <div className="flex-1 bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm">
-                                        <h3 className="text-sm font-semibold text-gray-900 mb-2">Final Case Approval</h3>
-                                        <p className="text-xs text-gray-500 mb-6">Once all findings have been addressed or escalated, you can finalize the review for this case.</p>
-                                        <div className="flex justify-start">
-                                            <button 
-                                                onClick={() => {
-                                                    sessionStorage.setItem(`case_status_${id}`, 'Done');
-                                                    setProcessMetadata(prev => ({ ...prev, status: 'Done' }));
-                                                }}
-                                                className="px-8 py-2.5 bg-[#1a1a1b] text-white text-sm font-bold rounded hover:bg-black active:scale-95 transition-all shadow-md flex items-center gap-2"
-                                            >
-                                                <Check className="w-4 h-4" />
-                                                Approve Case
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+
                         </div>
                     </div>
                 </div>

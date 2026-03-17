@@ -70,8 +70,7 @@ const ProcessList = ({ category = 'Data Integrity Review' }) => {
     const columns = [
         { label: 'Batch #', key: 'stockId' },
         { label: 'Product', key: 'name' },
-        { label: 'Site', key: 'site' },
-        { label: 'Confidence', key: 'confidence' }
+        { label: 'Site', key: 'site' }
     ];
 
     const handleApprove = (e, processId) => {

@@ -47,6 +47,46 @@ const updateProcessListStatus = async (processId, status, currentStatus) => {
     }
 };
 
+const waitForSignal = async (signalId) => {
+    console.log(`Waiting for human signal: ${signalId}...`);
+    const signalFile = path.join(PROJECT_ROOT, 'interaction-signals.json');
+    for (let i = 0; i < 15; i++) {
+        try {
+            if (fs.existsSync(signalFile)) {
+                const content = fs.readFileSync(signalFile, 'utf8');
+                if (!content) continue;
+                const signals = JSON.parse(content);
+                if (signals[signalId]) {
+                    delete signals[signalId];
+                    const tmp = signalFile + '.' + Math.random().toString(36).substring(7) + '.tmp';
+                    fs.writeFileSync(tmp, JSON.stringify(signals, null, 4));
+                    fs.renameSync(tmp, signalFile);
+                }
+                break;
+            }
+        } catch (e) { await delay(Math.floor(Math.random() * 200) + 100); }
+    }
+    while (true) {
+        try {
+            if (fs.existsSync(signalFile)) {
+                const content = fs.readFileSync(signalFile, 'utf8');
+                if (content) {
+                    const signals = JSON.parse(content);
+                    if (signals[signalId]) {
+                        console.log(`Signal ${signalId} received!`);
+                        delete signals[signalId];
+                        const tmp = signalFile + '.' + Math.random().toString(36).substring(7) + '.tmp';
+                        fs.writeFileSync(tmp, JSON.stringify(signals, null, 4));
+                        fs.renameSync(tmp, signalFile);
+                        return true;
+                    }
+                }
+            }
+        } catch (e) { }
+        await delay(1000);
+    }
+};
+
 (async () => {
     console.log(`Starting ${PROCESS_ID}: ${CASE_NAME}...`);
     writeJson(path.join(PUBLIC_DATA_DIR, `process_${PROCESS_ID}.json`), {
@@ -246,6 +286,16 @@ const updateProcessListStatus = async (processId, status, currentStatus) => {
         ],
         artifacts: [
             {
+                id: 'decision-003', type: 'decision',
+                data: {
+                    question: 'QA Disposition — Batch LS-2026-0031',
+                    options: [
+                        { label: 'Approve HOLD — send escalation to CMO, initiate OOS investigation', signal: 'APPROVE_HOLD_LS0031' },
+                        { label: 'Reject — do not escalate, release batch', signal: 'REJECT_HOLD_LS0031' }
+                    ]
+                }
+            },
+            {
                 id: 'escalation-email-003', type: 'email_draft', label: 'Escalation Email to CMO QA Director',
                 subject: 'URGENT: Critical Findings \u2014 Batch LS-2026-0031 Lisinopril 10mg \u2014 OOS Investigation Required',
                 from: 'pace-review@lilly.com', to: 'dr.k.weber@eurofins-mfg.com',
@@ -256,10 +306,10 @@ const updateProcessListStatus = async (processId, status, currentStatus) => {
     }, { 'Review Status': 'Needs Review', 'Confidence': '61%', 'Disposition': 'HOLD' });
     await updateProcessListStatus(PROCESS_ID, 'Needs Review', 'Escalation email drafted \u2014 awaiting send to Eurofins QA Director');
 
-    // Simulate email send after delay
-    await delay(5000);
+    await waitForSignal('APPROVE_HOLD_LS0031');
+    await delay(800);
 
-    // Step 10: Email sent confirmation
+    // Step 10: Email sent after approval
     updateProcessLog(PROCESS_ID, { id: 'step-10', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), title: 'Sending escalation to Eurofins QA Director...', status: 'processing' });
     await updateProcessListStatus(PROCESS_ID, 'Needs Review', 'Sending escalation to Eurofins QA Director...');
     await delay(2000);

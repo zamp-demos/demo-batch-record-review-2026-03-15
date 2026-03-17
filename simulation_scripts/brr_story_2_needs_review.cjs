@@ -288,6 +288,16 @@ const waitForSignal = async (signalId) => {
                     major_findings: 3, minor_findings: 1,
                     action_required: 'QA must approve HOLD and open deviation reports for all 3 MAJORs'
                 }
+            },
+            {
+                id: 'decision-002', type: 'decision',
+                data: {
+                    question: 'QA Disposition — Batch MF-2026-0089',
+                    options: [
+                        { label: 'Approve HOLD — confirm batch on hold, open 3 deviation reports', signal: 'APPROVE_HOLD_MF0089' },
+                        { label: 'Reject — release batch without deviation reports', signal: 'REJECT_HOLD_MF0089' }
+                    ]
+                }
             }
         ]
     };

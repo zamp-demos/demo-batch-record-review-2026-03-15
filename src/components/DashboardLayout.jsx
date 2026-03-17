@@ -338,7 +338,8 @@ const DashboardLayout = () => {
                         <button
                             onClick={async () => {
                                 try {
-                                    await fetch('/api/reset');
+                                    const API_BASE = import.meta.env.VITE_API_URL || '';
+                                    await fetch(`${API_BASE}/api/reset`);
                                     await new Promise(r => setTimeout(r, 3000));
                                 } catch (err) {
                                     console.error('Failed to reset backend:', err);

@@ -163,20 +163,6 @@ const server = http.createServer(async (req, res) => {
                         mbr: "MBR-LIS-010-002 v1.4",
                         confidence: null,
                         disposition: null
-                    },
-                    {
-                        id: "BRR_004",
-                        name: "Omeprazole 20mg Delayed-Release Capsules",
-                        category: "Batch Record Review",
-                        stockId: "OM-2026-0217",
-                        year: "2026-03-15",
-                        status: "In Progress",
-                        currentStatus: "Initializing...",
-                        site: "Lilly Branchburg NJ",
-                        batchSize: "900,000 units",
-                        mbr: "MBR-OME-020-004 v2.0",
-                        confidence: null,
-                        disposition: null
                     }
                 ];
                 fs.writeFileSync(processesPath, JSON.stringify(cases, null, 4));
@@ -186,8 +172,7 @@ const server = http.createServer(async (req, res) => {
                 const scripts = [
                     { file: 'brr_story_1_done.cjs', id: 'BRR_001' },
                     { file: 'brr_story_2_needs_review.cjs', id: 'BRR_002' },
-                    { file: 'brr_story_3_needs_review.cjs', id: 'BRR_003' },
-                    { file: 'brr_story_4_done.cjs', id: 'BRR_004' }
+                    { file: 'brr_story_3_needs_review.cjs', id: 'BRR_003' }
                 ];
 
                 let totalDelay = 0;

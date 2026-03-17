@@ -40,19 +40,5 @@
         "mbr": "MBR-LIS-010-002 v1.4",
         "confidence": null,
         "disposition": null
-    },
-    {
-        "id": "BRR_004",
-        "name": "Omeprazole 20mg Delayed-Release Capsules",
-        "category": "Batch Record Review",
-        "stockId": "OM-2026-0217",
-        "year": "2026-03-15",
-        "status": "In Progress",
-        "currentStatus": "Queued for review",
-        "site": "Lilly Branchburg NJ",
-        "batchSize": "900,000 units",
-        "mbr": "MBR-OME-020-004 v2.0",
-        "confidence": null,
-        "disposition": null
     }
 ]

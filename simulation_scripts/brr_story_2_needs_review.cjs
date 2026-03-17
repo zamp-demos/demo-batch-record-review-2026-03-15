@@ -200,7 +200,7 @@ const waitForSignal = async (signalId) => {
             ]
         },
         {
-id: 'step-7',
+            id: 'step-7',
             title_p: 'Running QC verification \u2014 results within spec despite process deviations...',
             title_s: 'QC results within specification \u2014 process record integrity compromised',
             reasoning: [
@@ -305,7 +305,7 @@ id: 'step-7',
         ]
     };
 
-    const allSteps = [...steps, ...steps2];
+    const allSteps = [...steps];
 
     for (let i = 0; i < allSteps.length; i++) {
         const step = allSteps[i];

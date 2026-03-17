@@ -1,47 +1,5 @@
 {
-    "logs": [
-        {
-            "id": "step-1",
-            "time": "09:49 AM",
-            "title": "EBR OM-2026-0217 received from J. Miller, Branchburg NJ — document loaded",
-            "status": "success",
-            "reasoning": [
-                "Source: james.miller@lilly.com",
-                "Attachment: ebr_OM-2026-0217.pdf (52 pages)",
-                "Batch: OM-2026-0217 | 900,000 units",
-                "Site: Lilly Branchburg, NJ"
-            ],
-            "artifacts": [
-                {
-                    "id": "ebr-pdf-004",
-                    "type": "pdf",
-                    "label": "EBR OM-2026-0217",
-                    "filename": "ebr_OM-2026-0217.pdf",
-                    "url": "/pdfs/ebr_OM-2026-0217.pdf"
-                }
-            ]
-        },
-        {
-            "id": "step-2",
-            "time": "09:50 AM",
-            "title": "Review in progress — awaiting QA countersignature",
-            "status": "warning",
-            "reasoning": [
-                "Environmental monitoring record for Step 4 missing QA countersignature",
-                "Observation ENV-OM-2026-0217 flagged",
-                "Site quality lead notified"
-            ],
-            "artifacts": []
-        }
-    ],
-    "keyDetails": {
-        "Batch Number": "OM-2026-0217",
-        "Product": "Omeprazole 20mg Delayed-Release Capsules",
-        "Batch Size": "900,000 units",
-        "Site": "Lilly Branchburg NJ",
-        "MBR Reference": "MBR-OME-020-004 v2.0",
-        "Review Status": "Needs Review",
-        "Confidence": "89%",
-        "Disposition": "NONE"
-    }
+    "logs": [],
+    "keyDetails": {},
+    "sidebarArtifacts": []
 }

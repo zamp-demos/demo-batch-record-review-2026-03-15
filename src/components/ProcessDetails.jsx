@@ -23,10 +23,11 @@ const VideoViewer = ({ artifact, onClose }) => {
             {/* Content Area */}
             <div className="flex-1 flex items-center justify-center p-8 bg-[#f9fafb]">
                 <div className="w-full max-w-4xl aspect-video bg-black rounded-lg shadow-xl overflow-hidden relative group">
-                    {artifact.videoPath ? (
-                        artifact.videoPath.endsWith('.webp') || artifact.videoPath.endsWith('.png') || artifact.videoPath.endsWith('.jpg') ? (
+                    {(artifact.videoPath || artifact.url) ? (() => {
+                        const src = artifact.videoPath || artifact.url;
+                        return src.endsWith('.webp') || src.endsWith('.png') || src.endsWith('.jpg') ? (
                             <img
-                                src={`${import.meta.env.VITE_API_URL || ''}${artifact.videoPath}`}
+                                src={`${import.meta.env.VITE_API_URL || ''}${src}`}
                                 alt={artifact.label}
                                 className="w-full h-full object-contain"
                             />
@@ -35,12 +36,12 @@ const VideoViewer = ({ artifact, onClose }) => {
                                 controls
                                 autoPlay
                                 className="w-full h-full"
-                                src={`${import.meta.env.VITE_API_URL || ''}${artifact.videoPath}`}
+                                src={`${import.meta.env.VITE_API_URL || ''}${src}`}
                             >
                                 Your browser does not support the video tag.
                             </video>
-                        )
-                    ) : (
+                        );
+                    })() : (
                         <div className="flex flex-col items-center justify-center h-full text-gray-400">
                             <Video className="w-16 h-16 mb-4 opacity-20" />
                             <p className="text-sm">Video content not available</p>

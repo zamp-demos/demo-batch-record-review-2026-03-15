@@ -171,13 +171,19 @@ const server = http.createServer(async (req, res) => {
                 fs.writeFileSync(FEEDBACK_QUEUE_PATH, '[]');
                 fs.writeFileSync(KB_VERSIONS_PATH, '[]');
 
+                // Delete per-process data files so UI shows clean Initializing state
+                ['BRR_001', 'BRR_002', 'BRR_003', 'BRR_004'].forEach((id) => {
+                    const pf = path.join(DATA_DIR, `process_${id}.json`);
+                    try { if (fs.existsSync(pf)) fs.unlinkSync(pf); } catch(e) {}
+                });
+
                 const scripts = [
                     { file: 'brr_story_1_done.cjs', id: 'BRR_001' },
                     { file: 'brr_story_2_needs_review.cjs', id: 'BRR_002' },
                     { file: 'brr_story_3_needs_review.cjs', id: 'BRR_003' }
                 ];
 
-                let totalDelay = 0;
+                let totalDelay = 1;
                 scripts.forEach((script) => {
                     setTimeout(() => {
                         const scriptPath = path.join(__dirname, 'simulation_scripts', script.file);

@@ -81,14 +81,18 @@ function serveStatic(res, filePath) {
 async function callGemini(systemPrompt, messages) {
     if (!GEMINI_API_KEY) throw new Error('GEMINI_API_KEY not set');
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
-    const chat = model.startChat({
-        systemInstruction: systemPrompt,
-        history: messages.slice(0, -1).map(m => ({
-            role: m.role === 'assistant' ? 'model' : 'user',
-            parts: [{ text: m.content }]
-        }))
+    const model = genAI.getGenerativeModel({
+        model: MODEL_NAME,
+        systemInstruction: {
+            role: 'user',
+            parts: [{ text: systemPrompt }]
+        }
     });
+    const history = messages.slice(0, -1).map(m => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }]
+    }));
+    const chat = model.startChat({ history });
     const last = messages[messages.length - 1];
     const result = await chat.sendMessage(last.content);
     return result.response.text();

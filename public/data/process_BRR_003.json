@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "EBR LS-2026-0031 received from Eurofins QA — document loaded",
             "status": "success",
             "reasoning": [
@@ -35,7 +35,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR-LIS-010-002 v1.4 retrieved — 3 versions found, v1.4 confirmed current approved",
             "status": "success",
             "reasoning": [
@@ -65,7 +65,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "BOM complete — all 6 materials dispensed within specification",
             "status": "success",
             "reasoning": [
@@ -81,7 +81,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "Manufacturing steps reviewed — CRITICAL: coating CPP inlet temperature 58°C for 40 min, undocumented",
             "status": "success",
             "reasoning": [
@@ -176,7 +176,7 @@
         },
         {
             "id": "step-6",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "QC OOS detected — CRITICAL: assay 93.1% out-of-specification, no investigation initiated",
             "status": "success",
             "reasoning": [
@@ -219,7 +219,7 @@
         },
         {
             "id": "step-7",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "68-point checklist: 2 CRITICAL + 1 MAJOR + 1 MINOR findings",
             "status": "success",
             "reasoning": [
@@ -234,7 +234,7 @@
         },
         {
             "id": "step-8",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "Confidence: 61% — Batch LS-2026-0031 requires mandatory human review — HOLD",
             "status": "success",
             "reasoning": [
@@ -276,7 +276,7 @@
         },
         {
             "id": "step-9",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "Escalation email drafted — awaiting send to Eurofins QA Director",
             "status": "warning",
             "reasoning": [
@@ -298,7 +298,7 @@
                     "to": "dr.k.weber@eurofins-mfg.com",
                     "body": "Dear Dr. Weber,\n\nOur batch record review system has identified 2 Critical findings in batch LS-2026-0031 (Lisinopril 10mg Tablets, 800,000 units) that require immediate action before any disposition can be considered.\n\nCRITICAL FINDING #1 — OOS Assay Result:\nAssay result: 93.1% (Specification: 95.0–105.0%). This is an Out-of-Specification result. Per 21 CFR 211.192 and FDA OOS Guidance (2006), a Phase I laboratory investigation must be initiated immediately. No OOS investigation was found in the batch record.\n\nCRITICAL FINDING #2 — CPP Coating Temperature Excursion:\nInlet temperature 58°C recorded for 40 minutes during enteric coating (Specification: 65–70°C). This is a Critical Process Parameter excursion with no deviation report or impact assessment on file.\n\nAdditionally, we note that CMO QA countersigned the release record despite the documented OOS result, which represents a Major procedural deviation.\n\nRequired actions within 5 business days:\n1. Initiate formal OOS Phase I investigation per SOP and FDA guidance\n2. Open deviation report for CPP coating temperature excursion\n3. Provide raw data and investigation plan to Lilly QA\n\nBatch LS-2026-0031 is placed on HOLD pending resolution of these findings.\n\nReference: OOS-2026-0031 (assigned)\n\nRegards,\nPace — Batch Record Review System\nLilly Quality Operations\ncc: regulatory-affairs@lilly.com | dr.p.mwangi@lilly.com",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:41:07.291Z"
+                    "timestamp": "2026-03-25T19:15:58.426Z"
                 }
             ]
         }

@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR (1498 lines) and EBR (1206 lines) ingested — CIP-2024-0156 loaded",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "68-point checklist: 67 pass, 1 critical fail — Item 61: LIMS timestamp discrepancy",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "1 CRITICAL finding: ALCOA+ violation — Confidence: 55% — HOLD",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "QA escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -80,7 +80,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch CIP-2024-0156 (Ciprofloxacin Hydrochloride Tablets 500mg) has been placed on HOLD.\n\nCRITICAL FINDING — ALCOA+ Data Integrity Violation:\nHPLC assay (QC-04, Section 12.4) LIMS entry timestamp: 14:32. Instrument hardware clock printout: 10:17. Discrepancy: 4 hours 15 minutes (253 minutes).\n\nMBR Section 3.2 tolerance is ±2 minutes. MBR explicitly states: \"Discrepancy > ±2 min = Critical ALCOA+ violation. Report as Critical deviation. Do not release batch while deviation is open.\"\n\nAnalyst recorded 'No' to the ±2 min check but raised no deviation. BR-11 was incorrectly marked 'Not triggered'. QA reviewer signed Checklist Item 61 as compliant (Y) without actioning the exceedance.\n\nRequired actions:\n1. Initiate Critical deviation per BR-11 immediately\n2. Investigate 4h 15min LIMS gap on HPLC-QC-101 assay sequence CIP-ASSAY\n3. Extend review to all analyst KN runs on HPLC-QC-101 in prior 30 days\n4. Do not release batch pending BR-11 investigation closure\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:41:06.452Z"
+                    "timestamp": "2026-03-25T19:15:57.563Z"
                 }
             ]
         }

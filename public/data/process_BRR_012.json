@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR and EBR ingested — LIS-2024-0441 loaded for review",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "CRITICAL: EBR records different formulation and product identity — BOM does not match MBR",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "MAJOR: 3 consecutive compression IPC supervisor signatures missing (shift handover gap) — Confidence: 52%",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "QA escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -80,7 +80,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch LIS-2024-0441 (Lisinopril 10mg Tablets) has been placed on HOLD. The EBR records a formulation that does not correspond to MPR-LIS-10-v08.\n\nCRITICAL FINDING 1 — BOM Formulation Discrepancy:\n- Disintegrant: EBR lists Croscarmellose Sodium (Ac-Di-Sol); MBR requires Crospovidone XL\n- Binder: EBR lists HPMC E5 at 8.00 kg; MBR specifies Pregelatinised Starch at 15.00 kg\n- Mannitol: EBR 162.52 kg vs MBR 90.00 kg (+80.6% deviation)\n- MCC: EBR 44.21 kg vs MBR 120.00 kg (-63.2% deviation)\n\nCRITICAL FINDING 2 — Product Identity Discrepancy:\nEBR product description: 'Lisinopril 10mg Film-Coated Tablets'. MBR: 'Lisinopril Tablets 10mg (Uncoated tablet, oral)'. No coating step is present in the EBR.\n\nMAJOR FINDING — Missing IPC Signatures:\nCompression IPC supervisor initials blank at rows 5-7 (08:30-09:00, shift handover). MBR Section 8.1 requires supervisor countersignature at every IPC check.\n\nNote: All QC results (assay 101.4%, dissolution 94.2%) pass. The formulation discrepancy requires investigation regardless.\n\nRequired actions:\n1. Determine whether physical manufacture followed MBR or EBR formulation\n2. Resolve Film-Coated vs Uncoated product identity discrepancy\n3. Obtain retrospective supervisor countersignature or raise formal deviation for IPC gap\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:41:10.456Z"
+                    "timestamp": "2026-03-25T19:16:01.628Z"
                 }
             ]
         }

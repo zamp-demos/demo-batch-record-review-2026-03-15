@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR (1541 lines) and EBR (1007 lines) ingested — OMP-2024-0318 loaded",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "72-point checklist complete — 70 pass, 2 fail (hold time H-02 breach + false verification entry)",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "CRITICAL finding confirmed: H-02 hold time exceeded 3h 30m — Confidence: 62% — HOLD",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "QA escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -80,7 +80,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch OMP-2024-0318 (Omeprazole 20mg Delayed-Release Capsules) has been placed on HOLD following automated batch record review.\n\nCRITICAL FINDING — H-02 Inter-Step Hold Time Exceeded:\nElapsed time between Step 2 and Step 3: 7h 30m (maximum per MBR: 4h 00m). Exceedance: +3h 30m.\n\nMBR Section 25 (ANDA regulatory commitment) states this limit is filed with the agency and any exceedance requires: (1) formal deviation report, (2) stability impact assessment, and (3) determination of whether agency notification is required.\n\nAdditional: Checklist Item 43 and the hold time verification table were both marked Y (compliant) by Operator V.K. and Supervisor T.R. despite the documented exceedance. A false record correction deviation is also required.\n\nRequired actions:\n1. Open deviation report for H-02 exceedance\n2. Initiate stability impact assessment per SP-OMP-HT-003\n3. Correct checklist item 43 and hold time table\n4. Determine if agency notification required per ANDA\n\nBatch remains on HOLD pending QA disposition.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:40:54.458Z"
+                    "timestamp": "2026-03-25T19:15:45.579Z"
                 }
             ]
         }

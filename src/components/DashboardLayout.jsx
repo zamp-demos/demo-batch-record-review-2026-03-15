@@ -36,6 +36,7 @@ const DashboardLayout = () => {
     const [isQueueOpen, setIsQueueOpen] = useState(false);
     const [counts, setCounts] = useState({ open: 0, queued: 0, processing: 0, applied: 0 });
     const queueTriggerRef = React.useRef(null);
+    const feedbackButtonRef = React.useRef(null);
 
     // Load queue count
     useEffect(() => {
@@ -278,7 +279,7 @@ const DashboardLayout = () => {
                     </div>
 
                     {/* Center: Work with Pace */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2">
+                    <div className="absolute left-1/2 transform -translate-x-1/2" ref={feedbackButtonRef}>
                         <button
                             onClick={() => setIsFeedbackModalOpen(true)}
                             className="bg-[#efefef] text-[#8f8f8f] border border-[#f0f0f0] flex h-7.5 w-[220px] items-center justify-between px-3 py-1 rounded-md shadow-sm hover:border-[#e5e5e5] transition-all"
@@ -399,6 +400,7 @@ const DashboardLayout = () => {
             <FeedbackModal
                 isOpen={isFeedbackModalOpen}
                 onClose={() => setIsFeedbackModalOpen(false)}
+                anchorRef={feedbackButtonRef}
             />
 
             {/* Feedback Queue Panel - Popover was moved up */}

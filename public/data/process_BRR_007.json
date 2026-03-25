@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR and EBR ingested — ATV-40-2024-0187 loaded for review",
             "status": "success",
             "reasoning": [
@@ -30,7 +30,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "Dispensing verified — CRITICAL: TP-008 calibration expired 15 days before use",
             "status": "success",
             "reasoning": [
@@ -44,7 +44,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "CRITICAL: HPLC assay LIMS timestamp 6h 55min after instrument printout — ALCOA+ violation",
             "status": "success",
             "reasoning": [
@@ -58,7 +58,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "All CPPs, IPC, hold times, QC values, and EM compliant — 2 critical findings block release",
             "status": "success",
             "reasoning": [
@@ -72,7 +72,7 @@
         },
         {
             "id": "step-5",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "QA Head escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -93,7 +93,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch ATV-40-2024-0187 (Atorvastatin Calcium Tablets 40mg) has been placed on HOLD. Two Critical deviations are required before any further action.\n\nCRITICAL FINDING 1 — Equipment Calibration:\nTP-008 (Tablet Press) semi-annual calibration expired 28-Feb-2024. Compression performed 15-Mar-2024 — 15 days past expiry. Operator recorded \"Cal Current? Y\" — incorrect. No deviation raised.\n\nCRITICAL FINDING 2 — Data Integrity (ALCOA+):\nHPLC assay (Section 6.4) LIMS entry time 16:47; instrument printout 09:52 — discrepancy 6h 55min. MBR tolerance ±2 min. Constitutes a Critical ALCOA+ Contemporaneous violation. No deviation raised.\n\nRequired actions:\n1. Open Critical deviation for TP-008 expired calibration — recalibration impact assessment required\n2. Open Critical deviation for HPLC LIMS timestamp gap — Phase I data integrity investigation required\n3. Both investigations must be completed and closed by QA Head before release can be reconsidered\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:41:04.169Z"
+                    "timestamp": "2026-03-25T19:15:55.287Z"
                 }
             ]
         }

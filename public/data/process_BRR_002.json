@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "EBR MF-2026-0089 received from D. Okafor via Teams — document loaded",
             "status": "success",
             "reasoning": [
@@ -35,7 +35,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR-MFH-500-001 v3.0 retrieved — current approved version confirmed",
             "status": "success",
             "reasoning": [
@@ -72,7 +72,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "BOM complete — all 7 materials dispensed within specification",
             "status": "success",
             "reasoning": [
@@ -89,7 +89,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "Manufacturing steps reviewed — 3 MAJOR findings identified",
             "status": "success",
             "reasoning": [
@@ -184,7 +184,7 @@
         },
         {
             "id": "step-7",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "QC results within specification — process record integrity compromised",
             "status": "success",
             "reasoning": [
@@ -218,7 +218,7 @@
         },
         {
             "id": "step-8",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "Confidence: 74% — 3 MAJOR findings require human QA disposition",
             "status": "success",
             "reasoning": [
@@ -260,7 +260,7 @@
         },
         {
             "id": "step-9",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "QA disposition required — 3 MAJOR findings — HOLD recommended",
             "status": "warning",
             "reasoning": [
@@ -310,6 +310,21 @@
                     }
                 }
             ]
+        },
+        {
+            "id": "step-10",
+            "time": "12:46 AM",
+            "title": "QA disposition confirmed — batch MF-2026-0089 on HOLD",
+            "status": "completed",
+            "reasoning": [
+                "QA disposition approved: HOLD — confirmed by authorized signatory",
+                "Deviation reports opened: DEV-MF-2026-0089-01, -02, -03",
+                "Batch MF-2026-0089 quarantine documentation filed — 1,200,000 units on HOLD",
+                "Investigation timeline: 30 business days per SOP-DEV-003",
+                "QA team notified: D. Okafor (Kinsale), Sr. QA Manager copied",
+                "Batch cannot be released until all 3 deviations are closed with documented root cause"
+            ],
+            "artifacts": []
         }
     ],
     "keyDetails": {
@@ -318,7 +333,7 @@
         "Batch Size": "1,200,000 units",
         "Site": "Lilly Kinsale",
         "MBR Reference": "MBR-MFH-500-001 v3.0",
-        "Review Status": "Needs Review",
+        "Review Status": "Done",
         "Confidence": "74%",
         "Disposition": "HOLD"
     }

@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR (1587 lines) and EBR (1080 lines) ingested — AML-2024-0271 loaded",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "68-point checklist: 62 pass, 6 fail — OOS assay suppressed + unauthorized retesting",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "4 findings confirmed: 2 CRITICAL + 2 MAJOR — Confidence: 52% — HOLD",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "QA escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -80,7 +80,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch AML-2024-0271 (Amlodipine Besylate Tablets 5mg) has been placed on HOLD.\n\nCRITICAL FINDING 1 — OOS Result Suppressed:\nFirst HPLC assay result: 91.2% (spec 95.0–105.0%) — OOS. Not reported to QA. No Form OOS-001 filed. Batch not placed on HOLD. MBR Section 6.3.1 violated.\n\nCRITICAL FINDING 2 — Original Data Excluded:\nOOS result recorded only on loose uncontrolled worksheet stapled to EBR. Only passing retest (97.8%) entered in Section 9.2.2. MBR Section 12.1 Rule 6 violated.\n\nMAJOR FINDING 1 — Unauthorized Retesting:\nRetest performed without QA notification, approved Retest Protocol (Form OOS-RP-001), or Phase I investigation. MBR Section 6.3.2 violated.\n\nMAJOR FINDING 2 — QA Reviewer Failure:\nSection 9.2.3 shows First Analysis Verification = N with blank retest protocol number. QA reviewer Sneha Patil (QA-4010) signed Items 63 and 64 as Y without flagging this.\n\nRequired actions:\n1. Open formal Data Integrity Investigation (SOP-DI-001)\n2. Open retroactive OOS Phase I Investigation for 91.2% result\n3. Review analyst Pooja Iyer (QC-3022) and QA reviewer Sneha Patil (QA-4010)\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:41:04.450Z"
+                    "timestamp": "2026-03-25T19:15:55.597Z"
                 }
             ]
         }

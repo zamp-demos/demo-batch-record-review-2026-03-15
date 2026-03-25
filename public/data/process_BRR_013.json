@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR and EBR ingested — LOS-2024-0512 loaded for review",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "All materials, CPPs, yields, and EM compliant — overall yield 98.5%, 8 stages pass",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "CRITICAL: OOS result (EXP-3179 0.24% vs NMT 0.20%) not investigated — batch released without OOS protocol",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:11 PM",
+            "time": "12:46 AM",
             "title": "QA escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -80,7 +80,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch LOS-2024-0512 (Losartan Potassium Tablets USP, 50mg) has been placed on HOLD.\n\nCRITICAL FINDING 1 — Out-of-Specification Result:\nEXP-3179 related substance result: 0.24% (duplicate confirmed: 0.24% and 0.24%). Specification: NMT 0.20%. This is a confirmed OOS result.\n\nCRITICAL FINDING 2 — No OOS Investigation Initiated:\nEBR Section 13.2 OOS tracking table is completely blank. No OOS number assigned. SOP-QA-005 requires Phase I investigation initiation immediately upon OOS identification. Batch was signed for release on 23-May-2024 without any investigation being opened. This is a direct violation of 21 CFR 211.192.\n\nAdditionally, QA 72-point checklist Item 56 was incorrectly marked 'Y' (compliant) despite the 0.24% result.\n\nRequired actions:\n1. Place batch on HOLD immediately\n2. Open OOS investigation per SOP-QA-005\n3. Correct QA checklist Item 56 to N with deviation reference\n4. Phase I investigation to determine root cause (storage conditions, synthesis impurity, or analytical method issue)\n5. Do not release until investigation closed with root cause and CAPA\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:41:12.458Z"
+                    "timestamp": "2026-03-25T19:16:03.570Z"
                 }
             ]
         }

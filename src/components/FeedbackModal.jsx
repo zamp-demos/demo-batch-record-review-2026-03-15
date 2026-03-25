@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ArrowUp, Loader2, Play } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { generateClarifyingQuestions, summarizeFeedback, applyFeedbackToQueue } from '../services/geminiService';
 import kbContent from '../data/knowledgeBase.md?raw';
 
-const FeedbackModal = ({ isOpen, onClose }) => {
+const FeedbackModal = ({ isOpen, onClose, anchorRef }) => {
     const [workflowState, setWorkflowState] = useState('idle');
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
@@ -17,6 +17,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     });
     const chatEndRef = useRef(null);
     const inputRef = useRef(null);
+    const [anchorLeft, setAnchorLeft] = useState('50%');
 
     useEffect(() => {
         chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -27,6 +28,14 @@ const FeedbackModal = ({ isOpen, onClose }) => {
             setTimeout(() => inputRef.current?.focus(), 100);
         }
     }, [isOpen]);
+
+    // Compute horizontal centre from the button's bounding rect
+    useEffect(() => {
+        if (isOpen && anchorRef?.current) {
+            const rect = anchorRef.current.getBoundingClientRect();
+            setAnchorLeft(rect.left + rect.width / 2);
+        }
+    }, [isOpen, anchorRef]);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -161,9 +170,8 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     );
 
     const PaceAvatar = () => (
-        <div className="flex h-4 min-h-4 w-4 min-w-4 items-center justify-center rounded-md bg-[#2445ff] text-white">
-            {/* Pace Icon SVG */}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 10 10 0 0 0-5-5 10 10 0 0 1-5-5" /></svg>
+        <div className="w-8 h-8 rounded bg-[#2445ff] flex items-center justify-center flex-shrink-0">
+            <img src="/adam-icon.svg" alt="Pace" className="w-5 h-5 invert brightness-0" />
         </div>
     );
 
@@ -232,79 +240,81 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        // Modal Wrapper - NO BLUR, NO DARK OVERLAY
-        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
-            {/* Actual Modal - Pointer events auto to allow interaction */}
-            <div className="pointer-events-auto relative shadow-chatbot-shadow w-[380px] space-y-1.5 rounded-[22px] border border-gray-500 bg-white p-0 animate-in fade-in zoom-in-95 duration-200">
-                <div className="bg-white flex max-h-[600px] flex-col rounded-[22px] p-1.5">
+        // Transparent full-screen backdrop for click-outside-to-close
+        <div className="fixed inset-0 z-50" onClick={handleClose}>
+        {/* Anchored below the "Work with Pace" button — centred on button's midpoint */}
+        <div
+            className="absolute pointer-events-none"
+            style={{ top: '46px', left: anchorLeft, transform: 'translateX(-50%)' }}
+            onClick={e => e.stopPropagation()}
+        >
+            {/* Hatched border wrapper */}
+            <div
+                className="pointer-events-auto rounded-[20px] animate-in fade-in zoom-in-95 duration-200"
+                style={{
+                    background: 'repeating-linear-gradient(-45deg, #d0d0d0 0px, #d0d0d0 1.5px, transparent 1.5px, transparent 8px)',
+                    padding: '3px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.10)',
+                }}
+            >
+                {/* White inner card */}
+                <div className="bg-white rounded-[17px] w-[400px] flex flex-col overflow-hidden" style={{ maxHeight: '520px' }}>
 
-                    {/* Header */}
-                    <div className="flex items-center justify-between px-4 py-3 shrink-0">
-                        <div className="flex items-center gap-2">
-                            <span className="text-[13px] font-medium text-[#171717]">
-                                {feedbackData.title || 'Work with Pace'}
-                            </span>
-                        </div>
-                        {/* Close button hidden or strictly minimal for cleaner look */}
-                        <button onClick={handleClose} className="p-1 hover:bg-black/5 rounded-full transition-colors opacity-50 hover:opacity-100">
-                            <X className="w-3.5 h-3.5" />
-                        </button>
-                    </div>
-
-                    {/* Content Wrapper */}
-                    <div className="shadow-table-filter-menu flex min-h-0 flex-1 flex-col rounded-b-[16px] border-x border-b border-white bg-white">
-
-                        {/* Messages Area */}
-                        {messages.length > 0 ? (
-                            <div className="min-h-0 flex-1 space-y-6 overflow-y-auto p-4 [&::-webkit-scrollbar]:hidden">
-                                {messages.map((msg, idx) => <ChatMessage key={idx} msg={msg} />)}
+                    {/* Messages Area — only shown when there are messages */}
+                    {messages.length > 0 && (
+                        <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+                            {/* First divider + greeting */}
+                            <div className="border-b border-[#f0f0f0] px-4 py-3">
+                                <span className="text-[13px] font-[500] text-[#171717]">Work with Pace</span>
+                            </div>
+                            <div className="p-4 space-y-0">
+                                {messages.map((msg, idx) => (
+                                    <div key={idx} className="border-b border-[#f0f0f0] last:border-b-0 py-4 first:pt-0">
+                                        <ChatMessage msg={msg} />
+                                    </div>
+                                ))}
                                 <div ref={chatEndRef} />
                             </div>
-                        ) : (
-                            /* Empty state */
-                            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center min-h-[200px]">
-                                <PaceAvatar />
-                                <p className="text-[13px] text-[#8f8f8f] mt-3 font-[450]">Ask a question or provide feedback to improve the process.</p>
-                            </div>
-                        )}
+                        </div>
+                    )}
 
-                        {/* Input Area */}
-                        <div className="p-3">
-                            <div className="shadow-side-drawer-inner rounded-xl border border-[#e5e5e5] bg-white relative">
-                                <textarea
-                                    ref={inputRef}
-                                    value={inputValue}
-                                    onChange={(e) => setInputValue(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSendMessage())}
-                                    placeholder="Ask anything or give feedback..."
-                                    disabled={isLoading || workflowState === 'queued'}
-                                    className="w-[calc(100%-20px)] text-[13px] font-[450] placeholder:text-[#8f8f8f] text-[#171717] min-h-[20px] max-h-[140px] resize-none border-none bg-transparent m-2.5 p-0 focus:ring-0 focus:outline-none overflow-y-auto shadow-none outline-none leading-[18px]"
-                                    rows={1}
-                                    style={{ height: 'auto', minHeight: '20px' }}
-                                />
-                                <div className="flex items-center justify-between py-2.5 pr-2.5 pl-1.5">
-                                    <div className="flex items-center gap-1">
-                                        <button className="p-1 hover:bg-[#f5f5f5] rounded text-[#171717] hover:bg-gray-300">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg>
-                                        </button>
-                                        <button className="p-1 hover:bg-[#f5f5f5] rounded text-[#171717] hover:bg-gray-300">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
-                                        </button>
-                                    </div>
-                                    <button
-                                        onClick={handleSendMessage}
-                                        disabled={!inputValue.trim() || isLoading}
-                                        className={`p-1.5 rounded-full transition-colors flex items-center justify-center !size-5 [&_svg]:size-3 ${inputValue.trim() && !isLoading ? 'bg-[#171717] text-white' : 'bg-transparent text-[#e5e5e5]'}`}
-                                    >
-                                        <ArrowUp className="w-3 h-3" />
+                    {/* Input Area */}
+                    <div className="p-3 flex-shrink-0">
+                        <div className="rounded-xl border border-[#e5e5e5] bg-white relative">
+                            <textarea
+                                ref={inputRef}
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSendMessage())}
+                                placeholder="Ask anything or give feedback..."
+                                disabled={isLoading || workflowState === 'queued'}
+                                className="w-[calc(100%-20px)] text-[13px] font-[450] placeholder:text-[#8f8f8f] text-[#171717] min-h-[20px] max-h-[140px] resize-none border-none bg-transparent m-2.5 p-0 focus:ring-0 focus:outline-none overflow-y-auto shadow-none outline-none leading-[18px]"
+                                rows={1}
+                                style={{ height: 'auto', minHeight: '20px' }}
+                            />
+                            <div className="flex items-center justify-between py-2.5 pr-2.5 pl-1.5">
+                                <div className="flex items-center gap-1">
+                                    <button className="p-1 hover:bg-[#f5f5f5] rounded text-[#8f8f8f] transition-colors">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg>
+                                    </button>
+                                    <button className="p-1 hover:bg-[#f5f5f5] rounded text-[#8f8f8f] transition-colors">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
                                     </button>
                                 </div>
+                                <button
+                                    onClick={handleSendMessage}
+                                    disabled={!inputValue.trim() || isLoading}
+                                    className={`p-1.5 rounded-full transition-colors flex items-center justify-center !size-6 [&_svg]:size-3 ${inputValue.trim() && !isLoading ? 'bg-[#e8e8e8] text-[#383838]' : 'bg-transparent text-[#e5e5e5]'}`}
+                                >
+                                    <ArrowUp className="w-3 h-3" />
+                                </button>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
+        </div>
         </div>
     );
 };

@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "EBR AT-2026-0142 received from S. Chen, Lilly Indianapolis — document loaded",
             "status": "success",
             "reasoning": [
@@ -35,7 +35,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR-ATV-040-003 v2.1 retrieved — current approved version confirmed",
             "status": "success",
             "reasoning": [
@@ -64,7 +64,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "BOM complete — all 8 materials dispensed within specification",
             "status": "success",
             "reasoning": [
@@ -96,7 +96,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "Manufacturing steps reviewed — 1 OBSERVATION: blend time +1 min, within SOP discretion",
             "status": "success",
             "reasoning": [
@@ -188,7 +188,7 @@
         },
         {
             "id": "step-7",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "QC complete — 12/12 specifications met",
             "status": "success",
             "reasoning": [
@@ -227,7 +227,7 @@
         },
         {
             "id": "step-8",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "68-point checklist complete — 67/68 items pass",
             "status": "success",
             "reasoning": [
@@ -244,7 +244,7 @@
         },
         {
             "id": "step-9",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "Confidence: 97% — Batch AT-2026-0142 meets all release criteria",
             "status": "success",
             "reasoning": [
@@ -276,7 +276,7 @@
         },
         {
             "id": "step-10",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "Review complete — batch AT-2026-0142 recommended for RELEASE",
             "status": "completed",
             "reasoning": [

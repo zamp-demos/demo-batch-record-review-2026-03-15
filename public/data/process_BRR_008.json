@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR (1612 lines) and EBR (1414 lines) ingested — WS-2024-0033 loaded",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "72-point checklist: 71 pass, 0 fail, 1 N/A — clean batch confirmed",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "0 findings — clean batch. Confidence: 99% — RELEASE recommended",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:11 PM",
+            "time": "12:45 AM",
             "title": "Review complete — batch WS-2024-0033 APPROVED FOR RELEASE",
             "status": "completed",
             "reasoning": [

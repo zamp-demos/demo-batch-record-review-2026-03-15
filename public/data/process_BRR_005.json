@@ -2,7 +2,7 @@
     "logs": [
         {
             "id": "step-1",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "MBR (1575 lines) and EBR (1307 lines) ingested — AMX-2024-0093 loaded",
             "status": "success",
             "reasoning": [
@@ -31,7 +31,7 @@
         },
         {
             "id": "step-2",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "72-point checklist: 70 pass, 2 fail — label reconciliation + data integrity",
             "status": "success",
             "reasoning": [
@@ -45,7 +45,7 @@
         },
         {
             "id": "step-3",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "2 MAJOR findings confirmed — Confidence: 84% — HOLD",
             "status": "success",
             "reasoning": [
@@ -59,7 +59,7 @@
         },
         {
             "id": "step-4",
-            "time": "09:10 PM",
+            "time": "12:45 AM",
             "title": "QA escalation drafted — awaiting send approval",
             "status": "warning",
             "reasoning": [
@@ -80,7 +80,7 @@
                     "to": "qa.head@lilly.com",
                     "body": "Dear QA Head,\n\nBatch AMX-2024-0093 (Amoxicillin Trihydrate Capsules 500mg) has been placed on HOLD.\n\nMAJOR FINDING 1 — Label Reconciliation:\n50,500 labels issued; 50,487 accounted for; discrepancy = 13 unaccounted labels. Operator recorded discrepancy as 0 (PASS) — arithmetically incorrect. Zero-tolerance breach per MBR Section 5.5.5, 7.5, 8.4, and 21 CFR 211.125.\n\nMAJOR FINDING 2 — Data Integrity:\nQC correction on EBR p.87 (FP-04 peak area, analyst T. Kumar) is missing the mandatory reason field required by MBR Section 7.2 and 21 CFR Part 211.\n\nRequired actions:\n1. Verify label count arithmetic and locate 13 unaccounted labels\n2. Obtain correction reason from T. Kumar before any release decision\n3. Raise deviation report for both findings\n\nBatch remains on HOLD pending resolution.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
                     "isIncoming": false,
-                    "timestamp": "2026-03-25T15:40:56.452Z"
+                    "timestamp": "2026-03-25T19:15:47.647Z"
                 }
             ]
         }

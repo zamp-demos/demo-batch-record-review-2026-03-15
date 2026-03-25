@@ -1,0 +1,98 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR (1498 lines) and EBR (1206 lines) ingested — CIP-2024-0156 loaded",
+            "status": "success",
+            "reasoning": [
+                "MBR reference: MPR-CIP-500-v08 — 1498 lines parsed across 19 sections",
+                "EBR batch: CIP-2024-0156 — 1206 lines parsed, manufacturing dates 03–04 Jun 2024",
+                "Product: Ciprofloxacin Hydrochloride Tablets 500mg, batch size 100,000 tablets",
+                "Manufacturing date range identified: 03-Jun-2024 (dispensing) through 04-Jun-2024 (packaging)",
+                "Both documents structured and ready for field-by-field comparison across 68 GMP checks"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-010",
+                    "type": "pdf",
+                    "label": "EBR CIP-2024-0156",
+                    "filename": "05_ciprofloxacin_ebr.pdf",
+                    "url": "/pdfs/05_ciprofloxacin_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-010",
+                    "type": "pdf",
+                    "label": "MBR MPR-CIP-500-v08",
+                    "filename": "05_ciprofloxacin_mbr.pdf",
+                    "url": "/pdfs/05_ciprofloxacin_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "68-point checklist: 67 pass, 1 critical fail — Item 61: LIMS timestamp discrepancy",
+            "status": "success",
+            "reasoning": [
+                "Category 1–3 (Header, BOM, Equipment): All 21 checks PASS — product ID, batch number, MBR v08, all 9 materials dispensed within tolerance with dual signatures, all equipment calibrated",
+                "Category 4–6 (Process, IPC, Environment): All 20 checks PASS — granulation endpoint 54 A (spec 45–65), LOD 1.6%, blend RSD 0.73%, 10 compression IPC points all within spec, no environmental excursions",
+                "Category 7–8 (Yield/Reconciliation, QC): 14 of 15 checks PASS — yields all within range; CRITICAL FAIL: HPLC assay LIMS entry 14:32 vs instrument printout 10:17, discrepancy 4h 15min (tolerance ±2 min)",
+                "Category 9–10 (Signatures, Deviations): All 12 checks PASS — all mandatory countersignatures present (SIG-05, SIG-08, SIG-09), no deviations documented",
+                "Total: 67 pass / 1 critical fail — assay result (98.6%) is within spec but contemporaneity cannot be verified"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:11 PM",
+            "title": "1 CRITICAL finding: ALCOA+ violation — Confidence: 55% — HOLD",
+            "status": "success",
+            "reasoning": [
+                "Primary finding: HPLC assay (QC-04, Section 12.4) LIMS entry timestamp (14:32) is 4 hours 15 minutes after instrument hardware clock printout (10:17)",
+                "Finding type: data_integrity — ALCOA+ Contemporaneous principle violation per MBR Sections 3.2, 6.4, and 7.1",
+                "Severity: CRITICAL — MBR explicitly states \"Discrepancy > ±2 min = Critical ALCOA+ violation. Report as Critical deviation. Do not release batch while deviation is open.\"",
+                "Regulatory reference: 21 CFR 211.194, EU Annex 11, FDA Data Integrity Guidance 2018; precedent: Intas Pharmaceuticals FDA 483 (Ahmedabad 2022)",
+                "Evidence: analyst recorded 'No' to ±2 min check but raised no deviation; BR-11 incorrectly marked 'Not triggered'; Checklist Item 61 incorrectly marked 'Y' by QA reviewer; confidence 55% — HOLD"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:11 PM",
+            "title": "QA escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "HPLC assay LIMS entry (14:32) is 4h 15min (253 minutes) after instrument hardware clock (10:17) — far beyond ±2 min MBR tolerance",
+                "ALCOA+ Contemporaneous violation: data integrity of QC-04 assay result (98.6%) cannot be assured without investigation",
+                "Analyst recorded 'No' to contemporaneous check but raised no deviation; BR-11 incorrectly marked not triggered",
+                "QA reviewer signed off Checklist Item 61 as Y without actioning the ±2 min exceedance",
+                "Critical deviation per BR-11 must be initiated immediately; investigation should extend to all analyst KN runs on HPLC-QC-101 in prior 30 days"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-010",
+                    "type": "email_draft",
+                    "label": "QA Escalation — ALCOA+ Data Integrity Violation",
+                    "signal": "APPROVE_HOLD_CIP0156",
+                    "subject": "HOLD: ALCOA+ Violation — Batch CIP-2024-0156 Ciprofloxacin 500mg",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch CIP-2024-0156 (Ciprofloxacin Hydrochloride Tablets 500mg) has been placed on HOLD.\n\nCRITICAL FINDING — ALCOA+ Data Integrity Violation:\nHPLC assay (QC-04, Section 12.4) LIMS entry timestamp: 14:32. Instrument hardware clock printout: 10:17. Discrepancy: 4 hours 15 minutes (253 minutes).\n\nMBR Section 3.2 tolerance is ±2 minutes. MBR explicitly states: \"Discrepancy > ±2 min = Critical ALCOA+ violation. Report as Critical deviation. Do not release batch while deviation is open.\"\n\nAnalyst recorded 'No' to the ±2 min check but raised no deviation. BR-11 was incorrectly marked 'Not triggered'. QA reviewer signed Checklist Item 61 as compliant (Y) without actioning the exceedance.\n\nRequired actions:\n1. Initiate Critical deviation per BR-11 immediately\n2. Investigate 4h 15min LIMS gap on HPLC-QC-101 assay sequence CIP-ASSAY\n3. Extend review to all analyst KN runs on HPLC-QC-101 in prior 30 days\n4. Do not release batch pending BR-11 investigation closure\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:41:06.452Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "CIP-2024-0156",
+        "Product": "Ciprofloxacin Hydrochloride Tablets 500mg",
+        "Batch Size": "100,000 tablets",
+        "Site": "Lilly Kinsale",
+        "MBR Reference": "MPR-CIP-500-v08",
+        "Review Status": "Needs Review",
+        "Confidence": "55%",
+        "Disposition": "HOLD"
+    }
+}

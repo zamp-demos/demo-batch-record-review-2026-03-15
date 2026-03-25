@@ -1,0 +1,111 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR and EBR ingested — ATV-40-2024-0187 loaded for review",
+            "status": "success",
+            "reasoning": [
+                "Received Master Batch Record MPR-ATV-40-v12 — Atorvastatin Calcium Tablets 40mg",
+                "Received Executed Batch Record EBR-ATV-40-2024-0187, manufactured 14-15 Mar 2024",
+                "MBR version on EBR cover confirmed: MPR-ATV-40-v12",
+                "Batch size 10,000 tablets, expiry 31-Mar-2026 — arithmetic verified correct"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-007",
+                    "type": "pdf",
+                    "label": "EBR ATV-40-2024-0187",
+                    "filename": "01_atorvastatin_ebr.pdf",
+                    "url": "/pdfs/01_atorvastatin_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-007",
+                    "type": "pdf",
+                    "label": "MBR MPR-ATV-40-v12",
+                    "filename": "01_atorvastatin_mbr.pdf",
+                    "url": "/pdfs/01_atorvastatin_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "Dispensing verified — CRITICAL: TP-008 calibration expired 15 days before use",
+            "status": "success",
+            "reasoning": [
+                "All 8 raw materials have QC-approved AR numbers — no TBD or pending entries",
+                "Two-person dispensing confirmed: R. Krishnan dispensed, S. Patil independently verified all 8 materials",
+                "CRITICAL: TP-008 (Tablet Press, semi-annual calibration) due date 28-Feb-2024; compression performed 15-Mar-2024 — 15 days past expiry",
+                "MBR Section 3.2 is unambiguous: equipment with expired calibration must NOT be used — no exceptions",
+                "Operator R. Krishnan recorded \"Cal Current? Y\" — incorrect; no deviation raised; QA reviewer S. Desai accepted without independent verification"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:10 PM",
+            "title": "CRITICAL: HPLC assay LIMS timestamp 6h 55min after instrument printout — ALCOA+ violation",
+            "status": "success",
+            "reasoning": [
+                "HPLC assay LIMS entry time: 16:47 on 16-Mar-2024; instrument printout time: 09:52 on 16-Mar-2024",
+                "Discrepancy: 6 hours 55 minutes — MBR v12 Section 6.4 tolerance is ±2 minutes",
+                "MBR classification: discrepancy >±2 min = CRITICAL ALCOA+ violation (Contemporaneous principle)",
+                "Required action per MBR: immediate Critical deviation report — none raised",
+                "Analyst V. Prasad and reviewer S. Desai both signed off; checklist item 61 incorrectly marked Y"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:10 PM",
+            "title": "All CPPs, IPC, hold times, QC values, and EM compliant — 2 critical findings block release",
+            "status": "success",
+            "reasoning": [
+                "Granulation CPPs: roll pressure 61-63 bar, speed 4 RPM, feed rate 20-21 kg/hr — all within spec throughout run",
+                "LOD post-drying: 1.8-2.0% at all 3 locations — within ≤2.5%; blend RSD 0.36% — within ≤5.0%",
+                "Dissolution: mean 88.2%, all 6 vessels ≥75%; water content 1.74%, impurities total 0.23% — all pass",
+                "All 6 inter-step hold times within validated limits; all 4 rooms EM-compliant with no excursions",
+                "Both critical findings are process compliance violations; numerical QC results are all within specification"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-5",
+            "time": "09:11 PM",
+            "title": "QA Head escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "Finding 1 (CRITICAL): TP-008 used 15 days past semi-annual calibration expiry — no deviation raised",
+                "Finding 2 (CRITICAL): HPLC assay LIMS timestamp 6h 55min late — ALCOA+ violation, no deviation raised",
+                "Both findings missed by QA reviewer S. Desai — checklist items 23 and 61 incorrectly marked Y",
+                "Batch cannot be released: requires 2 Critical deviation reports and Phase I investigations",
+                "Confidence: 97% (high base; numerical results all pass) but routing is HOLD due to unresolved criticals"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-007",
+                    "type": "email_draft",
+                    "label": "QA Head Escalation — 2 Critical Findings",
+                    "signal": "APPROVE_HOLD_ATV0187",
+                    "subject": "HOLD: 2 Critical Findings — Batch ATV-40-2024-0187 Atorvastatin 40mg",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch ATV-40-2024-0187 (Atorvastatin Calcium Tablets 40mg) has been placed on HOLD. Two Critical deviations are required before any further action.\n\nCRITICAL FINDING 1 — Equipment Calibration:\nTP-008 (Tablet Press) semi-annual calibration expired 28-Feb-2024. Compression performed 15-Mar-2024 — 15 days past expiry. Operator recorded \"Cal Current? Y\" — incorrect. No deviation raised.\n\nCRITICAL FINDING 2 — Data Integrity (ALCOA+):\nHPLC assay (Section 6.4) LIMS entry time 16:47; instrument printout 09:52 — discrepancy 6h 55min. MBR tolerance ±2 min. Constitutes a Critical ALCOA+ Contemporaneous violation. No deviation raised.\n\nRequired actions:\n1. Open Critical deviation for TP-008 expired calibration — recalibration impact assessment required\n2. Open Critical deviation for HPLC LIMS timestamp gap — Phase I data integrity investigation required\n3. Both investigations must be completed and closed by QA Head before release can be reconsidered\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:41:04.169Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "ATV-40-2024-0187",
+        "Product": "Atorvastatin Calcium Tablets 40mg",
+        "Batch Size": "10,000 tablets",
+        "Site": "Lilly Indianapolis",
+        "MBR Reference": "MPR-ATV-40-v12",
+        "Review Status": "Needs Review",
+        "Confidence": "97%",
+        "Disposition": "HOLD"
+    }
+}

@@ -1,0 +1,107 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR (1612 lines) and EBR (1414 lines) ingested — WS-2024-0033 loaded",
+            "status": "success",
+            "reasoning": [
+                "MBR reference: MPR-WAR-5-v14 — 1612 lines parsed across 19 sections",
+                "EBR batch: WS-2024-0033 — 1414 lines parsed, manufactured 08-May-2024",
+                "Product: Warfarin Sodium Tablets 5mg (NTI — Narrow Therapeutic Index)",
+                "Manufacturing date range: 08-May-2024 (dispensing) through 09-May-2024 (packaging)",
+                "Both documents structured and ready for 72-point GMP checklist review"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-008",
+                    "type": "pdf",
+                    "label": "EBR WS-2024-0033",
+                    "filename": "04_warfarin_ebr.pdf",
+                    "url": "/pdfs/04_warfarin_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-008",
+                    "type": "pdf",
+                    "label": "MBR MPR-WAR-5-v14",
+                    "filename": "04_warfarin_mbr.pdf",
+                    "url": "/pdfs/04_warfarin_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "72-point checklist: 71 pass, 0 fail, 1 N/A — clean batch confirmed",
+            "status": "success",
+            "reasoning": [
+                "Cat A-B (Document + BOM): 22/22 compliant — all materials, codes, weights, CoAs, and dual balance verification confirmed",
+                "Cat C (QA Witness NTI): 6/6 compliant — LP signed at all 3 mandatory NTI witness points (dispensing, compression start, packaging yield)",
+                "Cat D-F (Equipment, Env, Process/IPC): 24/24 compliant — all calibrations current, env within spec, all CPPs and IPC checks passed",
+                "Cat G-H (QC results, LIMS integrity): 13/13 compliant — assay 99.4%, CU RSD 1.8%, dissolution 95.4% min; all LIMS deltas = 1 min",
+                "Cat I-K (Yield, Mass Balance, Packaging, Deviations): 8/8 compliant, 1 N/A — 98.5% overall yield, 0.09% unaccounted, no deviations"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:10 PM",
+            "title": "0 findings — clean batch. Confidence: 99% — RELEASE recommended",
+            "status": "success",
+            "reasoning": [
+                "Primary finding: none — all 72 checklist items resolved as compliant or N/A",
+                "Finding type: clean_batch. Severity: N/A — no deviations, no OOS, no missing signatures, no LIMS discrepancies",
+                "NTI-specific note: human reviewer pre-annotation on Item 17 (BAL-02) marked FAIL in error; EBR Section 1.4 rows 1-2 confirm both 100g and 500g reference weights passed with dual countersign",
+                "Correct assessment: Item 17 is PASS — pre-annotation overridden based on EBR evidence",
+                "Confidence: 99% — 1pt withheld for N/A item (no environmental excursions, cannot fully score Item 40); auto-approve eligible"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:11 PM",
+            "title": "Review complete — batch WS-2024-0033 APPROVED FOR RELEASE",
+            "status": "completed",
+            "reasoning": [
+                "All 72 checklist categories reviewed — 71 compliant, 1 N/A (no environmental excursions)",
+                "No blocking findings: 0 critical, 0 major, 0 minor deviations identified",
+                "Confidence 99% — routing to QA spot-check (auto-approve eligible tier)",
+                "All NTI specifications met: assay 99.4%, CU RSD 1.8%, dissolution 95.4%, balance verification dual-confirmed",
+                "Recommended disposition: RELEASE — forward to QA for spot-check review and final release sign-off"
+            ],
+            "artifacts": [
+                {
+                    "id": "results-json-008",
+                    "type": "json",
+                    "label": "Consolidated Review Results",
+                    "data": {
+                        "pair_id": "pair-04-warfarin",
+                        "batch_number": "WS-2024-0033",
+                        "product_name": "Warfarin Sodium Tablets 5mg",
+                        "mbr_reference": "MPR-WAR-5-v14",
+                        "disposition": "RELEASE",
+                        "primary_finding_type": "clean_batch",
+                        "primary_finding_severity": "N/A",
+                        "confidence_pct": 99,
+                        "critical_findings": 0,
+                        "major_findings": 0,
+                        "minor_findings": 0,
+                        "total_findings": 0,
+                        "routing": "Forward to QA for spot-check review and final release sign-off. Auto-approve eligible (confidence >= 95%, zero critical/major findings).",
+                        "review_timestamp": "2026-03-25T03:54:32.961332+00:00"
+                    }
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "WS-2024-0033",
+        "Product": "Warfarin Sodium Tablets 5mg (NTI)",
+        "Batch Size": "200,000 tablets",
+        "Site": "Lilly Indianapolis",
+        "MBR Reference": "MPR-WAR-5-v14",
+        "Review Status": "Done",
+        "Confidence": "99%",
+        "Disposition": "RELEASE"
+    }
+}

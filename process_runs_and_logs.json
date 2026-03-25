@@ -1,0 +1,1479 @@
+{
+  "process": "Batch Record Review",
+  "org": "Lilly",
+  "process_id": "6f037763-bd41-410e-ba46-a74dc65dde61",
+  "total_pace_runs": 10,
+  "total_log_entries": 72,
+  "runs": [
+    {
+      "run_id": "d4e1f64b-c6a9-445c-9ad6-6525845b6b87",
+      "name": "OMP-2024-0318",
+      "document_name": "MBR+EBR \u2014 Omeprazole 20mg Delayed-Release Capsules",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 hold_time_violation | CRITICAL | 62% confidence",
+      "created_at": "2026-03-25T03:17:23.273508+00:00",
+      "updated_at": "2026-03-25T03:17:23.273508+00:00",
+      "log_count": 5,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Ingested MBR (1541 lines) and EBR (1007 lines) for Omeprazole 20mg Delayed-Release Capsules.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "batch_number": "OMP-2024-0318",
+            "product_name": "Omeprazole 20mg Delayed-Release Capsules",
+            "mbr_reference": "MPR-OMP-20-v06",
+            "reasoning_steps": [
+              "MBR reference: MPR-OMP-20-v06 \u2014 1541 lines parsed, 26 sections covering BOM, CPPs, hold times, QC specs, 72-point checklist",
+              "EBR batch: OMP-2024-0318 \u2014 1007 lines parsed, covering 6 manufacturing steps across 4 days (2024-03-18 to 2024-03-21)",
+              "Product: Omeprazole 20mg Delayed-Release Capsules \u2014 hard gelatin capsule with enteric-coated pellets",
+              "Manufacturing date range: Day 1 (2024-03-18) through QA disposition (2024-03-27)",
+              "Both documents structured and ready for field-by-field comparison across all review categories"
+            ]
+          },
+          "timestamp": "2026-03-25T03:17:42.740198+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Executed 72-point checklist \u2014 70 pass, 2 fail (hold time H-02 breach + false verification entry).",
+          "details": "",
+          "metadata": {
+            "step_name": "Checklist Execution",
+            "reasoning_steps": [
+              "Category 1-3 (Header/BOM/Equipment): PASS \u2014 MBR v06 confirmed, all 11 material lots verified, AR numbers present, dual-signed API dispensing, equipment calibration current",
+              "Category 4-6 (Process CPPs, IPC, Environment): PASS for CPPs and IPC \u2014 all 54 drug-layer and 46 enteric-coat CPP readings within range; all CWG samples pass; acid resistance tests pass; EM logs clean across all rooms",
+              "Category 7-8 (Yield/Reconciliation, QC): PASS \u2014 all stage yields above minimums; label reconciliation balances; one OOS (DEV-OMP-2024-0318-001) raised, Stage 2 dissolution passed, deviation properly closed",
+              "Category 9-10 (Signatures, Deviations): PASS for signatures on all steps \u2014 FAIL on checklist item 43 (H-02 hold time marked Y when elapsed time was 7h 30m vs 4h max)",
+              "Total: 70 pass / 2 fail across 72 items \u2014 both failures relate to the same H-02 hold time event"
+            ]
+          },
+          "timestamp": "2026-03-25T03:18:14.216773+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Classified 2 findings: 1 critical (H-02 hold time breach + false verification), 1 minor (data entry anomaly at 21:15).",
+          "details": "",
+          "metadata": {
+            "step_name": "Findings Classification",
+            "risk_level": "CRITICAL",
+            "final_status": "HOLD",
+            "reasoning_steps": [
+              "CRITICAL \u2014 Hold Time H-02 Breach + False Verification: Step 2 ended 23:45 (2024-03-18); Step 3 started 07:15 (2024-03-19); elapsed 7h 30m vs MBR maximum of 4h (240 min). MBR H-02 annotation and Section 25 both state this limit is ANDA-filed and any exceedance requires immediate deviation and QA disposition before batch progression.",
+              "CRITICAL (compounding) \u2014 False Record in Checklist Item 43: The hold time verification table marks H-02 Within Limit as Y, and checklist item 43 (inter-step hold time H-02 within 4-hour limit) is marked Y. Both are factually incorrect \u2014 elapsed time of 7h 30m was explicitly recorded in the same table. Operator V.K. and supervisor T.R. signed off on a materially false entry.",
+              "No deviation report was raised for the H-02 breach. MBR Section 9.3 requires QA review prior to batch progression. MBR Section 25 (ANDA regulatory note) states batches exceeding H-02 must not be released without agency consultation.",
+              "MINOR \u2014 Data entry anomaly: CPP log row at 21:15 shows Fluid. Air column contains operator name V. Kumar instead of a numeric value (m3/h). This is a transcription error \u2014 surrounding values confirm 219-220 m3/h range was maintained. Not a CPP breach, but a documentation defect under ALCOA+ (Accurate).",
+              "All other checks \u2014 materials, equipment calibration, CPPs, IPC, yields, QC results, QA signatures, label reconciliation \u2014 are compliant. The dissolution OOS (DEV-OMP-2024-0318-001) was properly investigated and closed per USP Stage 2 criteria."
+            ]
+          },
+          "timestamp": "2026-03-25T03:18:38.327263+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Confidence score: 62%. Routing: HOLD \u2014 unresolved critical finding requires QA disposition.",
+          "details": "",
+          "metadata": {
+            "step_name": "Confidence Scoring",
+            "decision_by": "Pace BRR Agent",
+            "quality_score": 62,
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Field-level scores computed across 72 checklist items plus supplementary CPP and EM logs",
+              "Critical field penalty: -15 pts from 1 critical finding (H-02 breach + false record)",
+              "Major field penalty: 0 pts (no standalone major findings)",
+              "Minor field penalty: -3 pts from 1 minor finding (CPP log transcription error at 21:15)",
+              "Overall confidence: 100 - 15 - 3 - 20 (ANDA-filed constraint breach modifier) = 62% \u2014 routing tier: HOLD"
+            ]
+          },
+          "timestamp": "2026-03-25T03:18:59.074894+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Disposition: HOLD. Critical H-02 breach (7h 30m vs 4h max) + false verification. QA disposition required.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition",
+            "final_status": "HOLD",
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "CRITICAL: Hold time H-02 exceeded by 3h 30m (7h 30m elapsed vs 4h maximum). MBR SP-OMP-HT-003 basis \u2014 moisture uptake and degradant increase documented beyond 4h under manufacturing conditions.",
+              "CRITICAL (compounding): H-02 verification table and 72-point checklist item 43 both marked Within Limit: Y \u2014 a false entry, signed by operator V.K. and supervisor T.R. No deviation raised despite exceedance being documented in the same record.",
+              "ANDA-filed constraint: MBR Section 25 explicitly states H-02 exceedance requires agency consultation before release. Batch released 2024-03-27 without a deviation for this event.",
+              "Confidence 62% \u2014 routing tier: HOLD. QA must review H-02 stability data (SP-OMP-HT-003), assess actual moisture/degradant impact, raise a formal deviation, and determine whether agency notification is required per ANDA commitments.",
+              "All other batch attributes are compliant. If QA determines product quality unaffected (supported by release assay 99.4% LC, impurities 0.14% total, dissolution Stage 2 pass), a documented justification and deviation closure could support release with regulatory disclosure."
+            ]
+          },
+          "timestamp": "2026-03-25T03:19:19.625752+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "41752b7b-f99d-4724-b51d-9830d26f2dcc",
+      "name": "AMX-2024-0093",
+      "document_name": "MBR+EBR \u2014 pair-03-amoxicillin",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 label_reconciliation | MAJOR | 84% confidence",
+      "created_at": "2026-03-25T03:51:59.724992+00:00",
+      "updated_at": "2026-03-25T03:51:59.724992+00:00",
+      "log_count": 6,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Receiving batch record and loading document for review...",
+          "details": "",
+          "metadata": {
+            "step_name": "Batch Record Intake",
+            "reasoning_steps": [
+              "Batch record document received for automated first-pass review",
+              "Identifying product name, batch number, and MBR reference from header",
+              "Preparing document for systematic 10-category GMP review",
+              "Applying Eli Lilly Bioproduct R&D review framework"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:00.178748+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Ingested MBR (1575 lines) and EBR (1307 lines) for Amoxicillin Trihydrate Capsules 500 mg.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "batch_number": "AMX-2024-0091",
+            "product_name": "Amoxicillin Trihydrate Capsules 500 mg",
+            "mbr_reference": "MPR-AMX-500-v07",
+            "reasoning_steps": [
+              "MBR reference: MPR-AMX-500-v07 \u2014 1575 lines parsed",
+              "EBR batch: AMX-2024-0091 \u2014 1307 lines parsed",
+              "Product: Amoxicillin Trihydrate Capsules 500 mg, 500 mg hard gelatin capsule, 50,000 capsule batch",
+              "Manufacturing date 22-Apr-2024; packaging 23-Apr-2024; QA release 28-Apr-2024",
+              "Both documents structured and ready for field-by-field 10-category GMP review"
+            ]
+          },
+          "timestamp": "2026-03-25T03:53:14.043439+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Executed 72-point checklist \u2014 70 pass, 2 fail (label reconciliation + data integrity).",
+          "details": "",
+          "metadata": {
+            "step_name": "Checklist Execution",
+            "reasoning_steps": [
+              "Category 1-3 (Header, BOM, Equipment): All pass \u2014 product ID correct, all 4 materials released, 9/9 equipment current",
+              "Category 4-6 (Process, IPC, Environment): All pass \u2014 blend 100.26% LC RSD 0.50%, fill weights 629\u2013631 mg, all EM within spec",
+              "Category 7-8 (Yield/Reconciliation, QC): Label reconciliation FAIL \u2014 13 unaccounted labels recorded as PASS; all 16 FP QC tests pass",
+              "Category 9-10 (Signatures, Deviations): Data integrity FAIL \u2014 correction on p.87 missing mandatory reason; no deviations raised for either finding",
+              "Total: 70 pass / 2 fail \u2014 Items 52 (label reconciliation) and 63 (correction reason) both FAIL"
+            ]
+          },
+          "timestamp": "2026-03-25T03:53:14.354028+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Classified 2 finding(s): 0 critical, 2 major, 0 minor.",
+          "details": "",
+          "metadata": {
+            "step_name": "Findings Classification",
+            "risk_level": "MAJOR",
+            "final_status": "HOLD",
+            "reasoning_steps": [
+              "Finding 1 (MAJOR): Label reconciliation \u2014 50,500 issued vs 50,487 accounted = 13 unaccounted labels; operator falsely recorded discrepancy = 0 and PASS",
+              "Finding type: label_reconciliation \u2014 violates zero-tolerance rule in MBR Sections 5.5.5, 7.5, 8.4 and 21 CFR 211.125 / EU GMP Annex 15",
+              "Finding 2 (MAJOR): QC correction on p.87 (FP-04 peak area) missing mandatory reason field \u2014 violates MBR Section 7.2 and 21 CFR Part 211 data integrity",
+              "QA reviewer S. Iyer accepted both items without verifying the arithmetic or the correction reason \u2014 oversight at the review gate",
+              "No deviation was raised for either finding during batch processing; both were undetected at batch close-out"
+            ]
+          },
+          "timestamp": "2026-03-25T03:53:14.636449+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Confidence score: 84%. Routing: Expedited QA review \u2014 hold pending resolution.",
+          "details": "",
+          "metadata": {
+            "step_name": "Confidence Scoring",
+            "decision_by": "Pace BRR Agent",
+            "quality_score": 84,
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Field-level scores computed across all 72 checklist items and all manufacturing stages",
+              "No critical findings \u2014 critical penalty: 0 pts",
+              "2 major findings \u2014 major penalty: 2 \u00d7 8 = 16 pts from baseline 100",
+              "Overall confidence: 84% \u2014 falls in 50\u201387% HOLD band per decision matrix",
+              "Routing tier: Expedited QA review \u2014 mandatory resolution of label discrepancy and correction reason before release"
+            ]
+          },
+          "timestamp": "2026-03-25T03:53:14.898207+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Review complete \u2014 HOLD recommended. 2 major finding(s). Confidence 84%.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition",
+            "final_status": "HOLD",
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Finding 1: 13 unaccounted labels falsely cleared as PASS \u2014 mandatory deviation required per SOP-QA-DEV-001",
+              "Finding 2: QC correction (p.87) missing mandatory reason \u2014 data integrity violation per Section 7.2",
+              "Confidence 84% \u2014 routing: HOLD (50\u201387% band); mandatory expedited human QA review",
+              "Recommended disposition: HOLD \u2014 2 open major findings require resolution before release can be reconsidered",
+              "Routing action: Assign to QA for arithmetic verification of label count, locate 13 labels, and obtain correction reason from T. Kumar"
+            ]
+          },
+          "timestamp": "2026-03-25T03:53:15.170361+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "4a20048f-5474-4e1f-b783-39df7ac04594",
+      "name": "MET-2024-0042",
+      "document_name": "MBR+EBR \u2014 pair-02-metformin",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 equipment_calibration | CRITICAL | 62% confidence",
+      "created_at": "2026-03-25T03:52:48.474713+00:00",
+      "updated_at": "2026-03-25T03:52:48.474713+00:00",
+      "log_count": 5,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Ingested MBR (1931 lines) and EBR (1186 lines) for Metformin HCl ER 500 mg.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "batch_number": "MET-2024-0042",
+            "product_name": "Metformin Hydrochloride Extended-Release Tablets 500 mg",
+            "mbr_reference": "MPR-MET-500ER-v09",
+            "reasoning_steps": [
+              "MBR reference: MPR-MET-500ER-v09 \u2014 1931 lines parsed, v09 effective 01-Jan-2024",
+              "EBR batch: MET-2024-0042 \u2014 1186 lines parsed, manufacturing 13\u201318 Mar 2024",
+              "Product: Metformin Hydrochloride Extended-Release Tablets 500 mg",
+              "Manufacturing campaign: Dispensing 13-Mar through Packaging 18-Mar-2024",
+              "Both documents structured and ready for 10-category, 72-point GMP review"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:49.201662+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Executed 72-point checklist \u2014 71 pass, 1 fail (Item 23: TP-008 calibration expired).",
+          "details": "",
+          "metadata": {
+            "step_name": "Checklist Execution",
+            "reasoning_steps": [
+              "Cat A\u2013B (Identity, Dispensing, Items 1\u201314): All PASS \u2014 MBR v09 correct, all 9 materials within \u00b10.5%, HPMC viscosity 98,400 mPa\u00b7s in range",
+              "Cat C (Equipment Calibration, Items 15\u201324): FAIL on Item 23 \u2014 TP-008 calibration due 10-Mar-2024, used 15-Mar-2024, expired 5 days; all other 9 equipment items current",
+              "Cat D\u2013F (Line Clearance, CPPs, IPC, Items 25\u201348): All PASS \u2014 granulation torque 10.3 Nm, LOD 1.9%, blend RSD 0.06%, all 20 IPC compression checks in spec",
+              "Cat G\u2013H (Yields, QC, Items 49\u201362): All PASS \u2014 overall yield 98.9%, assay 100.4%, dissolution S1 PASS all 5 timepoints, AV 4.2",
+              "Cat I\u2013J + Additional (Items 63\u201372): All PASS \u2014 ALCOA+ met, LIMS \u0394T \u22641 min throughout, API accountability 100.24%, all 3 QAIP witnesses present"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:50.048417+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Classified 1 finding: 1 CRITICAL \u2014 TP-008 tablet press operated with expired semi-annual calibration.",
+          "details": "",
+          "metadata": {
+            "step_name": "Findings Classification",
+            "risk_level": "CRITICAL",
+            "batch_number": "MET-2024-0042",
+            "final_status": "HOLD",
+            "product_name": "Metformin Hydrochloride Extended-Release Tablets 500 mg",
+            "mbr_reference": "MPR-MET-500ER-v09",
+            "reasoning_steps": [
+              "Primary finding: TP-008 calibration certificate CAL-TP008-2023-0089 due 10-Mar-2024; compression performed 15-Mar-2024 \u2014 5 days post-expiry",
+              "Finding type: equipment_calibration",
+              "Severity: CRITICAL per MBR MPR-MET-500ER-v09 Section 3.1 and Section 10.1 deviation classification table",
+              "Regulatory reference: 21 CFR 211.68, 21 CFR 211.105; MBR Step 7.1 pre-check, Checklist Item 23",
+              "Evidence: EBR Step 7.1 calibration table \u2014 due date '10-Mar-2024' recorded correctly, but 'Within calibration? Y' marked incorrectly by JW; countersigned by TO; no deviation raised"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:50.912053+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Confidence score: 62%. Routing: mandatory full QA review \u2014 HOLD pending TP-008 impact assessment.",
+          "details": "",
+          "metadata": {
+            "step_name": "Confidence Scoring",
+            "decision_by": "Pace BRR Agent",
+            "quality_score": 62,
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Field-level scores computed across 72 checklist items \u2014 71 fields score 100%, 1 field (Item 23) scores 0%",
+              "Base score before penalties: 97% (high base \u2014 only 1 of 72 items failed, all QC results pass)",
+              "Critical finding penalty: -15 pts from 1 critical finding (TP-008 expired calibration)",
+              "Additional modifier: -20 pts \u2014 no deviation raised by operator/supervisor despite visible evidence; QAIP countersigned without independent cert verification",
+              "Overall confidence: 62% \u2014 routing tier: mandatory full human review (below 80% threshold)"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:51.760729+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Disposition: HOLD. 1 critical finding. Confidence 62%. TP-008 calibration expired 5 days before use.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition",
+            "batch_number": "MET-2024-0042",
+            "final_status": "HOLD",
+            "product_name": "Metformin Hydrochloride Extended-Release Tablets 500 mg",
+            "mbr_reference": "MPR-MET-500ER-v09",
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "All 72 checklist categories reviewed \u2014 single failure at Item 23 (Equipment Calibration)",
+              "Blocking finding: TP-008 semi-annual calibration expired 10-Mar-2024; batch compressed 15-Mar-2024 with no deviation raised",
+              "Confidence 62% \u2014 mandatory full human review required (below 80% threshold)",
+              "Recommended disposition: HOLD \u2014 QC results all pass but force sensor reliability during compression unverified due to expired calibration",
+              "Routing: Raise critical deviation per SOP-DEV-001; schedule TP-008 out-of-calibration assessment; impact assessment on compression force data before any release decision"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:52.633437+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "56e1c1ed-9bdb-4d82-8a7f-fc79f96c8090",
+      "name": "ATV-40-2024-0187",
+      "document_name": "MBR+EBR review",
+      "status": "needs_review",
+      "final_status_text": "Ready for processing",
+      "created_at": "2026-03-25T03:52:52.768099+00:00",
+      "updated_at": "2026-03-25T03:52:52.768099+00:00",
+      "log_count": 6,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Received MBR (MPR-ATV-40-v12) and EBR (ATV-40-2024-0187) for batch record review.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "reasoning_steps": [
+              "Received Master Batch Record MPR-ATV-40-v12 \u2014 Atorvastatin Calcium Tablets 40 mg",
+              "Received Executed Batch Record EBR-ATV-40-2024-0187, manufactured 14-15 Mar 2024",
+              "MBR version on EBR cover confirmed: MPR-ATV-40-v12",
+              "Batch size 10,000 tablets, expiry 31-Mar-2026 \u2014 arithmetic verified correct"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:53.575921+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Dispensing records verified \u2014 all 8 materials within tolerance, two-person rule met.",
+          "details": "",
+          "metadata": {
+            "step_name": "Dispensing Verification",
+            "reasoning_steps": [
+              "All 8 raw materials have QC-approved AR numbers \u2014 no TBD or pending entries",
+              "All dispensed quantities within MBR tolerance ranges (Section 2.2)",
+              "Two-person dispensing confirmed: R. Krishnan dispensed, S. Patil independently verified all 8 materials",
+              "Balance calibration: BAL-07 due 30-Jun-2024, BAL-02 due 30-Apr-2024 \u2014 both current on 14-Mar-2024",
+              "Balance verification with reference weights passed before dispensing"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:54.326564+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "CRITICAL: TP-008 Tablet Press calibration expired \u2014 due 28-Feb-2024, used 15-Mar-2024.",
+          "details": "",
+          "metadata": {
+            "step_name": "Equipment Calibration Finding",
+            "batch_number": "ATV-40-2024-0187",
+            "reasoning_steps": [
+              "TP-008 (Tablet Press, semi-annual calibration) due date: 28-Feb-2024",
+              "Compression step performed: 15-Mar-2024 \u2014 15 days past calibration expiry",
+              "MBR Section 3.2 is unambiguous: equipment with expired calibration must NOT be used \u2014 no exceptions",
+              "Operator R. Krishnan recorded 'Cal Current? Y' \u2014 incorrect; constitutes a data integrity error",
+              "MBR Step 6 MANDATORY PRE-CHECK requires STOP and deviation if calibration expired \u2014 no deviation raised",
+              "QA reviewer S. Desai accepted operator entry without independent verification (checklist item 23 marked Y)",
+              "All IPC compression results are valid in value, but the equipment's metrological traceability is compromised"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:54.666048+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "CRITICAL: HPLC assay LIMS timestamp 6h 55min after instrument printout \u2014 ALCOA+ violation.",
+          "details": "",
+          "metadata": {
+            "step_name": "Data Integrity Finding",
+            "batch_number": "ATV-40-2024-0187",
+            "reasoning_steps": [
+              "HPLC assay LIMS entry time: 16:47 on 16-Mar-2024; instrument printout time: 09:52 on 16-Mar-2024",
+              "Discrepancy: 6 hours 55 minutes \u2014 MBR v12 Section 6.4 tolerance is \u00b12 minutes",
+              "MBR classification: discrepancy >\u00b12 min = CRITICAL ALCOA+ violation (Contemporaneous principle)",
+              "Required action per MBR: immediate Critical deviation report \u2014 none was raised",
+              "Analyst V. Prasad and reviewer S. Desai both signed off; no comment or flag recorded in EBR",
+              "Checklist item 61 marked Y by QA reviewer \u2014 incorrectly; this was a missed finding",
+              "Assay result value (98.8%) is numerically within spec but the analytical run's data integrity is unresolved"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:55.514626+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "All CPPs, IPCs, hold times, QC results, and EM logs verified compliant.",
+          "details": "",
+          "metadata": {
+            "step_name": "Process Parameters and QC Review",
+            "reasoning_steps": [
+              "Granulation CPPs: roll pressure 61-63 bar, speed 4 RPM, feed rate 20-21 kg/hr \u2014 all within spec throughout run",
+              "LOD post-drying: 1.8-2.0% at all 3 locations \u2014 within \u22642.5%; blend RSD 0.36% \u2014 within \u22645.0%",
+              "Dissolution: mean 88.2%, all 6 vessels \u226575%; water content 1.74%, impurities total 0.23% \u2014 all pass",
+              "All 6 inter-step hold times within validated limits; all 4 rooms EM-compliant with no excursions",
+              "Coating yield 99.6%, compression yield 99.4%; packaging yield deviation DEV-2024-0187-01 raised and closed",
+              "Label reconciliation: zero discrepancy on all 10,300 labels; QAIP countersignatures present at 3 mandatory events"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:56.340092+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Disposition: HOLD \u2014 2 critical unresolved findings require deviations before release.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition Decision",
+            "disposition": "HOLD",
+            "batch_number": "ATV-40-2024-0187",
+            "reasoning_steps": [
+              "Finding 1 (CRITICAL): TP-008 used 15 days past semi-annual calibration expiry \u2014 no deviation raised, operator entry incorrect",
+              "Finding 2 (CRITICAL): HPLC assay LIMS timestamp 6h 55min late \u2014 no deviation raised, missed by QA reviewer",
+              "Both findings were undetected during the batch record review; checklist items 23 and 61 incorrectly marked Y",
+              "All other process parameters, QC numerical results, hold times, and EM data are compliant",
+              "Batch cannot be released: requires (1) TP-008 calibration deviation and (2) HPLC ALCOA+ Critical deviation",
+              "Recommended routing: return to QA Head for Critical deviation initiation and Phase I investigations"
+            ]
+          },
+          "timestamp": "2026-03-25T03:52:56.659459+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "e8b2d324-a011-4d0f-b625-891dfb0fab9e",
+      "name": "WS-2024-0033",
+      "document_name": "MBR+EBR review",
+      "status": "done",
+      "final_status_text": "RELEASE | N/A | 99% confidence",
+      "created_at": "2026-03-25T03:52:59.611659+00:00",
+      "updated_at": "2026-03-25T03:52:59.611659+00:00",
+      "log_count": 6,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Receiving batch record and loading document for review...",
+          "details": "",
+          "metadata": {
+            "step_name": "Batch Record Intake",
+            "reasoning_steps": [
+              "Batch record document received for automated first-pass review",
+              "Identifying product name, batch number, and MBR reference from header",
+              "Preparing document for systematic 10-category GMP review",
+              "Applying Eli Lilly Bioproduct R&D review framework"
+            ]
+          },
+          "timestamp": "2026-03-25T03:53:00.389387+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Ingested MBR (1612 lines) and EBR (1414 lines) for Warfarin Sodium Tablets 5 mg.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "batch_number": "WS-2024-0033",
+            "product_name": "Warfarin Sodium Tablets 5 mg",
+            "mbr_reference": "MPR-WAR-5-v14",
+            "reasoning_steps": [
+              "MBR reference: MPR-WAR-5-v14 \u2014 1612 lines parsed across 19 sections",
+              "EBR batch: WS-2024-0033 \u2014 1414 lines parsed, manufactured 08-May-2024",
+              "Product: Warfarin Sodium Tablets 5 mg (NTI \u2014 Narrow Therapeutic Index)",
+              "Manufacturing date range: 08-May-2024 (dispensing) through 09-May-2024 (packaging)",
+              "Both documents structured and ready for 72-point GMP checklist review"
+            ]
+          },
+          "timestamp": "2026-03-25T03:54:05.163369+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Executed 72-point checklist \u2014 71 pass, 0 fail, 1 N/A.",
+          "details": "",
+          "metadata": {
+            "step_name": "Checklist Execution",
+            "reasoning_steps": [
+              "Cat A-B (Document + BOM): 22/22 compliant \u2014 all materials, codes, weights, CoAs, and dual balance verification confirmed",
+              "Cat C (QA Witness NTI): 6/6 compliant \u2014 LP signed at all 3 mandatory NTI witness points (dispensing, compression start, packaging yield)",
+              "Cat D-F (Equipment, Env, Process/IPC): 24/24 compliant \u2014 all calibrations current, env within spec, all CPPs and IPC checks passed",
+              "Cat G-H (QC results, LIMS integrity): 13/13 compliant \u2014 assay 99.4%, CU RSD 1.8%, dissolution 95.4% min; all LIMS deltas = 1 min",
+              "Cat I-K (Yield, Mass Balance, Packaging, Deviations): 8/8 compliant, 1 N/A \u2014 98.5% overall yield, 0.09% unaccounted, no deviations"
+            ]
+          },
+          "timestamp": "2026-03-25T03:54:05.41453+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Classified 0 findings: 0 critical, 0 major, 0 minor. Clean batch.",
+          "details": "",
+          "metadata": {
+            "step_name": "Findings Classification",
+            "risk_level": "N/A",
+            "batch_number": "WS-2024-0033",
+            "final_status": "RELEASE",
+            "product_name": "Warfarin Sodium Tablets 5 mg",
+            "mbr_reference": "MPR-WAR-5-v14",
+            "reasoning_steps": [
+              "Primary finding: none \u2014 all 72 checklist items resolved as compliant or N/A",
+              "Finding type: clean_batch",
+              "Severity: N/A \u2014 no deviations, no OOS, no missing signatures, no LIMS discrepancies",
+              "Golden dataset note: human reviewer marked Item 17 FAIL (BAL-02 single ref weight), but EBR rows 1-2 confirm dual verification \u2014 both 100g and 500g weights PASS with operator and supervisor countersign",
+              "Evidence: Section 1.4 rows 1-2 fully completed; Section 12 confirms no deviations recorded"
+            ]
+          },
+          "timestamp": "2026-03-25T03:54:05.676705+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Confidence score: 99%. Routing: QA spot-check \u2014 auto-approve eligible.",
+          "details": "",
+          "metadata": {
+            "step_name": "Confidence Scoring",
+            "decision_by": "Pace BRR Agent",
+            "quality_score": 99,
+            "recommendation": "RELEASE",
+            "reasoning_steps": [
+              "Field-level scores computed across 72 checklist items \u2014 all critical NTI fields at 100%",
+              "Critical field penalty: -0 pts from 0 critical findings",
+              "Major field penalty: -0 pts from 0 major findings",
+              "Overall confidence: 99% \u2014 1pt withheld for N/A item (no excursions, cannot fully score Item 40)",
+              "Routing tier: 95-100% \u2014 auto-approve eligible, QA spot-check recommended"
+            ]
+          },
+          "timestamp": "2026-03-25T03:54:05.952455+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Disposition: RELEASE. 0 findings. Confidence 99%. Batch WS-2024-0033 cleared.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition",
+            "batch_number": "WS-2024-0033",
+            "final_status": "RELEASE",
+            "product_name": "Warfarin Sodium Tablets 5 mg",
+            "mbr_reference": "MPR-WAR-5-v14",
+            "recommendation": "RELEASE",
+            "reasoning_steps": [
+              "All 72 checklist categories reviewed \u2014 71 compliant, 1 N/A (no environmental excursions)",
+              "No blocking findings: 0 critical, 0 major, 0 minor deviations identified",
+              "Confidence 99% \u2014 routing to QA spot-check (auto-approve eligible tier)",
+              "Recommended disposition: RELEASE \u2014 batch meets all NTI specifications",
+              "Routing action: Forward to QA for spot-check review and final release sign-off"
+            ]
+          },
+          "timestamp": "2026-03-25T03:54:06.257629+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "0b56fce8-8b9f-497f-ab24-a60929445eef",
+      "name": "AML-2024-0271",
+      "document_name": "MBR+EBR \u2014 pair-06-amlodipine",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 oos_uninvestigated | CRITICAL | 52% confidence",
+      "created_at": "2026-03-25T04:26:07.832781+00:00",
+      "updated_at": "2026-03-25T04:26:07.832781+00:00",
+      "log_count": 5,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Ingested MPR-AML-5-v06 (1587 lines) and EBR-AML-2024-0055 (1080 lines) for Amlodipine Besylate Tablets 5 mg.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "batch_number": "AML-2024-0055",
+            "product_name": "Amlodipine Besylate Tablets 5 mg",
+            "mbr_reference": "MPR-AML-5-v06",
+            "reasoning_steps": [
+              "MBR reference: MPR-AML-5-v06 (effective 01-Jan-2024) \u2014 1587 lines parsed across 17 sections + appendices",
+              "EBR batch: AML-2024-0055 \u2014 1080 lines parsed covering dispensing through packaging and QC",
+              "Product: Amlodipine Besylate Tablets 5 mg, Batch Size 30,000 tablets, Mfg Date 19-Jul-2024",
+              "Manufacturing date range: 19-Jul-2024 (dispensing through coating) to 20-Jul-2024 (packaging)",
+              "Both documents structured and ready for 10-category, 68-point GMP review"
+            ]
+          },
+          "timestamp": "2026-03-25T04:27:25.41962+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Executed 68-point checklist \u2014 62 pass, 6 fail across 10 categories.",
+          "details": "",
+          "metadata": {
+            "step_name": "Checklist Execution",
+            "reasoning_steps": [
+              "Category 1-3 (Header, BOM, Equipment): All PASS \u2014 product identity, batch number, MBR version, materials, calibrations all verified",
+              "Category 4-6 (Process, IPC, Environment): All PASS \u2014 CPPs in range, IPC results clean, EM within limits throughout",
+              "Category 7-8 (Yield/Reconciliation, QC): Yield PASS; QC \u2014 5 tests pass, 1 critical failure in HPLC assay data integrity",
+              "Category 9-10 (Signatures, Deviations): Signatures mostly complete (QA Manager PENDING); CRITICAL \u2014 6 checklist items incorrectly marked Y",
+              "Total: 62 pass / 6 fail (Items 60, 62, 63, 64, BR-12 trigger missed, BR-14 trigger missed)"
+            ]
+          },
+          "timestamp": "2026-03-25T04:27:25.727962+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Classified 4 findings: 2 critical, 2 major. Primary: OOS result suppressed \u2014 assay first analysis 91.2% not reported.",
+          "details": "",
+          "metadata": {
+            "step_name": "Findings Classification",
+            "risk_level": "CRITICAL",
+            "final_status": "HOLD",
+            "reasoning_steps": [
+              "CRITICAL-1: OOS assay result (91.2% vs spec 95.0-105.0%) obtained on first analysis \u2014 not reported to QA, no OOS notification (Form OOS-001) filed, batch not placed on HOLD (MBR Section 6.3.1 violated)",
+              "CRITICAL-2: Original OOS result recorded only on loose, uncontrolled worksheet stapled to EBR \u2014 not entered in main batch record; only passing retest (97.8%) appears in Section 9.2.2 (MBR Section 12.1 Rule 6 violated)",
+              "MAJOR-1: Unauthorized retesting performed \u2014 retest done without QA notification, without approved Retest Protocol (Form OOS-RP-001), and without Phase I investigation (MBR Section 6.3.2 violated)",
+              "MAJOR-2: Section 9.2.3 First Analysis Verification field explicitly shows 'N' (not first analysis) with blank retest protocol number \u2014 QA reviewer Sneha Patil signed Item 63 and 64 as Y without actioning this red flag",
+              "Additional: Unauthorized averaging (91.2+97.8)/2=94.5% \u2014 still OOS \u2014 noted on worksheet; BR-12 incorrectly recorded as not triggered"
+            ]
+          },
+          "timestamp": "2026-03-25T04:27:26.557883+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Confidence score: 52%. Two unresolved CRITICAL findings drive HOLD disposition.",
+          "details": "",
+          "metadata": {
+            "step_name": "Confidence Scoring",
+            "decision_by": "Pace BRR Agent",
+            "quality_score": 52,
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Base score: 100% \u2014 manufacturing process itself (Steps 1-6) is clean with no parameter deviations",
+              "CRITICAL-1 penalty: -15 pts (suppressed OOS result \u2014 direct data integrity and patient safety risk)",
+              "CRITICAL-2 penalty: -15 pts (original data excluded from controlled batch record)",
+              "MAJOR-1 penalty: -8 pts (unauthorized retesting \u2014 independent GMP violation)",
+              "MAJOR-2 penalty: -8 pts (QA reviewer failure to flag explicit 'N' in First Analysis Verification field)",
+              "Observation penalty: -2 pts (QA Manager final release signature still PENDING at time of review)",
+              "Net confidence: 100 - 48 = 52% \u2014 mandatory full human review tier; HOLD disposition required"
+            ]
+          },
+          "timestamp": "2026-03-25T04:27:27.38926+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Disposition: HOLD. 4 findings (2 critical, 2 major). Confidence 52%. Data integrity investigation required.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition",
+            "final_status": "HOLD",
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Two unresolved CRITICAL findings confirmed: suppressed OOS result + original data excluded from main batch record",
+              "Blocking finding: First HPLC assay result 91.2% (OOS) hidden on uncontrolled loose worksheet; only passing retest 97.8% in official record",
+              "Confidence 52% \u2014 mandatory full human review; cannot auto-approve or expedite",
+              "Recommended disposition: HOLD \u2014 do NOT release batch AML-2024-0055",
+              "Routing: Immediate HOLD \u2192 open formal Data Integrity Investigation (SOP-DI-001) + retroactive OOS Phase I Investigation \u2192 personnel review for analyst Pooja Iyer (QC-3022) and QA reviewer Sneha Patil (QA-4010)"
+            ]
+          },
+          "timestamp": "2026-03-25T04:27:27.698806+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "7340e3e4-d5ac-4e1f-842d-b4ee19d97b86",
+      "name": "CIP-2024-0156",
+      "document_name": "MBR+EBR \u2014 pair-05-ciprofloxacin",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 data_integrity | CRITICAL | 55% confidence",
+      "created_at": "2026-03-25T04:26:27.984223+00:00",
+      "updated_at": "2026-03-25T04:26:27.984223+00:00",
+      "log_count": 5,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Ingested MBR (1498 lines) and EBR (1206 lines) for Ciprofloxacin HCl 500 mg Tablets.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Ingestion",
+            "batch_number": "CIP-2024-0077",
+            "product_name": "Ciprofloxacin Hydrochloride Tablets 500 mg",
+            "mbr_reference": "MPR-CIP-500-v08",
+            "reasoning_steps": [
+              "MBR reference: MPR-CIP-500-v08 \u2014 1498 lines parsed across 19 sections",
+              "EBR batch: CIP-2024-0077 \u2014 1206 lines parsed, manufacturing dates 03\u201304 Jun 2024",
+              "Product: Ciprofloxacin Hydrochloride Tablets 500 mg, batch size 100,000 tablets",
+              "Manufacturing date range identified: 03-Jun-2024 (dispensing) through 04-Jun-2024 (packaging)",
+              "Both documents structured and ready for field-by-field comparison across 68 GMP checks"
+            ]
+          },
+          "timestamp": "2026-03-25T04:26:28.792227+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Executed 68-point checklist \u2014 67 pass, 1 critical fail (Item 61: LIMS timestamp).",
+          "details": "",
+          "metadata": {
+            "step_name": "Checklist Execution",
+            "reasoning_steps": [
+              "Category 1\u20133 (Header, BOM, Equipment): All 21 checks PASS \u2014 product ID, batch number, MBR v08, all 9 materials dispensed within tolerance with dual signatures, all equipment calibrated",
+              "Category 4\u20136 (Process, IPC, Environment): All 20 checks PASS \u2014 granulation endpoint 54 A (spec 45\u201365), LOD 1.6%, blend RSD 0.73%, 10 compression IPC points all within spec, no environmental excursions",
+              "Category 7\u20138 (Yield/Reconciliation, QC): 14 of 15 checks PASS \u2014 yields all within range; CRITICAL FAIL: HPLC assay LIMS entry 14:32 vs instrument printout 10:17, discrepancy 4 hr 15 min (tolerance \u00b12 min)",
+              "Category 9\u201310 (Signatures, Deviations): All 12 checks PASS \u2014 all mandatory countersignatures present (SIG-05, SIG-08, SIG-09), no deviations documented",
+              "Total: 67 pass / 1 critical fail across 68 checklist items"
+            ]
+          },
+          "timestamp": "2026-03-25T04:26:29.643107+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Classified 1 finding: 1 CRITICAL data integrity violation \u2014 ALCOA+ Contemporaneous principle breach.",
+          "details": "",
+          "metadata": {
+            "step_name": "Findings Classification",
+            "risk_level": "CRITICAL",
+            "batch_number": "CIP-2024-0077",
+            "final_status": "HOLD",
+            "product_name": "Ciprofloxacin Hydrochloride Tablets 500 mg",
+            "mbr_reference": "MPR-CIP-500-v08",
+            "reasoning_steps": [
+              "Primary finding: HPLC assay (QC-04, Section 12.4) LIMS entry timestamp (14:32) is 4 hours 15 minutes after instrument hardware clock printout (10:17)",
+              "Finding type: data_integrity \u2014 ALCOA+ Contemporaneous principle violation per MBR Sections 3.2, 6.4, and 7.1",
+              "Severity: CRITICAL \u2014 MBR explicitly states 'Discrepancy > \u00b12 min = Critical ALCOA+ violation. Report as Critical deviation. Do not release batch while deviation is open.'",
+              "Regulatory reference: 21 CFR 211.194, EU Annex 11, FDA Data Integrity Guidance 2018; precedent: Intas Pharmaceuticals FDA 483 (Ahmedabad 2022)",
+              "Evidence: EBR Section 12.4 \u2014 LIMS Entry Time 14:32, Instrument Printout Time 10:17; analyst recorded 'No' to \u00b12 min check but raised no deviation; BR-11 incorrectly marked 'Not triggered'; Checklist Item 61 incorrectly marked 'Y' by QA reviewer"
+            ]
+          },
+          "timestamp": "2026-03-25T04:26:30.431033+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Confidence score: 55%. HOLD recommended \u2014 unresolved Critical deviation blocks release.",
+          "details": "",
+          "metadata": {
+            "step_name": "Confidence Scoring",
+            "decision_by": "Pace BRR Agent",
+            "quality_score": 55,
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Field-level scores computed across 68 GMP checklist items",
+              "67 items scored 100% \u2014 all process parameters, yields, QC results, signatures, and environmental monitoring within spec",
+              "Critical field penalty: \u201315 pts from 1 Critical finding (LIMS contemporaneous failure on QC-04 HPLC assay)",
+              "Overall confidence: 55% \u2014 below 80% threshold, mandatory full human review required; assay result (98.6%) is within spec but contemporaneity cannot be verified",
+              "Routing tier: HOLD \u2014 MBR explicitly prohibits batch release while Critical deviation is open; BR-11 must be initiated; investigation required for 4h 15min LIMS gap"
+            ]
+          },
+          "timestamp": "2026-03-25T04:26:31.179307+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Review complete \u2014 HOLD recommended. 1 Critical finding. Confidence 55%. Batch must not be released.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition",
+            "final_status": "HOLD",
+            "recommendation": "HOLD",
+            "reasoning_steps": [
+              "Critical ALCOA+ violation confirmed: HPLC assay LIMS entry (14:32) is 4h 15min after instrument hardware clock (10:17) \u2014 253 minutes beyond the \u00b12 min MBR tolerance",
+              "Blocking finding: Contemporaneous principle breach \u2014 data integrity of QC-04 assay result (98.6%) cannot be assured without investigation of the 4h 15min gap",
+              "Confidence 55% \u2014 routing: mandatory full human QA review; do not release batch",
+              "Recommended disposition: HOLD \u2014 initiate Critical deviation per BR-11, investigate LIMS gap, extend review to all KN runs on HPLC-QC-101 in prior 30 days",
+              "Routing action: QA HOLD \u2014 initiate Critical deviation immediately, batch hold pending BR-11 investigation and QA assessment"
+            ]
+          },
+          "timestamp": "2026-03-25T04:26:31.972385+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "73cb7f2c-331d-47f6-983a-ef159ddeb95a",
+      "name": "MTX-2024-0204",
+      "document_name": "MBR+EBR review",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 api_mass_balance_transcription_error | MAJOR | 92% confidence",
+      "created_at": "2026-03-25T04:27:29.186833+00:00",
+      "updated_at": "2026-03-25T04:27:29.186833+00:00",
+      "log_count": 10,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "BRR review started for pair-09-methotrexate.",
+          "details": "",
+          "metadata": {
+            "step_name": "Review Initiated",
+            "reasoning_steps": [
+              "Received MBR and EBR files for pair-09-methotrexate",
+              "Execution skill and KB loaded successfully",
+              "Run created in Pace Live Dashboard",
+              "Beginning document parse and field extraction"
+            ]
+          },
+          "timestamp": "2026-03-25T04:27:40.880557+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Parsed MBR MPR-MTX-2.5-v05 and EBR MTX-2024-0204 \u2014 all sections extracted.",
+          "details": "",
+          "metadata": {
+            "step_name": "Document Parse and Extraction",
+            "batch_number": "MTX-2024-0204",
+            "product_name": "Methotrexate Tablets 2.5 mg",
+            "mbr_reference": "MPR-MTX-2.5-v05",
+            "reasoning_steps": [
+              "MBR: MPR-MTX-2.5-v05, Methotrexate Tablets 2.5 mg, batch size 200,000 tablets, 40.000 kg",
+              "EBR: Batch MTX-2024-0204, manufactured 12-15 Feb 2024, Building B OSD Cytotoxic Suite",
+              "MBR extracted: formula, equipment list, 72-point checklist, hold times, EM specs, QC specs",
+              "EBR extracted: all executed steps, actual values, QC results, mass balance, disposition",
+              "Both documents fully loaded \u2014 proceeding to field-by-field comparison"
+            ]
+          },
+          "timestamp": "2026-03-25T04:28:38.754376+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Dispensing review complete \u2014 all quantities in tolerance, triple-check compliant.",
+          "details": "",
+          "metadata": {
+            "step_name": "Dispensing Review",
+            "reasoning_steps": [
+              "API: MTX USP 500.015 g dispensed (spec 499.5\u2013500.5 g) \u2014 PASS; CAS 59-05-2 verified; COA #QC-RM-2024-0088 attached",
+              "Triple independent verification: M. Chen (Dispenser), D. Okonkwo (Verifier 1), P. Sharma (Verifier 2) \u2014 all different individuals, all signed \u2014 PASS per HAM-SOP-2023-011",
+              "CSTD-002 used for API transfer, dispensed in CDS-101 at -17 Pa (spec \u2264 -15 Pa) \u2014 PASS",
+              "All 4 excipients within 0.1% tolerance; LASA verification performed (Methotrexate vs Metformin/Metolazone/Mitoxantrone confirmed)",
+              "Total dispensed 39,999.715 g vs theoretical 40,000.0 g \u2014 no issues; all materials transferred to QS-001"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:07.539699+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Blending and blend uniformity pass \u2014 RSD 4.8% within spec, QA approved compression.",
+          "details": "",
+          "metadata": {
+            "step_name": "Blending and Blend Uniformity Review",
+            "reasoning_steps": [
+              "Charge order followed: lactose (\u00bd) \u2192 API \u2192 MCC \u2192 CCS \u2192 lactose (\u00bd) per MBR critical requirement \u2014 PASS",
+              "Pre-lubrication blend: 15 RPM \u00d7 20 min (300 rotations) \u2014 exact spec compliance; lubrication blend: 3 min (max 5 min) \u2014 PASS",
+              "Blend yield: 39,965.2 g / 39,999.715 g = 99.91% (spec \u2265 98.0%) \u2014 PASS",
+              "BU results: mean 100.02% (spec 95-105%), RSD 4.8% (spec \u2264 6.0%), all 10 individuals within 90-110% \u2014 PASS; QC Supervisor noted RSD elevated vs historical ~2.5% but within validated spec",
+              "Hold time HP-01: 0.75 hr (max 72 hr) \u2014 PASS; QA approval for compression obtained 12-Feb-2024"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:08.326973+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Compression complete \u2014 all CPPs within range, all IPC time points pass.",
+          "details": "",
+          "metadata": {
+            "step_name": "Compression and IPC Review",
+            "reasoning_steps": [
+              "CPP monitoring (17 entries over 4h05m): pre-comp force 1.4-1.5 kN (spec 1.0-2.0), main comp 7.8-8.2 kN (spec 6.0-10.0), turret 30-31 RPM (spec 25-35), ejection \u2264 0.9 kN (spec \u2264 1.5) \u2014 all PASS",
+              "Weight variation (9 time points, n=20 each): mean 199.7-200.3 mg, all within \u00b15% spec \u2014 PASS; friability 0.20-0.22% (spec \u2264 1.0%) \u2014 PASS",
+              "Hardness (6 time points): mean 58-62 N, all within 40-80 N spec \u2014 PASS; thickness all 3.00-3.02 mm (spec 2.8-3.2 mm) \u2014 PASS",
+              "Disintegration: max 9.2 min across all 3 time points (spec NMT 30 min) \u2014 PASS",
+              "Compression yield: 200,115 net good tablets = 99.88% (spec \u2265 97.0%) \u2014 PASS; hold time HP-02: 20.3 hr (max 48 hr) \u2014 PASS"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:41.51217+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "All QC finished product tests conform \u2014 assay 99.4%, CU AV 3.8, dissolution min 97.1%.",
+          "details": "",
+          "metadata": {
+            "step_name": "QC Finished Product Testing Review",
+            "quality_score": "99.4% assay",
+            "reasoning_steps": [
+              "Assay (HPLC): 99.4% mean (spec 90-110%); system suitability: tailing 1.2, plates 8450, RSD 0.4% \u2014 all PASS",
+              "Content uniformity (n=10): mean 99.5%, AV = 3.8 (spec \u2264 15.0), individual range 98.0-100.8% \u2014 PASS",
+              "Dissolution (n=6): all vessels 97.1-98.9% dissolved at 30 min; S1 criterion (each \u2265 85%) met \u2014 PASS; spec Q=80% revised from v04 (75%) correctly applied",
+              "Additional tests: LOD 0.8% (\u2264 2.0%), related substances 0.3% total / 0.08% max unknown (specs 2.0% / 0.5%), ID confirmed at 7.6 min \u2014 all PASS",
+              "Microbial: TAMC 12 CFU/g (\u2264 1000), TYMC <10 CFU/g (\u2264 100), pathogens absent \u2014 PASS"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:41.798003+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "CRITICAL: API mass balance contains a major transcription error \u2014 dispensed quantity recorded as 5,000 g vs actual 500.015 g.",
+          "details": "",
+          "metadata": {
+            "step_name": "Mass Balance and API Accountability Review",
+            "reasoning_steps": [
+              "EBR Section 8.1 records API dispensed (Item A) as 5,000.0 g \u2014 this is a 10\u00d7 error; dispensing log (Section 2.2) clearly records 500.015 g dispensed",
+              "Consequence: calculated accountability = 515.695 / 5000.0 = 9.8%, with 4,484 g listed as unaccounted \u2014 both figures are nonsensical",
+              "EBR checklist Item 52 marked Y (pass) by S. Williams for mass balance accuracy \u2014 this is incorrect; the error was not detected during QA review",
+              "Material yield summary (Section 8.2) correctly uses 40,000.0 g total batch weight with consistent yields \u2014 the error is isolated to the API mass balance row Item A",
+              "This is a documentation/transcription error (MAJOR finding), not a product quality failure \u2014 actual API dispensed and in-process data are internally consistent"
+            ]
+          },
+          "timestamp": "2026-03-25T04:30:16.47976+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Packaging, environmental monitoring, and cleaning verification all conform.",
+          "details": "",
+          "metadata": {
+            "step_name": "Packaging, EM and Cleaning Review",
+            "reasoning_steps": [
+              "Packaging: sealing temps 179/182\u00b0C (spec 180\u00b110), forming 118\u00b0C (spec 120\u00b110), leak test pass; yield 99.84% (spec \u2265 98%) \u2014 all PASS",
+              "Metal detector: all 3 challenge standards (Fe 0.5mm, Non-Fe 0.7mm, SS 1.0mm) detected at start/mid/end \u2014 PASS",
+              "EM: non-viable particle counts well below ISO 7/8 limits across all rooms and all days; viable EM all below alert limits; differential pressures maintained throughout",
+              "Cleaning swabs: all 13 locations \u2264 0.04 \u00b5g/cm\u00b2 (max observed 0.022); TOC: VB-008 2.1 ppm, TP-015 3.4 ppm (limit \u2264 10 ppm) \u2014 PASS",
+              "IH wipe sampling: all 10 locations below OEL-derived limit of \u2264 0.01 \u00b5g/cm\u00b2; corridor outside CDS-101 <0.001 \u2014 no containment breach"
+            ]
+          },
+          "timestamp": "2026-03-25T04:30:16.753518+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Findings Summary \u2014 MTX-2024-0204",
+          "details": "",
+          "metadata": {
+            "data": {
+              "Product": "Methotrexate Tablets 2.5 mg",
+              "All QC Tests": "PASS (assay 99.4%, CU AV 3.8, dissolution min 97.1%)",
+              "Batch Number": "MTX-2024-0204",
+              "Observations": "1 \u2014 Checklist Item 52 marked Pass by QA reviewer despite mass balance error",
+              "MBR Reference": "MPR-MTX-2.5-v05",
+              "Major Findings": "1 \u2014 API mass balance transcription error (5,000 g recorded vs 500.015 g dispensed)",
+              "Minor Findings": "1 \u2014 BU RSD 4.8% elevated vs historical mean ~2.5% (within validated spec \u2264 6.0%)",
+              "Critical Findings": "0",
+              "All Process Parameters": "PASS (dispensing, blending, compression, packaging)",
+              "Environmental Monitoring": "PASS (all rooms, all days)",
+              "Disposition Recommendation": "HOLD \u2014 correct API mass balance error per SOP-DOC-001 before release"
+            },
+            "step_name": "Findings Summary"
+          },
+          "timestamp": "2026-03-25T04:30:41.50119+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "BRR complete \u2014 HOLD disposition. API mass balance transcription error requires correction before release.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition and Routing",
+            "decision_by": "Pace BRR (first-pass automated review)",
+            "final_status": "HOLD",
+            "recommendation": "Correct API mass balance (Item A: 500.015 g) per SOP-DOC-001, then re-review checklist Item 52",
+            "reasoning_steps": [
+              "One MAJOR finding identified: API dispensed quantity in mass balance Section 8.1 recorded as 5,000.0 g \u2014 a 10\u00d7 transcription error; actual dispensed quantity per dispensing log is 500.015 g",
+              "This renders the accountability calculation (9.8%) and unaccounted API (4,484 g) meaningless \u2014 a GMP-critical documentation deficiency under 21 CFR 211.192",
+              "All product quality data (QC assay, CU, dissolution, microbial, related substances) conform; product quality itself is not in question",
+              "Disposition: HOLD pending SOP-DOC-001 correction to mass balance Section 8.1 Item A and re-sign of checklist Item 52 by QA",
+              "Routing: Return EBR to Production Manager (K. Yamamoto) and QA Reviewer (S. Williams) for documented correction; no product quality investigation required"
+            ]
+          },
+          "timestamp": "2026-03-25T04:30:59.935295+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "b389f686-8bd0-4429-90ff-52da88afcecb",
+      "name": "LIS-2024-0441",
+      "document_name": "MBR+EBR review",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 bom_formulation_discrepancy | CRITICAL | 52% confidence",
+      "created_at": "2026-03-25T04:27:56.531838+00:00",
+      "updated_at": "2026-03-25T04:27:56.531838+00:00",
+      "log_count": 11,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "Batch record LIS-2024-0441 loaded for Lisinopril 10 mg Tablets.",
+          "details": "",
+          "metadata": {
+            "step_name": "Batch Record Intake",
+            "batch_number": "LIS-2024-0441",
+            "product_name": "Lisinopril 10 mg Tablets",
+            "mbr_reference": "MPR-LIS-10-v08",
+            "reasoning_steps": [
+              "Batch record LIS-2024-0441 received and ingested successfully",
+              "Product identified: Lisinopril 10 mg Tablets, Product Code LIS-10-TAB",
+              "Executing batch record linked to MBR reference MPR-LIS-10-v08",
+              "Document covers all manufacturing phases: dispensing, granulation, drying, milling, blending, compression, packaging",
+              "10-category review initiated across 68 standardised GMP verification checks"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:37.542773+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Header review complete \u2014 1 MAJOR finding: EBR labels product as Film-Coated; MBR specifies Uncoated.",
+          "details": "",
+          "metadata": {
+            "step_name": "Header & Identification Review",
+            "batch_number": "LIS-2024-0441",
+            "product_name": "Lisinopril 10 mg Tablets",
+            "mbr_reference": "MPR-LIS-10-v08",
+            "reasoning_steps": [
+              "H-01 FAIL: EBR product name 'Lisinopril 10 mg Film-Coated Tablets' \u2014 MBR specifies 'Lisinopril Tablets 10 mg (Uncoated tablet, oral)'. Coating status is a critical product attribute; the discrepancy constitutes a major identity finding.",
+              "H-02 PASS: Batch number LIS-2024-0441 \u2014 format consistent with site convention, no prior batch with same number identified.",
+              "H-03 PASS: MBR version MPR-LIS-10-v08 confirmed current on manufacturing date 19-Mar-2024 (effective 15-Feb-2024).",
+              "H-05 PASS: Manufacturing date 19-Mar-2024 recorded in valid format.",
+              "H-06 PASS: Expiry date Mar 2026 correctly calculated (19-Mar-2024 + 24 months = 31-Mar-2026)."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:37.822035+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "BOM review FAILED \u2014 EBR records a different formulation with wrong excipients and quantities vs MBR.",
+          "details": "",
+          "metadata": {
+            "step_name": "Bill of Materials Verification",
+            "reasoning_steps": [
+              "M-01 FAIL: EBR lists Croscarmellose Sodium (Ac-Di-Sol) as disintegrant; MBR requires Crospovidone XL \u2014 these are different excipients with different disintegration mechanisms. This is a critical formulation deviation.",
+              "M-01 FAIL: EBR lists HPMC E5 (Methocel E5) as binder at 8.00 kg; MBR specifies Pregelatinised Starch at 15.00 kg \u2014 different material and different quantity.",
+              "M-04 FAIL: EBR Mannitol quantity 162.52 kg vs MBR specification 90.00 kg (+80.6% deviation, spec \u00b15%). EBR MCC quantity 44.21 kg vs MBR specification 120.00 kg (-63.2%, spec \u00b15%). These are not rounding errors \u2014 the formulation is fundamentally different.",
+              "M-04 FAIL: EBR purified water 18.00 kg vs MBR 40.00 kg (-55%), further confirming the EBR reflects a different formulation entirely.",
+              "M-06/M-07 PASS: Two-person dispensing (PK/SV) recorded for all 8 materials. AR numbers present for all materials."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:38.082292+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Equipment review passed \u2014 all 5 manufacturing items calibrated and line-cleared at time of use.",
+          "details": "",
+          "metadata": {
+            "step_name": "Equipment & Calibration Review",
+            "reasoning_steps": [
+              "E-01 PASS: All 5 MBR-required manufacturing equipment items (HSG-003, DRY-006, MIL-005, BLN-022, TP-012) documented with asset IDs in EBR.",
+              "E-02 PASS: TP-012 calibration due 15-Sep-2024 \u2014 current on manufacturing dates 19\u201320-Mar-2024. QAIP officer P. Venkataraman independently verified at compression start.",
+              "E-02 PASS: HSG-003 (due 31-Mar-2024), DRY-006 (due 30-Apr-2024), MIL-005 (due 31-May-2024), BLN-022 (due 31-Jul-2024) \u2014 all current on 19-Mar-2024.",
+              "E-03 PASS: Line clearance completed and dual-verified (operator + SM) for all 5 equipment items. QAIP officer countersigned overall line clearance at 07:05.",
+              "E-05 PASS: IQ/OQ/PQ qualification records referenced as current. No expired qualification flags raised."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:38.388733+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Process parameters passed \u2014 all CPPs within spec, correct sequence, no hold time breaches.",
+          "details": "",
+          "metadata": {
+            "step_name": "Process Parameters Review",
+            "reasoning_steps": [
+              "P-01/P-02 PASS: Granulation impeller (248 RPM, spec 200\u2013300), chopper (1998 RPM, spec 1500\u20132500), liquid addition (0.98 kg/min, spec 0.5\u20131.5), end-point power (4.8 kW, spec 3.5\u20135.5) \u2014 all within validated ranges.",
+              "P-01/P-02 PASS: Drying inlet temp 62\u201363\u00b0C (spec 55\u201370\u00b0C), product temp 25\u201352\u00b0C rising within spec 40\u201355\u00b0C at steady state. All readings within range.",
+              "P-04 PASS: Process step sequence dispensing \u2192 granulation \u2192 drying \u2192 milling \u2192 blending \u2192 compression \u2192 packaging executed in correct order per MBR.",
+              "P-05 PASS: All 5 inter-step hold times within validated limits. Worst: blending\u2192compression at 14h 40min vs 24h limit.",
+              "P-07 PASS: Room conditions \u2014 RM-101 (21.1\u201322.8\u00b0C, 41\u201352% RH), RM-201 (21.3\u201323.1\u00b0C, 43\u201355% RH), RM-401 (20.8\u201322.6\u00b0C, 38\u201350% RH) \u2014 all within spec 18\u201325\u00b0C / \u226460% RH throughout."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:39.137618+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "IPC review complete \u2014 1 MAJOR finding: 3 consecutive compression intervals missing supervisor countersignature.",
+          "details": "",
+          "metadata": {
+            "step_name": "In-Process Controls Review",
+            "reasoning_steps": [
+              "I-01 PASS: LOD tested at 3 locations at drying end \u2014 1.8%, 1.7%, 1.9% \u2014 all within spec \u22643.0%.",
+              "I-01 PASS: Blend uniformity tested at 3 locations \u2014 mean 101.1% LC, RSD 0.3% \u2014 within spec \u22645.0% RSD.",
+              "I-02 PASS: All 20 compression IPC rows show hardness 6.8\u20137.1 kP (spec 5\u20139 kP), weight 60.0\u201360.3 mg (spec 55\u201365 mg), friability 0.10\u20130.12% where tested (spec \u22641.0%). All results within spec.",
+              "I-06 FAIL: Compression IPC rows 5, 6, 7 (08:30, 08:45, 09:00) have blank Supervisor Initials (Column J). MBR Section 8.1 and Signatory Matrix require supervisor countersignature at EVERY IPC interval. Three consecutive unsigned intervals is a Major GMP data integrity finding (72-point checklist item 47 flagged N by QA reviewer DK).",
+              "I-06 NOTE: Rows 1\u20134 signed by SM (day supervisor), rows 8\u201320 signed by KA (night supervisor). The gap at rows 5\u20137 represents the shift handover window 08:30\u201309:00 with no supervisor coverage documented."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:39.92548+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Environmental monitoring confirmed \u2014 all rooms within spec throughout the manufacturing campaign.",
+          "details": "",
+          "metadata": {
+            "step_name": "Environmental Monitoring Review",
+            "reasoning_steps": [
+              "V-01 PASS: RM-101 temp 21.1\u201322.8\u00b0C, RM-201 21.0\u201323.1\u00b0C, RM-401 20.8\u201322.6\u00b0C \u2014 all within spec 18\u201325\u00b0C across both manufacturing days.",
+              "V-02 PASS: RH \u2014 RM-101 41\u201352%, RM-201 42\u201355%, RM-401 38\u201350% \u2014 all within spec \u226460%.",
+              "V-03 PASS: Differential pressure \u2014 RM-101 +11 to +17 Pa, RM-201 +11 to +18 Pa (spec +10 to +20 Pa), RM-401 +8 to +13 Pa (spec +5 to +15 Pa) \u2014 all within spec.",
+              "V-04 PASS: No environmental excursions recorded for any room on either manufacturing day.",
+              "V-05 PASS: Monitoring frequency consistent with validated schedule. QA review by D. Krishnaswamy confirmed 22-Mar-2024."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:40.232602+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Yield and label reconciliation passed \u2014 all stage yields in spec, labels 100% accounted for.",
+          "details": "",
+          "metadata": {
+            "step_name": "Yield & Label Reconciliation",
+            "reasoning_steps": [
+              "Y-01/Y-02 PASS: Drying yield 99.8% (spec \u226597.0%), milling yield 99.9% (spec \u226599.0%), blending yield 99.9% (spec \u226599.5%), compression yield 99.5% (spec 97.5\u2013102.5%).",
+              "Y-03 PASS: Packaging adjusted yield 98.6% within spec 98.5\u2013101.5% after documented destruction of 68 blisters due to sealing excursion. Deviation PKG-DEV-LIS-2024-031 raised, investigated, and closed.",
+              "Y-07 PASS: API accountability 99.8% (spec 98.0\u2013102.0%). Assay 101.4% LC confirms API content within specification.",
+              "Y-08 PASS: Label reconciliation \u2014 51,200 issued, 49,755 applied, 1,440 destroyed (documented), 5 returned to store. Discrepancy = 0. QAIP witness P. Venkataraman at 18:05."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:40.938942+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "All 7 QC tests passed \u2014 assay 101.4%, dissolution 94.2%, no OOS results raised.",
+          "details": "",
+          "metadata": {
+            "step_name": "QC Results Review",
+            "reasoning_steps": [
+              "QC-01 PASS: Identification (IR) \u2014 conforms to reference spectrum.",
+              "QC-02 PASS: Assay (HPLC) 101.4% LC \u2014 within spec 90.0\u2013110.0%. Content uniformity RSD 1.2% within spec \u22646.0%.",
+              "QC-03 PASS: Dissolution (T=30min) 94.2% mean (n=6), all 6 vessels \u226580% \u2014 within spec.",
+              "QC-04 PASS: Related substances max 0.08% per impurity \u2014 within spec \u22640.1% each, \u22640.3% total. Water content 2.1% within spec \u22645.0%. Microbial limits passed.",
+              "QC-05 PASS: HPLC LIMS timestamps vs instrument printout \u2014 all 13 runs within \u00b11 second, well within \u00b12 min tolerance. No data integrity flags. QC supervisor N. Subramaniam reviewed 21\u201322-Mar-2024."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:41.200579+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Documentation review complete \u2014 1 MAJOR finding on compression IPC signatures, all other docs complete.",
+          "details": "",
+          "metadata": {
+            "step_name": "Documentation & Signatures Review",
+            "reasoning_steps": [
+              "D-01 PASS: 72-point batch release checklist completed by QA reviewer D. Krishnaswamy on 22-Mar-2024. 71/72 items pass, 1 item N (item 47 \u2014 compression IPC supervisor signatures).",
+              "D-02 PASS: All corrections use strikethrough with reason and initials. No white-out detected. All entries attributed to traceable individuals.",
+              "D-03 PASS: Step-level operator and supervisor signatures present for granulation, drying, milling, blending, and packaging. QA page sign-offs documented throughout.",
+              "D-04 FAIL: Compression IPC Column J (supervisor initials) blank at rows 5, 6, 7. Three consecutive intervals 08:30\u201309:00 unsigned. MBR and Signatory Matrix require supervisor presence at every IPC check \u2014 self-verification is explicitly prohibited.",
+              "D-05 PASS: One deviation raised (PKG-DEV-LIS-2024-031) \u2014 fully documented, CAPA assigned (CAP-2024-031), closed with QA sign-off by D. Krishnaswamy 21-Mar-2024."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:41.506951+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Disposition: HOLD \u2014 critical BOM formulation discrepancy and product identity mismatch require QA investigation.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition & Routing",
+            "decision_by": "Pace BRR Agent (first-pass)",
+            "batch_number": "LIS-2024-0441",
+            "final_status": "HOLD",
+            "product_name": "Lisinopril 10 mg Tablets",
+            "mbr_reference": "MPR-LIS-10-v08",
+            "quality_score": "52",
+            "recommendation": "HOLD \u2014 QA investigation required",
+            "reasoning_steps": [
+              "CRITICAL: EBR records a fundamentally different formulation \u2014 Croscarmellose Sodium instead of Crospovidone XL, HPMC E5 instead of Pregelatinised Starch, Mannitol 162.5 kg vs MBR 90 kg, MCC 44.2 kg vs MBR 120 kg. This is not a tolerance deviation \u2014 the excipients and quantities do not correspond to MPR-LIS-10-v08.",
+              "CRITICAL: EBR product description 'Film-Coated Tablets' contradicts MBR dosage form 'Uncoated tablet, oral'. No coating step is present in the EBR. This is a product identity discrepancy.",
+              "MAJOR: 3 consecutive compression IPC supervisor countersignatures missing (rows 5\u20137, 08:30\u201309:00). GMP documentation integrity requirement unmet per MBR Section 8.1.",
+              "PASS areas: all CPPs within spec, all QC results pass, all hold times within limits, all equipment calibrated, EM all clear, label reconciliation complete, one minor packaging deviation properly closed.",
+              "Recommended disposition: HOLD. QA must investigate whether physical manufacture followed MBR or EBR formulation, resolve the film-coated vs uncoated discrepancy, and obtain retrospective supervisor countersignature or raise formal deviation for IPC gap before batch disposition can proceed."
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:41.766902+00:00"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "run_id": "00e1deb6-b03e-49a5-af23-b864058bb36c",
+      "name": "LOS-2024-0512",
+      "document_name": "MBR+EBR review",
+      "status": "needs_review",
+      "final_status_text": "HOLD \u2014 losartan_dose_calculation_error | CRITICAL | 55.5 deviation",
+      "created_at": "2026-03-25T04:28:35.698701+00:00",
+      "updated_at": "2026-03-25T04:28:35.698701+00:00",
+      "log_count": 13,
+      "logs": [
+        {
+          "step": "",
+          "agent": "",
+          "message": "BRR started for LOS-2024-0512 \u2014 Losartan Potassium 50 mg.",
+          "details": "",
+          "metadata": {
+            "step_name": "Review Initiated",
+            "batch_number": "LOS-2024-0512",
+            "reasoning_steps": [
+              "Batch record review initiated for batch LOS-2024-0512",
+              "Product: Losartan Potassium Tablets USP, 50 mg",
+              "MBR reference: MPR-LOS-50-v07 (v07, effective 01-Jan-2024)",
+              "Documents loaded: EBR (LOS-2024-0512) and MBR (MPR-LOS-50-v07)",
+              "Review scope: 72-point QA checklist, field-by-field comparison, QC results, yields"
+            ]
+          },
+          "timestamp": "2026-03-25T04:28:36.013707+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Header and administrative review complete \u2014 all 12 items compliant.",
+          "details": "",
+          "metadata": {
+            "step_name": "Header & Administrative Review",
+            "reasoning_steps": [
+              "MBR version MPR-LOS-50-v07 matches EBR header \u2014 correct",
+              "Batch number LOS-2024-0512 consistent throughout all sections",
+              "Batch size 75,000 tablets matches MBR specification exactly",
+              "Expiry date May-2027 correctly reflects 36-month shelf life from 14-May-2024",
+              "All 72 checklist items reviewed by Diana Walsh on 22-May-2024 with signatures present"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:32.713916+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Dispensing review complete \u2014 all 10 materials within tolerance, dual verification confirmed.",
+          "details": "",
+          "metadata": {
+            "step_name": "Materials & Dispensing Review",
+            "reasoning_steps": [
+              "All 10 raw materials (RM-01 through RM-10) dispensed within \u00b10.5% tolerance",
+              "All AR numbers verified; all expiry dates current at time of use (latest expiry Nov-2025 for Losartan K)",
+              "Balance EQ-BAL-001 calibration current (CAL-001-2024, exp 12-Jan-2025)",
+              "Double verification present for all dispensed quantities (TK dispensed, VS verified)",
+              "Total actual dispensed 15.455 kg vs 15.450 kg target \u2014 0.03% variance, within tolerance"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:33.428305+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "All manufacturing CPPs within specification across granulation, drying, milling, blending, compression, coating.",
+          "details": "",
+          "metadata": {
+            "step_name": "Manufacturing Process CPP Review",
+            "reasoning_steps": [
+              "Granulation: impeller 205/248 rpm, chopper 1520/1980 rpm, endpoint amperage 21.3 A (spec 18\u201324 A) \u2014 all within range",
+              "Drying: inlet 55\u201356\u00b0C (spec 55\u00b15\u00b0C), LOD 2.0\u20132.2% all locations (spec 1.5\u20133.0%) \u2014 pass",
+              "Milling: 1.0 mm screen, 1180 rpm (spec 1200\u00b1100 rpm), PSD all fractions within specification",
+              "Blending: 15 rpm pre-blend 10 min, lubrication 3.0 min (critical limit \u22645 min) \u2014 compliant",
+              "Compression: main force 14.4\u201314.6 kN (spec 10\u201320 kN), all IPC checks passed; coating weight gain 3.4% (spec 2.5\u20133.5%)"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:34.190372+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "All 8 yield stages within target limits \u2014 overall yield 98.5%, mass balance acceptable.",
+          "details": "",
+          "metadata": {
+            "step_name": "Yield & Mass Balance Review",
+            "reasoning_steps": [
+              "Wet granulation yield 98.7% (target \u226598.0%) \u2014 pass",
+              "Drying yield 98.9% (target \u226597.0%), milling yield 99.6% (target \u226598.0%) \u2014 both pass",
+              "Blending yield 99.1% (target \u226598.5%), compression yield 99.1% (target \u226597.0%) \u2014 pass",
+              "Coating yield 99.9% (target \u226599.0%), packaging yield 99.6% (target \u226598.0%) \u2014 pass",
+              "Overall: 73,890 tablets packed (98.5%); unaccounted 0.06% \u2014 within 0.5% limit; mass balance acceptable"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:34.485972+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Environmental monitoring compliant across all 8 rooms \u2014 particulate, microbial, and water all within limits.",
+          "details": "",
+          "metadata": {
+            "step_name": "Environmental Monitoring Review",
+            "reasoning_steps": [
+              "All 14 room-condition pairs (at-rest and in-operation) within ISO 8 particulate limits (\u22643,520,000/m\u00b3 at 0.5\u00b5m)",
+              "Microbial counts: highest active air result 15 CFU/m\u00b3 in MFG-203 (limit \u2264200 CFU/m\u00b3) \u2014 well within limit",
+              "Purified water: conductivity 0.8\u20130.9 \u00b5S/cm (\u22641.3), TOC 185\u2013210 ppb (\u2264500 ppb), microbial <10 CFU/mL \u2014 all pass",
+              "Equipment cleaning pre-use: all swab results 0.6\u20131.5 ppm (limit \u226410 ppm) \u2014 pass",
+              "All hold times between manufacturing steps within specified limits (longest: coating\u2192packaging 22.5 hr, limit 60 days)"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:34.792611+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "QC testing review identified 1 OOS result: EXP-3179 at 0.24% exceeds NMT 0.20% limit.",
+          "details": "",
+          "metadata": {
+            "step_name": "QC Results Review",
+            "batch_number": "LOS-2024-0512",
+            "reasoning_steps": [
+              "Assay 100.2% (spec 95\u2013105%), CU AV=5.8 (spec \u226415.0), dissolution mean 91.5% (spec Q\u226580%) \u2014 all pass",
+              "Water content 2.8% (spec \u22645.0%), TAMC 22 CFU/g (spec \u22641000), microbial limits all pass",
+              "CRITICAL: EXP-3179 related substance result = 0.24% (duplicate confirmed: 0.24% and 0.24%) \u2014 MBR/USP limit NMT 0.20%",
+              "All other impurities within limit: hydroxymethyl analog 0.08% (\u22640.15%), unknown RRT 0.72 at 0.04% (\u22640.10%)",
+              "Total impurities 0.38% (spec \u22640.50%) pass \u2014 but individual EXP-3179 exceedance is an OOS requiring investigation"
+            ]
+          },
+          "timestamp": "2026-03-25T04:29:35.10338+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "CRITICAL: OOS investigation not initiated for EXP-3179 failure \u2014 batch was released without investigation.",
+          "details": "",
+          "metadata": {
+            "step_name": "OOS Investigation Compliance Check",
+            "reasoning_steps": [
+              "EBR Section 13.2 OOS tracking table is completely blank \u2014 no OOS number assigned",
+              "EBR QA 72-point checklist Item 56 incorrectly marked 'Y' (compliant) for EXP-3179 \u22640.20% despite 0.24% result",
+              "SOP-QA-005 requires Phase I investigation initiation immediately upon OOS identification",
+              "21 CFR 211.192 requires all discrepancies be fully investigated before batch disposition",
+              "Batch was signed for release on 23-May-2024 without any OOS investigation being opened \u2014 direct GMP violation"
+            ]
+          },
+          "timestamp": "2026-03-25T04:30:20.139626+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Documentation review complete \u2014 no deviations logged, all signatures and training records present.",
+          "details": "",
+          "metadata": {
+            "step_name": "Documentation & Signatures Review",
+            "reasoning_steps": [
+              "All 10 personnel in signature log with Employee IDs, roles, and signatures \u2014 complete",
+              "All training records current: GMP training (TRN-GMP-2024) and product-specific training verified for all roles",
+              "Deviation log shows 'None recorded' \u2014 consistent with EBR narrative but inconsistent with OOS finding",
+              "No correction fluid used; all appendices (A\u2013P) attached except K (OOS Report) and L (Deviation Reports) \u2014 marked N/A",
+              "Label reconciliation: 2,600 issued, 2,471 used, 5 damaged, 124 returned \u2014 100% accounted for"
+            ]
+          },
+          "timestamp": "2026-03-25T04:30:20.446094+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Findings Summary \u2014 1 Critical, 0 Major, 0 Minor, 0 Observations",
+          "details": "",
+          "metadata": {
+            "data": {
+              "Finding 1 \u2014 Ref": "21 CFR 211.192 / SOP-QA-005",
+              "Finding 2 \u2014 Ref": "21 CFR 211.192 / SOP-QA-005",
+              "Finding 1 \u2014 Detail": "EXP-3179 result 0.24% exceeds NMT 0.20% limit",
+              "Finding 2 \u2014 Detail": "Batch released without OOS investigation being opened",
+              "Total Major Findings": "0",
+              "Total Minor Findings": "0",
+              "Finding 1 \u2014 Category": "QC Out-of-Specification (OOS)",
+              "Finding 1 \u2014 Severity": "CRITICAL",
+              "Finding 2 \u2014 Category": "Missing OOS Investigation",
+              "Finding 2 \u2014 Severity": "CRITICAL",
+              "Total Critical Findings": "2 (treated as single OOS event)",
+              "Disposition Recommendation": "HOLD"
+            },
+            "step_name": "Findings Classification"
+          },
+          "timestamp": "2026-03-25T04:30:20.711168+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Review complete \u2014 HOLD recommended pending OOS investigation and QA checklist correction.",
+          "details": "",
+          "metadata": {
+            "step_name": "Disposition & Routing",
+            "disposition": "HOLD",
+            "final_status": "HOLD",
+            "reasoning_steps": [
+              "EXP-3179 at 0.24% is a confirmed OOS result (duplicate injections both at 0.24%) \u2014 not a lab error",
+              "Batch cannot be released without a closed OOS investigation per 21 CFR 211.192",
+              "QA 72-point checklist Item 56 must be corrected to 'N' with deviation reference",
+              "Phase I investigation must determine root cause: storage conditions, synthesis impurity, analytical method issue",
+              "Batch placed on HOLD; release gating on OOS closure with documented root cause and CAPA"
+            ]
+          },
+          "timestamp": "2026-03-25T04:30:21.479633+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Human decision: approve",
+          "details": "",
+          "metadata": {
+            "decision": "approve",
+            "step_name": "Human Decision",
+            "decided_by": "Prabhu",
+            "hitl_decision": true,
+            "decision_label": "Approve (Accept recommendation)"
+          },
+          "timestamp": "2026-03-25T10:27:20.604327+00:00"
+        },
+        {
+          "step": "",
+          "agent": "",
+          "message": "Approve (Accept recommendation) \u2014 approved by Prabhu",
+          "details": "",
+          "metadata": {
+            "decision": "approve",
+            "step_name": "Human Decision",
+            "decided_by": "Prabhu",
+            "decision_label": "Approve (Accept recommendation)",
+            "reasoning_steps": [
+              "Reviewer Prabhu selected: Approve",
+              "Action: Accept recommendation"
+            ]
+          },
+          "timestamp": "2026-03-25T10:27:20.691405+00:00"
+        }
+      ],
+      "artifacts": []
+    }
+  ]
+}

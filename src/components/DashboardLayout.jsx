@@ -21,7 +21,8 @@ import {
     AlignLeft,
     Sun,
     Square,
-    Check
+    Check,
+    Target,
 } from 'lucide-react';
 import FeedbackModal from './FeedbackModal';
 import FeedbackQueuePanel from './FeedbackQueuePanel';
@@ -82,6 +83,16 @@ const DashboardLayout = () => {
     }, []);
 
     const isProcessDetailPage = location.pathname.includes('/process/');
+    const isDatasetDetailPage = location.pathname.startsWith('/data/dataset/');
+    const isDataPage = location.pathname === '/data' || location.pathname === '/data/';
+    const isAccuracyPage = location.pathname === '/done/accuracy';
+
+    const DATASET_NAMES = {
+      'golden-ground-truth': 'Golden Dataset — Ground Truth',
+      'batch-review-results': 'Batch Review Results',
+    };
+    const datasetId = isDatasetDetailPage ? location.pathname.split('/data/dataset/')[1] : null;
+    const datasetName = datasetId ? (DATASET_NAMES[datasetId] || 'Dataset') : null;
 
     const handleLogout = () => {
         setIsAirbnbOpen(false);
@@ -154,13 +165,19 @@ const DashboardLayout = () => {
                             to="/data"
                             icon={<Database />}
                             label="Data"
-                            isActive={location.pathname === '/data'}
+                            isActive={location.pathname.startsWith('/data')}
                         />
                         <SidebarItem
                             to="/done/people"
                             icon={<Users />}
                             label="People"
                             isActive={location.pathname === '/done/people'}
+                        />
+                        <SidebarItem
+                            to="/done/accuracy"
+                            icon={<Target />}
+                            label="Accuracy"
+                            isActive={location.pathname === '/done/accuracy'}
                         />
                     </div>
 
@@ -242,6 +259,18 @@ const DashboardLayout = () => {
                                     <ChevronRight className="w-3.5 h-3.5 text-[#c9c9c9]" />
                                     <span className="text-[#171717] font-[550]">Activity Logs</span>
                                 </>
+                            ) : isDatasetDetailPage ? (
+                                <>
+                                    <button onClick={() => navigate('/data')} className="hover:bg-white rounded p-1 transition-colors">
+                                        <ArrowLeft className="w-3.5 h-3.5 text-[#171717]" />
+                                    </button>
+                                    <span className="text-[#8f8f8f] font-normal">Data /</span>
+                                    <span className="text-[#171717] font-[550]">{datasetName}</span>
+                                </>
+                            ) : isDataPage ? (
+                                <span className="text-[#171717] font-[550]">Data</span>
+                            ) : isAccuracyPage ? (
+                                <span className="text-[#171717] font-[550]">Accuracy</span>
                             ) : (
                                 <span className="text-[#171717] font-[550]">Batch Record Review</span>
                             )}

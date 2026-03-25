@@ -169,6 +169,146 @@ const server = http.createServer(async (req, res) => {
                         mbr: "MBR-LIS-010-002 v1.4",
                         confidence: null,
                         disposition: null
+                    },
+                    {
+                        id: "BRR_004",
+                        name: "Omeprazole 20mg Delayed-Release Capsules",
+                        category: "Batch Record Review",
+                        stockId: "OMP-2024-0318",
+                        year: "2024-03-18",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Indianapolis",
+                        batchSize: "900,000 units",
+                        mbr: "MPR-OMP-20-v06",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_005",
+                        name: "Amoxicillin Trihydrate Capsules 500mg",
+                        category: "Batch Record Review",
+                        stockId: "AMX-2024-0093",
+                        year: "2024-02-14",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Cork",
+                        batchSize: "750,000 units",
+                        mbr: "MPR-AMX-500-v07",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_006",
+                        name: "Metformin HCl Extended-Release Tablets 500mg",
+                        category: "Batch Record Review",
+                        stockId: "MET-2024-0042",
+                        year: "2024-01-22",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Kinsale",
+                        batchSize: "1,100,000 units",
+                        mbr: "MPR-MET-500ER-v09",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_007",
+                        name: "Atorvastatin Calcium Tablets 40mg",
+                        category: "Batch Record Review",
+                        stockId: "ATV-40-2024-0187",
+                        year: "2024-04-05",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Indianapolis",
+                        batchSize: "600,000 units",
+                        mbr: "MPR-ATV-40-v12",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_008",
+                        name: "Warfarin Sodium Tablets 5mg (NTI)",
+                        category: "Batch Record Review",
+                        stockId: "WS-2024-0033",
+                        year: "2024-01-10",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Branchburg",
+                        batchSize: "400,000 units",
+                        mbr: "MPR-WAR-5-v14",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_009",
+                        name: "Amlodipine Besylate Tablets 5mg",
+                        category: "Batch Record Review",
+                        stockId: "AML-2024-0271",
+                        year: "2024-05-12",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Fegersheim",
+                        batchSize: "850,000 units",
+                        mbr: "MPR-AML-5-v06",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_010",
+                        name: "Ciprofloxacin Hydrochloride Tablets 500mg",
+                        category: "Batch Record Review",
+                        stockId: "CIP-2024-0156",
+                        year: "2024-03-28",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Cork",
+                        batchSize: "700,000 units",
+                        mbr: "MPR-CIP-500-v08",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_011",
+                        name: "Methotrexate Tablets 2.5mg (HIGH ALERT)",
+                        category: "Batch Record Review",
+                        stockId: "MTX-2024-0204",
+                        year: "2024-04-18",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Indianapolis",
+                        batchSize: "200,000 units",
+                        mbr: "MPR-MTX-2.5-v05",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_012",
+                        name: "Lisinopril 10mg Tablets",
+                        category: "Batch Record Review",
+                        stockId: "LIS-2024-0441",
+                        year: "2024-06-03",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Eurofins Mfg GmbH Mannheim",
+                        batchSize: "800,000 units",
+                        mbr: "MPR-LIS-10-v08",
+                        confidence: null,
+                        disposition: null
+                    },
+                    {
+                        id: "BRR_013",
+                        name: "Losartan Potassium Tablets USP 50mg",
+                        category: "Batch Record Review",
+                        stockId: "LOS-2024-0512",
+                        year: "2024-07-14",
+                        status: "In Progress",
+                        currentStatus: "Initializing...",
+                        site: "Lilly Kinsale",
+                        batchSize: "950,000 units",
+                        mbr: "MPR-LOS-50-v07",
+                        confidence: null,
+                        disposition: null
                     }
                 ];
                 fs.writeFileSync(processesPath, JSON.stringify(cases, null, 4));
@@ -176,7 +316,8 @@ const server = http.createServer(async (req, res) => {
                 fs.writeFileSync(KB_VERSIONS_PATH, '[]');
 
                 // Delete per-process data files so UI shows clean Initializing state
-                ['BRR_001', 'BRR_002', 'BRR_003', 'BRR_004'].forEach((id) => {
+                ['BRR_001','BRR_002','BRR_003','BRR_004','BRR_005','BRR_006','BRR_007',
+                 'BRR_008','BRR_009','BRR_010','BRR_011','BRR_012','BRR_013'].forEach((id) => {
                     const pf = path.join(DATA_DIR, `process_${id}.json`);
                     try { if (fs.existsSync(pf)) fs.unlinkSync(pf); } catch(e) {}
                 });
@@ -184,7 +325,17 @@ const server = http.createServer(async (req, res) => {
                 const scripts = [
                     { file: 'brr_story_1_done.cjs', id: 'BRR_001' },
                     { file: 'brr_story_2_needs_review.cjs', id: 'BRR_002' },
-                    { file: 'brr_story_3_needs_review.cjs', id: 'BRR_003' }
+                    { file: 'brr_story_3_needs_review.cjs', id: 'BRR_003' },
+                    { file: 'brr_story_4_omp.cjs', id: 'BRR_004' },
+                    { file: 'brr_story_5_amx.cjs', id: 'BRR_005' },
+                    { file: 'brr_story_6_met.cjs', id: 'BRR_006' },
+                    { file: 'brr_story_7_atv.cjs', id: 'BRR_007' },
+                    { file: 'brr_story_8_war.cjs', id: 'BRR_008' },
+                    { file: 'brr_story_9_aml.cjs', id: 'BRR_009' },
+                    { file: 'brr_story_10_cip.cjs', id: 'BRR_010' },
+                    { file: 'brr_story_11_mtx.cjs', id: 'BRR_011' },
+                    { file: 'brr_story_12_lis.cjs', id: 'BRR_012' },
+                    { file: 'brr_story_13_los.cjs', id: 'BRR_013' }
                 ];
 
                 let totalDelay = 1;

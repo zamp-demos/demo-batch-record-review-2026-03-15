@@ -1,5 +1,98 @@
 {
-    "logs": [],
-    "keyDetails": {},
-    "sidebarArtifacts": []
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR (1541 lines) and EBR (1007 lines) ingested — OMP-2024-0318 loaded",
+            "status": "success",
+            "reasoning": [
+                "MBR reference: MPR-OMP-20-v06 — 1541 lines parsed, 26 sections covering BOM, CPPs, hold times, QC specs, 72-point checklist",
+                "EBR batch: OMP-2024-0318 — 1007 lines parsed, covering 6 manufacturing steps across 4 days (2024-03-18 to 2024-03-21)",
+                "Product: Omeprazole 20mg Delayed-Release Capsules — hard gelatin capsule with enteric-coated pellets",
+                "Manufacturing date range: Day 1 (2024-03-18) through QA disposition (2024-03-27)",
+                "Both documents structured and ready for field-by-field comparison across all review categories"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-004",
+                    "type": "pdf",
+                    "label": "EBR OMP-2024-0318",
+                    "filename": "08_omeprazole_ebr.pdf",
+                    "url": "/pdfs/08_omeprazole_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-004",
+                    "type": "pdf",
+                    "label": "MBR MPR-OMP-20-v06",
+                    "filename": "08_omeprazole_mbr.pdf",
+                    "url": "/pdfs/08_omeprazole_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "72-point checklist complete — 70 pass, 2 fail (hold time H-02 breach + false verification entry)",
+            "status": "success",
+            "reasoning": [
+                "Category 1-3 (Header/BOM/Equipment): PASS — MBR v06 confirmed, all 11 material lots verified, AR numbers present, dual-signed API dispensing, equipment calibration current",
+                "Category 4-6 (Process CPPs, IPC, Environment): PASS — all 54 drug-layer and 46 enteric-coat CPP readings within range; all CWG samples pass; acid resistance tests pass; EM logs clean",
+                "Category 7-8 (Yield/Reconciliation, QC): PASS — all stage yields above minimums; one OOS (DEV-OMP-2024-0318-001) raised for Stage 1 dissolution, Stage 2 passed, deviation properly closed",
+                "Category 9-10 (Signatures, Deviations): FAIL on checklist item 43 — H-02 hold time marked Y when elapsed time was 7h 30m vs 4h max",
+                "Total: 70 pass / 2 fail — both failures relate to the same H-02 hold time event"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:10 PM",
+            "title": "CRITICAL finding confirmed: H-02 hold time exceeded 3h 30m — Confidence: 62% — HOLD",
+            "status": "success",
+            "reasoning": [
+                "CRITICAL — Hold Time H-02 Breach: Step 2 ended 23:45 (2024-03-18); Step 3 started 07:15 (2024-03-19); elapsed 7h 30m vs MBR maximum 4h. ANDA-filed constraint — any exceedance requires deviation and QA disposition before progression",
+                "CRITICAL (compounding) — False Record in Checklist Item 43: H-02 hold time verification table marks Within Limit as Y, and checklist item 43 is marked Y. Both factually incorrect. Operator V.K. and supervisor T.R. signed off on a materially false entry",
+                "No deviation report was raised for the H-02 breach. MBR Section 9.3 requires QA review prior to batch progression",
+                "MINOR — CPP log row at 21:15 shows Fluid Air column contains operator name V. Kumar instead of numeric value (m3/h) — ALCOA+ documentation defect",
+                "Confidence: 100 - 15 (critical) - 3 (minor) - 20 (ANDA-filed modifier) = 62% — HOLD tier"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:10 PM",
+            "title": "QA escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "H-02 inter-step hold time exceeded by 3h 30m (7h 30m elapsed vs 4h maximum)",
+                "False entry in checklist item 43 — operator and supervisor signed off incorrect Y",
+                "MBR Section 25 (ANDA regulatory note): batches exceeding H-02 must not be released without agency consultation",
+                "No deviation report raised — required before any further batch progression",
+                "Draft escalation prepared for QA Head to initiate formal deviation and stability impact assessment"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-004",
+                    "type": "email_draft",
+                    "label": "QA Escalation — Hold Time Violation",
+                    "signal": "APPROVE_HOLD_OMP0318",
+                    "subject": "HOLD: Critical H-02 Hold Time Breach — Batch OMP-2024-0318 Omeprazole 20mg",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch OMP-2024-0318 (Omeprazole 20mg Delayed-Release Capsules) has been placed on HOLD following automated batch record review.\n\nCRITICAL FINDING — H-02 Inter-Step Hold Time Exceeded:\nElapsed time between Step 2 and Step 3: 7h 30m (maximum per MBR: 4h 00m). Exceedance: +3h 30m.\n\nMBR Section 25 (ANDA regulatory commitment) states this limit is filed with the agency and any exceedance requires: (1) formal deviation report, (2) stability impact assessment, and (3) determination of whether agency notification is required.\n\nAdditional: Checklist Item 43 and the hold time verification table were both marked Y (compliant) by Operator V.K. and Supervisor T.R. despite the documented exceedance. A false record correction deviation is also required.\n\nRequired actions:\n1. Open deviation report for H-02 exceedance\n2. Initiate stability impact assessment per SP-OMP-HT-003\n3. Correct checklist item 43 and hold time table\n4. Determine if agency notification required per ANDA\n\nBatch remains on HOLD pending QA disposition.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:40:54.458Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "OMP-2024-0318",
+        "Product": "Omeprazole 20mg Delayed-Release Capsules",
+        "Batch Size": "120,000 capsules",
+        "Site": "Lilly Cork",
+        "MBR Reference": "MPR-OMP-20-v06",
+        "Review Status": "Needs Review",
+        "Confidence": "62%",
+        "Disposition": "HOLD"
+    }
 }

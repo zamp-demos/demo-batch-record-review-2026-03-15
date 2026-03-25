@@ -5,6 +5,9 @@ import ProcessList from './components/ProcessList';
 import ProcessDetails from './components/ProcessDetails';
 import KnowledgeBase from './components/KnowledgeBase';
 import People from './components/People';
+import DataPage from './components/DataPage';
+import DatasetDetail from './components/DatasetDetail';
+import Accuracy from './components/Accuracy';
 
 const CATEGORY_SLUG = "batch-record-review";
 const CATEGORY_LABEL = "Batch Record Review";
@@ -19,9 +22,11 @@ function App() {
           <Route path={`${CATEGORY_SLUG}/process/:id`} element={<ProcessDetails />} />
           <Route path="knowledge-base" element={<KnowledgeBase />} />
           <Route path="people" element={<People />} />
+          <Route path="accuracy" element={<Accuracy />} />
         </Route>
         <Route path="/data" element={<DashboardLayout />}>
-          <Route index element={<div className="p-8 text-[#8f8f8f]">Data view coming soon</div>} />
+          <Route index element={<DataPage />} />
+          <Route path="dataset/:id" element={<DatasetDetail />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

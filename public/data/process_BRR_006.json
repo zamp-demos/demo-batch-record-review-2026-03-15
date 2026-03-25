@@ -1,0 +1,98 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR (1931 lines) and EBR (1186 lines) ingested — MET-2024-0042 loaded",
+            "status": "success",
+            "reasoning": [
+                "MBR reference: MPR-MET-500ER-v09 — 1931 lines parsed, v09 effective 01-Jan-2024",
+                "EBR batch: MET-2024-0042 — 1186 lines parsed, manufacturing 13-18 Mar 2024",
+                "Product: Metformin Hydrochloride Extended-Release Tablets 500mg",
+                "Manufacturing campaign: Dispensing 13-Mar through Packaging 18-Mar-2024",
+                "Both documents structured and ready for 10-category, 72-point GMP review"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-006",
+                    "type": "pdf",
+                    "label": "EBR MET-2024-0042",
+                    "filename": "02_metformin_ebr.pdf",
+                    "url": "/pdfs/02_metformin_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-006",
+                    "type": "pdf",
+                    "label": "MBR MPR-MET-500ER-v09",
+                    "filename": "02_metformin_mbr.pdf",
+                    "url": "/pdfs/02_metformin_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "72-point checklist: 71 pass, 1 fail — Item 23: TP-008 calibration expired",
+            "status": "success",
+            "reasoning": [
+                "Cat A-B (Identity, Dispensing, Items 1-14): All PASS — MBR v09 correct, all 9 materials within ±0.5%, HPMC viscosity 98,400 mPa·s in range",
+                "Cat C (Equipment Calibration, Items 15-24): FAIL on Item 23 — TP-008 calibration due 10-Mar-2024, used 15-Mar-2024, expired 5 days; all other 9 equipment items current",
+                "Cat D-F (Line Clearance, CPPs, IPC, Items 25-48): All PASS — granulation torque 10.3 Nm, LOD 1.9%, blend RSD 0.06%, all 20 IPC compression checks in spec",
+                "Cat G-H (Yields, QC, Items 49-62): All PASS — overall yield 98.9%, assay 100.4%, dissolution S1 PASS all 5 timepoints, AV 4.2",
+                "Cat I-J (Items 63-72): All PASS — ALCOA+ met, LIMS ΔT ≤1 min throughout, API accountability 100.24%, all 3 QAIP witnesses present"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:10 PM",
+            "title": "1 CRITICAL finding: TP-008 expired calibration — Confidence: 62% — HOLD",
+            "status": "success",
+            "reasoning": [
+                "Primary finding: TP-008 calibration certificate CAL-TP008-2023-0089 due 10-Mar-2024; compression performed 15-Mar-2024 — 5 days post-expiry",
+                "Finding type: equipment_calibration. Severity: CRITICAL per MBR Section 3.1 and Section 10.1",
+                "Regulatory reference: 21 CFR 211.68, 21 CFR 211.105; MBR Step 7.1 pre-check, Checklist Item 23",
+                "Evidence: EBR Step 7.1 — due date 10-Mar-2024 correctly recorded, but \"Within calibration? Y\" marked incorrectly by JW; countersigned by TO; no deviation raised",
+                "Confidence: 97% base − 15 (critical) − 20 (no deviation raised modifier) = 62% — mandatory full human review"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:10 PM",
+            "title": "QA escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "TP-008 (Tablet Press, semi-annual calibration) used 5 days past calibration expiry on 15-Mar-2024",
+                "Operator JW recorded \"Within calibration? Y\" — incorrect; constitutes a data integrity error per 21 CFR 211.68",
+                "MBR Step 7.1 MANDATORY PRE-CHECK requires STOP and deviation if calibration expired — no deviation raised",
+                "QAIP countersigned without independent verification of calibration certificate",
+                "Out-of-calibration impact assessment required: were compression force readings reliable during the run?"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-006",
+                    "type": "email_draft",
+                    "label": "QA Escalation — Equipment Calibration Violation",
+                    "signal": "APPROVE_HOLD_MET0042",
+                    "subject": "HOLD: Critical Equipment Calibration Finding — Batch MET-2024-0042 Metformin 500mg ER",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch MET-2024-0042 (Metformin HCl ER 500mg Tablets) has been placed on HOLD.\n\nCRITICAL FINDING — Equipment Calibration Expired:\nTP-008 (Tablet Press) semi-annual calibration certificate CAL-TP008-2023-0089 expired 10-Mar-2024. Compression performed 15-Mar-2024 — 5 days post-expiry. Operator JW recorded \"Within calibration? Y\" which is incorrect.\n\nMBR Section 3.1 classifies this as CRITICAL. 21 CFR 211.68 and 211.105 require equipment used in manufacturing to have current calibration.\n\nRequired actions:\n1. Raise critical deviation per SOP-DEV-001\n2. Schedule TP-008 recalibration immediately\n3. Perform out-of-calibration impact assessment on compression force data\n4. Review historical TP-008 calibration performance\n\nBatch remains on HOLD until TP-008 recalibration confirmed and QA disposition complete.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:40:58.445Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "MET-2024-0042",
+        "Product": "Metformin Hydrochloride Extended-Release Tablets 500mg",
+        "Batch Size": "600,000 tablets",
+        "Site": "Lilly Kinsale",
+        "MBR Reference": "MPR-MET-500ER-v09",
+        "Review Status": "Needs Review",
+        "Confidence": "62%",
+        "Disposition": "HOLD"
+    }
+}

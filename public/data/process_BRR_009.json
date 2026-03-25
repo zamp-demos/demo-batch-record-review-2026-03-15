@@ -1,0 +1,98 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR (1587 lines) and EBR (1080 lines) ingested — AML-2024-0271 loaded",
+            "status": "success",
+            "reasoning": [
+                "MBR reference: MPR-AML-5-v06 (effective 01-Jan-2024) — 1587 lines parsed across 17 sections + appendices",
+                "EBR batch: AML-2024-0271 — 1080 lines parsed covering dispensing through packaging and QC",
+                "Product: Amlodipine Besylate Tablets 5mg, Batch Size 30,000 tablets, Mfg Date 19-Jul-2024",
+                "Manufacturing date range: 19-Jul-2024 (dispensing through coating) to 20-Jul-2024 (packaging)",
+                "Both documents structured and ready for 10-category, 68-point GMP review"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-009",
+                    "type": "pdf",
+                    "label": "EBR AML-2024-0271",
+                    "filename": "06_amlodipine_ebr.pdf",
+                    "url": "/pdfs/06_amlodipine_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-009",
+                    "type": "pdf",
+                    "label": "MBR MPR-AML-5-v06",
+                    "filename": "06_amlodipine_mbr.pdf",
+                    "url": "/pdfs/06_amlodipine_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "68-point checklist: 62 pass, 6 fail — OOS assay suppressed + unauthorized retesting",
+            "status": "success",
+            "reasoning": [
+                "Category 1–3 (Header, BOM, Equipment): All PASS — product identity, batch number, MBR version, materials, calibrations all verified",
+                "Category 4–6 (Process, IPC, Environment): All PASS — CPPs in range, IPC results clean, EM within limits throughout",
+                "Category 7–8 (Yield/Reconciliation, QC): Yield PASS; QC — 5 tests pass, 1 critical failure in HPLC assay data integrity",
+                "Category 9–10 (Signatures, Deviations): Signatures mostly complete (QA Manager PENDING); CRITICAL — 6 checklist items incorrectly marked Y",
+                "Total: 62 pass / 6 fail (Items 60, 62, 63, 64, BR-12 trigger missed, BR-14 trigger missed)"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:10 PM",
+            "title": "4 findings confirmed: 2 CRITICAL + 2 MAJOR — Confidence: 52% — HOLD",
+            "status": "success",
+            "reasoning": [
+                "CRITICAL-1: OOS assay result (91.2% vs spec 95.0–105.0%) obtained on first analysis — not reported to QA, no OOS notification (Form OOS-001) filed, batch not placed on HOLD (MBR Section 6.3.1 violated)",
+                "CRITICAL-2: Original OOS result recorded only on loose, uncontrolled worksheet stapled to EBR — not entered in main batch record; only passing retest (97.8%) appears in Section 9.2.2 (MBR Section 12.1 Rule 6 violated)",
+                "MAJOR-1: Unauthorized retesting performed — retest done without QA notification, without approved Retest Protocol (Form OOS-RP-001), and without Phase I investigation (MBR Section 6.3.2 violated)",
+                "MAJOR-2: Section 9.2.3 First Analysis Verification field shows 'N' with blank retest protocol number — QA reviewer Sneha Patil signed Items 63 and 64 as Y without actioning this red flag",
+                "Confidence: 100 − 15 (critical-1) − 15 (critical-2) − 8 (major-1) − 8 (major-2) − 2 (obs: QA Manager sig PENDING) = 52% — mandatory full human review"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:11 PM",
+            "title": "QA escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "First HPLC assay result 91.2% (OOS vs spec 95.0–105.0%) suppressed — not entered in official batch record",
+                "Unauthorized retest (97.8%) recorded in Section 9.2.2 without OOS protocol, QA notification, or Phase I investigation",
+                "Unauthorized average (91.2 + 97.8) / 2 = 94.5% noted on uncontrolled worksheet — still OOS under spec",
+                "QA reviewer Sneha Patil (QA-4010) and analyst Pooja Iyer (QC-3022) both require formal review",
+                "Confidence 52% — mandatory full human review; formal Data Integrity Investigation and retroactive OOS Phase I required"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-009",
+                    "type": "email_draft",
+                    "label": "QA Escalation — OOS Suppression + Data Integrity",
+                    "signal": "APPROVE_HOLD_AML0271",
+                    "subject": "HOLD: Data Integrity Violation — Batch AML-2024-0271 Amlodipine 5mg",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch AML-2024-0271 (Amlodipine Besylate Tablets 5mg) has been placed on HOLD.\n\nCRITICAL FINDING 1 — OOS Result Suppressed:\nFirst HPLC assay result: 91.2% (spec 95.0–105.0%) — OOS. Not reported to QA. No Form OOS-001 filed. Batch not placed on HOLD. MBR Section 6.3.1 violated.\n\nCRITICAL FINDING 2 — Original Data Excluded:\nOOS result recorded only on loose uncontrolled worksheet stapled to EBR. Only passing retest (97.8%) entered in Section 9.2.2. MBR Section 12.1 Rule 6 violated.\n\nMAJOR FINDING 1 — Unauthorized Retesting:\nRetest performed without QA notification, approved Retest Protocol (Form OOS-RP-001), or Phase I investigation. MBR Section 6.3.2 violated.\n\nMAJOR FINDING 2 — QA Reviewer Failure:\nSection 9.2.3 shows First Analysis Verification = N with blank retest protocol number. QA reviewer Sneha Patil (QA-4010) signed Items 63 and 64 as Y without flagging this.\n\nRequired actions:\n1. Open formal Data Integrity Investigation (SOP-DI-001)\n2. Open retroactive OOS Phase I Investigation for 91.2% result\n3. Review analyst Pooja Iyer (QC-3022) and QA reviewer Sneha Patil (QA-4010)\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:41:04.450Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "AML-2024-0271",
+        "Product": "Amlodipine Besylate Tablets 5mg",
+        "Batch Size": "30,000 tablets",
+        "Site": "Lilly Indianapolis",
+        "MBR Reference": "MPR-AML-5-v06",
+        "Review Status": "Needs Review",
+        "Confidence": "52%",
+        "Disposition": "HOLD"
+    }
+}

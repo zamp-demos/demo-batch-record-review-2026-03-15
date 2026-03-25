@@ -1,0 +1,98 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR and EBR ingested — LOS-2024-0512 loaded for review",
+            "status": "success",
+            "reasoning": [
+                "Batch record review initiated for batch LOS-2024-0512",
+                "Product: Losartan Potassium Tablets USP, 50mg; MBR reference MPR-LOS-50-v07 (v07, effective 01-Jan-2024)",
+                "Batch size 75,000 tablets; expiry May-2027 (36-month shelf life from 14-May-2024)",
+                "All 10 personnel signatures documented; all 72 checklist items reviewed by Diana Walsh on 22-May-2024",
+                "Review scope: 72-point QA checklist, field-by-field comparison, QC results, yields, OOS compliance"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-013",
+                    "type": "pdf",
+                    "label": "EBR LOS-2024-0512",
+                    "filename": "10_losartan_ebr.pdf",
+                    "url": "/pdfs/10_losartan_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-013",
+                    "type": "pdf",
+                    "label": "MBR MPR-LOS-50-v07",
+                    "filename": "10_losartan_mbr.pdf",
+                    "url": "/pdfs/10_losartan_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:11 PM",
+            "title": "All materials, CPPs, yields, and EM compliant — overall yield 98.5%, 8 stages pass",
+            "status": "success",
+            "reasoning": [
+                "Dispensing: all 10 raw materials within ±0.5% tolerance; all AR numbers verified; double verification present (TK/VS) for all quantities — PASS",
+                "CPPs: granulation impeller 205/248 rpm (spec 150–300), endpoint 21.3 A (spec 18–24), LOD 2.0–2.2% (spec 1.5–3.0%), compression main force 14.4–14.6 kN (spec 10–20 kN) — all PASS",
+                "Yields: wet granulation 98.7%, drying 98.9%, milling 99.6%, blending 99.1%, compression 99.1%, coating 99.9%, packaging 99.6% — all above minimum specs; overall 98.5% (73,890 tablets)",
+                "EM: all 14 room-condition pairs within ISO 8 particulate limits; highest microbial 15 CFU/m³ (limit ≤200); purified water TOC 185–210 ppb (≤500) — all PASS",
+                "Documentation: all 10 personnel in signature log with IDs and roles; training records (TRN-GMP-2024) current; label reconciliation 100% accounted for (2,600 issued, 2,471 used, 5 damaged, 124 returned)"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:11 PM",
+            "title": "CRITICAL: OOS result (EXP-3179 0.24% vs NMT 0.20%) not investigated — batch released without OOS protocol",
+            "status": "success",
+            "reasoning": [
+                "CRITICAL-1: EXP-3179 related substance result = 0.24% (duplicate confirmed: 0.24% and 0.24%) — MBR/USP limit NMT 0.20%. This is a confirmed OOS result, not a lab error",
+                "CRITICAL-2: EBR Section 13.2 OOS tracking table is completely blank — no OOS number assigned; SOP-QA-005 requires Phase I investigation initiation immediately upon OOS identification",
+                "EBR QA 72-point checklist Item 56 incorrectly marked 'Y' (compliant) for EXP-3179 ≤0.20% despite 0.24% result; 21 CFR 211.192 requires all discrepancies to be fully investigated before batch disposition",
+                "Batch was signed for release on 23-May-2024 without any OOS investigation being opened — direct GMP violation; deviation log shows 'None recorded' despite confirmed OOS",
+                "Other QC: assay 100.2% (pass), CU AV=5.8 (pass), dissolution 91.5% (pass), water 2.8% (pass) — EXP-3179 is the sole OOS; confidence 92% — HOLD"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:11 PM",
+            "title": "QA escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "EXP-3179 at 0.24% is a confirmed OOS (duplicate confirmed 0.24% + 0.24%) — MBR/USP limit NMT 0.20%",
+                "OOS tracking table completely blank; no investigation opened; batch signed for release on 23-May-2024 in direct violation of 21 CFR 211.192",
+                "QA checklist Item 56 incorrectly marked Y — must be corrected to N with deviation reference",
+                "Phase I investigation required to determine root cause: storage conditions, synthesis impurity, or analytical method issue",
+                "Batch must remain on HOLD until OOS investigation is closed with documented root cause and CAPA"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-013",
+                    "type": "email_draft",
+                    "label": "QA Escalation — OOS Without Investigation",
+                    "signal": "APPROVE_HOLD_LOS0512",
+                    "subject": "HOLD: OOS Not Investigated — Batch LOS-2024-0512 Losartan 50mg",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch LOS-2024-0512 (Losartan Potassium Tablets USP, 50mg) has been placed on HOLD.\n\nCRITICAL FINDING 1 — Out-of-Specification Result:\nEXP-3179 related substance result: 0.24% (duplicate confirmed: 0.24% and 0.24%). Specification: NMT 0.20%. This is a confirmed OOS result.\n\nCRITICAL FINDING 2 — No OOS Investigation Initiated:\nEBR Section 13.2 OOS tracking table is completely blank. No OOS number assigned. SOP-QA-005 requires Phase I investigation initiation immediately upon OOS identification. Batch was signed for release on 23-May-2024 without any investigation being opened. This is a direct violation of 21 CFR 211.192.\n\nAdditionally, QA 72-point checklist Item 56 was incorrectly marked 'Y' (compliant) despite the 0.24% result.\n\nRequired actions:\n1. Place batch on HOLD immediately\n2. Open OOS investigation per SOP-QA-005\n3. Correct QA checklist Item 56 to N with deviation reference\n4. Phase I investigation to determine root cause (storage conditions, synthesis impurity, or analytical method issue)\n5. Do not release until investigation closed with root cause and CAPA\n\nBatch remains on HOLD.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:41:12.458Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "LOS-2024-0512",
+        "Product": "Losartan Potassium Tablets USP, 50mg",
+        "Batch Size": "75,000 tablets",
+        "Site": "Lilly Kinsale",
+        "MBR Reference": "MPR-LOS-50-v07",
+        "Review Status": "Needs Review",
+        "Confidence": "92%",
+        "Disposition": "HOLD"
+    }
+}

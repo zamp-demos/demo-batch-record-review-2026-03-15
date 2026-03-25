@@ -1,0 +1,98 @@
+{
+    "logs": [
+        {
+            "id": "step-1",
+            "time": "09:10 PM",
+            "title": "MBR and EBR ingested — MTX-2024-0204 loaded for review",
+            "status": "success",
+            "reasoning": [
+                "MBR: MPR-MTX-2.5-v05, Methotrexate Tablets 2.5mg, batch size 200,000 tablets, 40.000 kg",
+                "EBR: Batch MTX-2024-0204, manufactured 12–15 Feb 2024, Building B OSD Cytotoxic Suite",
+                "MBR extracted: formula, equipment list, 72-point checklist, hold times, EM specs, QC specs",
+                "EBR extracted: all executed steps, actual values, QC results, mass balance, disposition",
+                "Both documents fully loaded — proceeding to field-by-field comparison"
+            ],
+            "artifacts": [
+                {
+                    "id": "ebr-pdf-011",
+                    "type": "pdf",
+                    "label": "EBR MTX-2024-0204",
+                    "filename": "09_methotrexate_ebr.pdf",
+                    "url": "/pdfs/09_methotrexate_ebr.pdf"
+                },
+                {
+                    "id": "mbr-pdf-011",
+                    "type": "pdf",
+                    "label": "MBR MPR-MTX-2.5-v05",
+                    "filename": "09_methotrexate_mbr.pdf",
+                    "url": "/pdfs/09_methotrexate_mbr.pdf"
+                }
+            ]
+        },
+        {
+            "id": "step-2",
+            "time": "09:10 PM",
+            "title": "All process parameters and QC results pass — assay 99.4%, dissolution min 97.1%",
+            "status": "success",
+            "reasoning": [
+                "Dispensing: API MTX USP 500.015g dispensed (spec 499.5–500.5g) PASS; triple independent verification (M. Chen, D. Okonkwo, P. Sharma) all different individuals, all signed PASS",
+                "Blending: pre-lubrication 15 RPM × 20 min, BU mean 100.02%, RSD 4.8% (≤6.0%), HP-01 hold time 0.75hr vs 72hr limit — all PASS",
+                "Compression: all 17 CPP monitoring entries in spec, all 9 IPC time points pass, compression yield 99.88% (≥97.0%) PASS; all inter-step hold times within validated limits",
+                "QC: assay 99.4% (spec 90–110%), CU AV=3.8 (≤15.0), dissolution min 97.1% (Q≥80%), related substances 0.3% total (≦2.0%) — all PASS",
+                "EM compliant all rooms and days; IH wipe sampling at all 10 locations below OEL-derived limit — no containment breach"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-3",
+            "time": "09:11 PM",
+            "title": "MAJOR: API mass balance transcription error — 5,000g recorded vs 500.015g actual — Confidence: 92%",
+            "status": "success",
+            "reasoning": [
+                "EBR Section 8.1 records API dispensed (Item A) as 5,000.0g — this is a 10× transcription error; dispensing log (Section 2.2) clearly records 500.015g dispensed",
+                "Consequence: calculated accountability = 515.695 / 5,000.0 = 9.8% with 4,484g listed as unaccounted — both figures are nonsensical",
+                "EBR checklist Item 52 marked Y (pass) by S. Williams for mass balance accuracy — incorrect; error not detected during QA review",
+                "Finding type: api_mass_balance_transcription_error — MAJOR documentation deficiency under 21 CFR 211.192",
+                "This is a documentation/transcription error, not a product quality failure — actual API dispensed and in-process data are internally consistent; confidence 92% — HOLD pending correction"
+            ],
+            "artifacts": []
+        },
+        {
+            "id": "step-4",
+            "time": "09:11 PM",
+            "title": "QA escalation drafted — awaiting send approval",
+            "status": "warning",
+            "reasoning": [
+                "Mass balance Section 8.1 Item A: 5,000.0g recorded — actual dispensed per Section 2.2 is 500.015g (10× transcription error)",
+                "Accountability calculation (9.8%, 4,484g unaccounted) is nonsensical — GMP-critical documentation deficiency under 21 CFR 211.192",
+                "QA reviewer S. Williams signed off checklist Item 52 as pass without detecting the error",
+                "All QC results (assay 99.4%, CU AV 3.8, dissolution 97.1%) confirm product quality is not in question",
+                "SOP-DOC-001 correction by K. Yamamoto and re-sign by S. Williams required; no product quality investigation needed"
+            ],
+            "artifacts": [
+                {
+                    "id": "hitl-email-011",
+                    "type": "email_draft",
+                    "label": "QA Escalation — API Mass Balance Transcription Error",
+                    "signal": "APPROVE_HOLD_MTX0204",
+                    "subject": "HOLD: Mass Balance Transcription Error — Batch MTX-2024-0204 Methotrexate 2.5mg",
+                    "from": "pace-review@lilly.com",
+                    "to": "qa.head@lilly.com",
+                    "body": "Dear QA Head,\n\nBatch MTX-2024-0204 (Methotrexate Tablets 2.5mg) requires a documentation correction before release.\n\nMAJOR FINDING — API Mass Balance Transcription Error:\nEBR Section 8.1 Item A (API dispensed quantity) records 5,000.0 g. The dispensing log (Section 2.2) records the actual dispensed quantity as 500.015 g. This is a 10x transcription error.\n\nImpact: The accountability calculation (9.8%) and unaccounted API (4,484 g) are nonsensical. GMP-critical documentation deficiency under 21 CFR 211.192. QA reviewer S. Williams signed off checklist Item 52 as pass without detecting the error.\n\nNote: All QC results are within specification (assay 99.4%, CU AV 3.8, dissolution min 97.1%). This is a documentation issue, not a product quality failure.\n\nRequired actions:\n1. Return EBR to Production Manager K. Yamamoto for SOP-DOC-001 correction (correct value: 500.015 g in Section 8.1 Item A)\n2. QA Reviewer S. Williams to re-sign checklist Item 52 after correction is verified\n3. No product quality investigation required\n\nBatch remains on HOLD until correction is completed.\n\nRegards,\nPace — Batch Record Review\nLilly Quality Operations",
+                    "isIncoming": false,
+                    "timestamp": "2026-03-25T15:41:08.455Z"
+                }
+            ]
+        }
+    ],
+    "keyDetails": {
+        "Batch Number": "MTX-2024-0204",
+        "Product": "Methotrexate Tablets 2.5mg",
+        "Batch Size": "200,000 tablets",
+        "Site": "Lilly Cork",
+        "MBR Reference": "MPR-MTX-2.5-v05",
+        "Review Status": "Needs Review",
+        "Confidence": "92%",
+        "Disposition": "HOLD"
+    }
+}
